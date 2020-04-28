@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30021.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turbodrive", "Turbodrive\Turbodrive.csproj", "{DDF4E23C-4FF9-46F3-A9A3-D62C1A0E7069}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDF4E23C-4FF9-46F3-A9A3-D62C1A0E7069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF4E23C-4FF9-46F3-A9A3-D62C1A0E7069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF4E23C-4FF9-46F3-A9A3-D62C1A0E7069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF4E23C-4FF9-46F3-A9A3-D62C1A0E7069}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA3E35C7-96CE-4E83-A5B5-540D90A514AF}
+	EndGlobalSection
+EndGlobal
