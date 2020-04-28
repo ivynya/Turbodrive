@@ -12,6 +12,8 @@ using Turbodrive.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ElectronNET.API;
+using ElectronNET.API.Entities;
 
 namespace Turbodrive
 {
@@ -32,7 +34,8 @@ namespace Turbodrive
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
             services.AddRazorPages();
         }
 
@@ -65,6 +68,12 @@ namespace Turbodrive
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            Task.Run(async () => await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
+            {
+                Height = 800,
+                Width = 1250
+            }));
         }
     }
 }
