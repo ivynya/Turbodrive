@@ -10,6 +10,15 @@
         "dist/swup.min.js",
         "LICENSE"
       ]
+    },
+    {
+      "library": "@swup/preload-plugin@1.0.3",
+      "destination": "wwwroot/swup/preload-plugin/",
+      "files": [
+        "dist/SwupPreloadPlugin.js",
+        "dist/SwupPreloadPlugin.min.js",
+        "LICENSE"
+      ]
     }
   ]
 }

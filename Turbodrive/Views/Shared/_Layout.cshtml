@@ -10,18 +10,20 @@
 <body>
     <header class="navbar">
         <nav>
-            <a asp-area="" asp-controller="Home" asp-action="Index">Turbodrive</a>
-            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" data-swup-preload>Turbodrive</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" data-swup-preload>Home</a>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy" data-swup-preload>Privacy</a>
         </nav>
     </header>
 
-    <main role="main" class="pad-b-sm pad-x-sm">
+    <main class="pad-b-sm pad-x-sm transition-fade">
         @RenderBody()
     </main>
 
     <script src="~/lib/zepto/zepto.min.js"></script>
     <script src="~/lib/shoelace/shoelace.js"></script>
+    <script src="~/lib/swup/dist/swup.min.js"></script>
+    <script src="~/lib/swup/dist/preload.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
