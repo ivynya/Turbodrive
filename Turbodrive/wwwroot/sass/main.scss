@@ -1,0 +1,10 @@
+﻿
+// App Styles
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+// Layout Styles
+@import 'layout/_nav.scss';
