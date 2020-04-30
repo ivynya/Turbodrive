@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "swup@2.0.9",
+      "destination": "wwwroot/lib/swup/",
+      "files": [
+        "dist/swup.js",
+        "dist/swup.min.js",
+        "LICENSE"
+      ]
+    }
+  ]
+}
