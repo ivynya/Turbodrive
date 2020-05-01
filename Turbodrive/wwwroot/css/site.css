@@ -37,12 +37,22 @@ main {
   padding: 10px 20px;
 }
 .navbar nav a {
-  background-color: #fee;
+  background-color: #eee;
   border-radius: 5px;
   color: #000;
   display: flex;
   margin-bottom: 15px;
-  padding: 5px;
+  padding: 10px 15px;
+  text-decoration: none;
+  transition-duration: 0.2s;
+}
+.navbar nav a:hover {
+  background-color: #ddd;
+  border-radius: 2px;
+}
+.navbar nav hr {
+  margin: 0;
+  margin-bottom: 1rem;
 }
 
 /*# sourceMappingURL=site.css.map */
