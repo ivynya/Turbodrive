@@ -1,4 +1,6 @@
 # Turbodrive
+[![Build Status](https://travis-ci.com/SDBagel/Turbodrive.svg?branch=master)](https://travis-ci.com/SDBagel/Turbodrive)
+
 Seamlessly integrate Microsoft 365 & GSuite for Education.
 
 ## The Problem
