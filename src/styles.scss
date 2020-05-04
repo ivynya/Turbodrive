@@ -1,10 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-primary: #fff;
+  --bg-secondary: #fff;
+  --bg-tertiary: #eee;
+
+  --box-shadow: #ccca;
+}
+
 html, body {
-  background-color: #fff;
+  background-color: var(--bg-primary);
   
   margin: 0;
   padding: 0;
 
   height: 100%;
   font-family: 'Nunito', Arial, Helvetica, sans-serif;
+}
+
+.container {
+  padding: 0 10px;
+  max-width: 700px;
+  margin: auto;
 }
