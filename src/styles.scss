@@ -51,6 +51,7 @@ html, body {
   padding: 10px;
 
   display: flex;
+  position: relative;
 
   .icon {
     background-color: var(--bg-secondary);
@@ -72,6 +73,22 @@ html, body {
 
     > * {
       margin: 0;
+    }
+  }
+
+  .actions {
+    background-color: #afa;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    transition-duration: 0.3s;
+  }
+
+  &:hover {
+    .actions {
+      width: 90px;
     }
   }
 }
