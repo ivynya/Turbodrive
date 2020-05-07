@@ -1,2 +1,34 @@
 :host {
 }
+
+.sidebar {
+  flex-direction: column;
+  width: 300px;
+
+  img {
+    width: 100%;
+  }
+  
+  .text {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .card {
+    min-height: 50px;
+  }
+}
+
+#assignments {
+  padding: 0 25px;
+}
+
+.title-sm {
+  background-image: linear-gradient(to right, #e60a, #0000);
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}

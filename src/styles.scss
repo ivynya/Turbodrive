@@ -7,6 +7,7 @@
   --box-shadow: #ccca;
 
   --text-primary: #333;
+  --text-secondary: #777;
 }
 
 html, body {
@@ -20,8 +21,57 @@ html, body {
   font-family: 'Nunito', Arial, Helvetica, sans-serif;
 }
 
+.page {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+}
+
 .container {
-  padding: 0 10px;
-  max-width: 900px;
+  padding: 30px 10px;
+  max-width: 850px;
   margin: auto;
+}
+
+.d-flex {
+  display: flex;
+
+  .flex {
+    flex: 1 1;
+  }
+}
+
+.card {
+  background-color: var(--bg-tertiary);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+
+  display: flex;
+
+  .icon {
+    background-color: var(--bg-secondary);
+    border-radius: 50%;
+    display: block;
+    height: 45px;
+    width: 45px;
+  }
+
+  .text {
+    padding-left: 20px;
+    flex: 1 1;
+
+    .row {
+      display: flex;
+      flex: 1 1;
+      justify-content: space-between;
+    }
+
+    > * {
+      margin: 0;
+    }
+  }
 }
