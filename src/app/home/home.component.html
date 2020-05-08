@@ -67,32 +67,12 @@
       <div class="sidebar d-flex">
         <img src="../../assets/img/Banner1.png" alt="Plant">
         <div class="text">
-          <div class="card">
+          <div class="card" *ngFor="let course of courses; index as i">
             <span class="icon"></span>
             <div class="text">
-              <b>P1-Chinese 4H</b>
-              <p>Teacher Name</p>
+              <b>{{course.name}}</b>
+              <p>{{course.courseState}}</p>
             </div>
-          </div>
-          <div class="card">
-            <span class="icon"></span>
-            <div class="text">
-              <b>2019-2020 World Lit</b>
-              <p>Teacher Name</p>
-            </div>
-          </div>
-          <div class="card">
-            <span class="icon"></span>
-            <div class="text">
-              <b>P5 Chem H</b>
-              <p>Teacher Name</p>
-            </div>
-          </div>
-          <div class="card">
-            
-          </div>
-          <div class="card">
-            
           </div>
         </div>
       </div>
