@@ -67,12 +67,15 @@
       <div class="sidebar d-flex">
         <img src="../../assets/img/Banner1.png" alt="Plant">
         <div class="text">
-          <div class="card" *ngFor="let course of courses; index as i">
+          <div class="card" *ngFor="let course of courses">
             <span class="icon"></span>
             <div class="text">
               <b>{{course.name}}</b>
               <p>{{course.courseState}}</p>
             </div>
+          </div>
+          <div class="card" *ngIf="!this.courses">
+            <p class="text-center">No classes!</p>
           </div>
         </div>
       </div>

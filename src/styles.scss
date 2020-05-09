@@ -4,10 +4,29 @@
   --bg-secondary: #fff;
   --bg-tertiary: #eee;
 
-  --box-shadow: #ccca;
-
   --text-primary: #333;
   --text-secondary: #777;
+
+  --box-shadow: #ccca;
+  --selection: #7df5;
+}
+
+::selection {
+  background-color: var(--selection);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-tertiary);
+  border-radius: 8px;
 }
 
 html, body {

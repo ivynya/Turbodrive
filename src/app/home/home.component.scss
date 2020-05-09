@@ -10,11 +10,12 @@
   }
   
   .text {
-    max-height: 500px;
+    max-height: 400px;
     overflow-y: auto;
   }
 
   .card {
+    margin-right: 5px;
     min-height: 50px;
   }
 }

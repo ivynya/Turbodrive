@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     classroom.courses.list({
       courseStates: ["ACTIVE"]
     }, (err, res) => {
-      if (err) return console.error('The API returned an error: ' + err);
+      if (err) return console.error(err);
       const rcourses = res.data.courses;
       if (rcourses && rcourses.length) {
         console.log('Courses:');
