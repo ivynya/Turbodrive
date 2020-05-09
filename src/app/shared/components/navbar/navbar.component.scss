@@ -25,10 +25,22 @@
       width: 45px;
       margin: 0 10px;
       transition-duration: 0.2s;
+      position: relative;
 
       &:hover {
         background-color: #ddd;
         border-radius: 10px;
+      }
+
+      [data-notify] {
+        background-color: var(--notify-color);
+        border-radius: 50%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 12px;
+        width: 12px;
+        z-index: 10;
       }
     }
   }
