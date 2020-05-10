@@ -79,9 +79,14 @@ html, body {
 
 .d-flex {
   display: flex;
+  flex-direction: column;
 
   .flex {
     flex: 1 1;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 }
 

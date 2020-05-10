@@ -1,12 +1,11 @@
-:host {
-}
-
 .sidebar {
   flex-direction: column;
-  width: 300px;
+  margin: 20px 0;
+  padding: 0 25px;
 
   img {
-    width: 100%;
+    margin: 0 auto;
+    max-height: 200px;
   }
   
   .text {
@@ -18,18 +17,44 @@
     margin-right: 5px;
     min-height: 50px;
   }
+
+  @media (min-width: 768px) {
+    margin: 0;
+    padding-left: 0;
+    width: 300px;
+
+    img {
+      max-height: unset;
+      width: 100%;
+    }
+  }
 }
 
 #assignments {
   padding: 0 25px;
-}
 
-.title-sm {
-  background-image: linear-gradient(to right, #789, #abc);
-  border-radius: 5px;
-  color: var(--text-contrast);
-  font-weight: 600;
-  margin: 0;
-  margin-bottom: 10px;
-  padding: 5px 10px;
+  .title-sm {
+    background-image: linear-gradient(to right, #789, #abc);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: var(--text-contrast);
+    font-weight: 600;
+    margin: 0;
+    padding: 5px 10px;
+  }
+
+  .card {
+    border-left: var(--bg-tertiary) 5px solid;
+    border-radius: 0;
+    margin: 0;
+
+    &:last-of-type {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &:hover {
+      border-left: var(--notify-color) 5px solid;
+    }
+  }
 }
