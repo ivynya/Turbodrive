@@ -3,12 +3,12 @@
   margin: 20px 0;
   padding: 0 25px;
 
-  img {
+  > img {
     margin: 0 auto;
     max-height: 200px;
   }
   
-  .text {
+  > .text {
     max-height: 400px;
     overflow-y: auto;
   }
@@ -23,7 +23,7 @@
     padding-left: 0;
     width: 300px;
 
-    img {
+    > img {
       max-height: unset;
       width: 100%;
     }
