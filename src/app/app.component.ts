@@ -29,10 +29,10 @@ export class AppComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    let path = `${app.getAppPath()}/src/data`;
-    let secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
+    const path = `${app.getAppPath()}/src/data`;
+    const secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
 
-    let oauth2Client = new google.auth.OAuth2(
+    const oauth2Client = new google.auth.OAuth2(
       secrets["googleClientId"],
       secrets["googleClientSecret"],
       "http://localhost:4200/oauthcallback"
@@ -44,16 +44,16 @@ export class AppComponent implements OnInit {
       'https://www.googleapis.com/auth/classroom.coursework.me'
     ];
 
-    let url = oauth2Client.generateAuthUrl({
+    const url = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: scopes
     });
 
     if (fs.existsSync(`${path}/tokens.json`)) {
-      let stored = JSON.parse(fs.readFileSync(`${path}/tokens.json`, "utf8"));
+      const stored = JSON.parse(fs.readFileSync(`${path}/tokens.json`, "utf8"));
       console.log(stored);
       oauth2Client.setCredentials({
-        refresh_token: stored["refresh_token"]
+        refresh_token: stored["refreshToken"]
       });
 
       google.options({

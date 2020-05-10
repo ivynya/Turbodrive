@@ -15,10 +15,10 @@ export class AuthComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let path = `${app.getAppPath()}/src/data`;
-    let secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
+    const path = `${app.getAppPath()}/src/data`;
+    const secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
 
-    let oauth2Client = new google.auth.OAuth2(
+    const oauth2Client = new google.auth.OAuth2(
       secrets["googleClientId"],
       secrets["googleClientSecret"],
       "http://localhost:4200/oauthcallback"
@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
         google.options({ auth: oauth2Client });
 
         // Save refresh token
-        let json = JSON.stringify({ "refresh_token" : tokens.refresh_token });
+        const json = JSON.stringify({ "refreshToken" : tokens.refresh_token });
         fs.writeFileSync(`${path}/tokens.json`, json);
 
         // Redirect to home page
