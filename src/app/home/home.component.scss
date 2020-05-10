@@ -25,9 +25,9 @@
 }
 
 .title-sm {
-  background-image: linear-gradient(to right, #e60a, #0000);
+  background-image: linear-gradient(to right, #789, #abc);
   border-radius: 5px;
-  color: #fff;
+  color: var(--text-contrast);
   font-weight: 600;
   margin: 0;
   margin-bottom: 10px;

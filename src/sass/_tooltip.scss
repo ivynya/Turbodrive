@@ -1,0 +1,63 @@
+/* CSS Hover Tooltip */
+
+[data-tt] {
+  position: relative;
+  z-index: 10;
+
+  /* Positioning and visibility */
+  &:before, &:after {
+    position: absolute;
+    top: calc(100% + 5px);
+    bottom: auto;
+    left: 50%;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.15s;
+    will-change: transform;
+  }
+
+  /* Dynamic-width tooltip */
+  &:before {
+    background-color: var(--bg-contrast);
+    color: var(--text-contrast);
+    content: attr(data-tt);
+    padding: 8px 14px;
+    line-height: 18px;
+    height: 18px;
+    min-width: 50px;
+    max-width: 300px;
+    width: max-content;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    white-space: pre-wrap;
+    transform: translate(-50%, 5px) scale(0.7);
+  }
+
+  /* Tooltip arrow */
+  &:after {
+    content: '';
+    border-style: solid;
+    border-width: 0px 7px 7px 7px;
+    border-color: var(--bg-contrast) transparent;
+    transform-origin: bottom;
+    transform: translateX(-50%) translateY(100%);
+  }
+
+  &:hover {
+    /* Tooltip becomes visible on hover */
+    &:before, &:after {
+      visibility: visible;
+      opacity: 1;
+    }
+    /* Scale & arrow slide effects */
+    &:before {
+      transform: translate(-50%, 5px) scale(1);
+    }
+    &:after {
+      transition-duration: 0.15s;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
