@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { google } from 'googleapis';
+
+const app = require('electron').remote.app;
+import * as fs from 'fs';
 
 @Component({
   selector: 'app-auth',
@@ -9,46 +11,35 @@ import { google } from 'googleapis';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  oauth2Client: any;
-  secrets: Object;
-  url: string;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.secrets = require('../../assets/appsettings.json');
+    let path = `${app.getAppPath()}/src/data`;
+    let secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
 
-    this.oauth2Client = new google.auth.OAuth2(
-      this.secrets["googleClientId"],
-      this.secrets["googleClientSecret"],
+    let oauth2Client = new google.auth.OAuth2(
+      secrets["googleClientId"],
+      secrets["googleClientSecret"],
       "http://localhost:4200/oauthcallback"
     );
-
-    const scopes = [
-      'https://www.googleapis.com/auth/classroom.announcements.readonly',
-      'https://www.googleapis.com/auth/classroom.courses.readonly',
-      'https://www.googleapis.com/auth/classroom.coursework.me'
-    ];
-
-    this.url = this.oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      scope: scopes
-    });
 
     // Check for returned auth code
     this.activatedRoute.queryParams.subscribe(async params => {
       if (params["code"]) {
         // Get access token
-        const { tokens } = await this.oauth2Client.getToken(params["code"]);
-        this.oauth2Client.setCredentials(tokens);
+        const { tokens } = await oauth2Client.getToken(params["code"]);
+        oauth2Client.setCredentials(tokens);
+
         // Set as globally accessible
-        google.options({
-          auth: this.oauth2Client
-        });
+        google.options({ auth: oauth2Client });
+
+        // Save refresh token
+        let json = JSON.stringify({ "refresh_token" : tokens.refresh_token });
+        fs.writeFileSync(`${path}/tokens.json`, json);
 
         // Redirect to home page
-        this.router.navigate(['/home']);
+        window.location.pathname = "/";
       }
     });
   }

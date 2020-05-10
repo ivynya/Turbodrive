@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
+
+import { google } from 'googleapis';
+const app = require('electron').remote.app;
+import * as fs from 'fs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  constructor(
-    public electronService: ElectronService,
-    private translate: TranslateService
-  ) {
+export class AppComponent implements OnInit {
+  constructor(public electronService: ElectronService,
+              private translate: TranslateService) {
     translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
 
@@ -25,4 +27,41 @@ export class AppComponent {
       console.log('Mode web');
     }
   }
+  
+  ngOnInit(): void {
+    let path = `${app.getAppPath()}/src/data`;
+    let secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
+
+    let oauth2Client = new google.auth.OAuth2(
+      secrets["googleClientId"],
+      secrets["googleClientSecret"],
+      "http://localhost:4200/oauthcallback"
+    );
+
+    const scopes = [
+      'https://www.googleapis.com/auth/classroom.announcements.readonly',
+      'https://www.googleapis.com/auth/classroom.courses.readonly',
+      'https://www.googleapis.com/auth/classroom.coursework.me'
+    ];
+
+    let url = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: scopes
+    });
+
+    if (fs.existsSync(`${path}/tokens.json`)) {
+      let stored = JSON.parse(fs.readFileSync(`${path}/tokens.json`, "utf8"));
+      console.log(stored);
+      oauth2Client.setCredentials({
+        refresh_token: stored["refresh_token"]
+      });
+
+      google.options({
+        auth: oauth2Client
+      });
+    }
+    else
+      window.location.href = url;
+  }
+
 }

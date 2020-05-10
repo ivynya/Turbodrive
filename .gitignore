@@ -48,4 +48,6 @@ package-lock.json
 # System Files
 .DS_Store
 Thumbs.db
-src/assets/appsettings.json
+
+# Data files
+src/data/*
