@@ -3,8 +3,9 @@ os:
   - osx
 language: node_js
 node_js:
+  - '14'
+  - '13'
   - '12'
-  - '10'
 dist: xenial
 services:
   - xvfb
@@ -18,3 +19,4 @@ script:
   - npm run test
   - npm run e2e
   - npm run build
+after_success: istanbul cover jasmine-node --captureExceptions spec/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
