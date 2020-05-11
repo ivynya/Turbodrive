@@ -16,6 +16,11 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     const path = `${app.getAppPath()}/src/data`;
+    // Try get credentials from file
+    if (!fs.existsSync(`${path}/credentials.json`)) { 
+      console.error("No credentials.json found!");
+      return;
+    }
     const secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
 
     const oauth2Client = new google.auth.OAuth2(
