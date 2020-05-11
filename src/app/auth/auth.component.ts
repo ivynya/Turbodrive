@@ -25,21 +25,22 @@ export class AuthComponent implements OnInit {
     );
 
     // Check for returned auth code
-    this.activatedRoute.queryParams.subscribe(async params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       if (params["code"]) {
         // Get access token
-        const { tokens } = await oauth2Client.getToken(params["code"]);
-        oauth2Client.setCredentials(tokens);
-
-        // Set as globally accessible
-        google.options({ auth: oauth2Client });
-
-        // Save refresh token
-        const json = JSON.stringify({ "refreshToken" : tokens.refresh_token });
-        fs.writeFileSync(`${path}/tokens.json`, json);
-
-        // Redirect to home page
-        window.location.pathname = "/";
+        oauth2Client.getToken(params["code"], (err, tokens) => {
+          oauth2Client.setCredentials(tokens);
+  
+          // Set as globally accessible
+          google.options({ auth: oauth2Client });
+  
+          // Save refresh token
+          const json = JSON.stringify({ "refreshToken" : tokens.refresh_token });
+          fs.writeFileSync(`${path}/tokens.json`, json);
+  
+          // Redirect to home page
+          window.location.pathname = "/";
+        });
       }
     });
   }
