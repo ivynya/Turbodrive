@@ -15,8 +15,9 @@ install:
   - npm set progress=false
   - npm install
 script:
-  - ng lint
-  - npm run test
-  - npm run e2e
-  - npm run build
-after_success: istanbul cover jasmine-node --captureExceptions spec/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+  - COVERALLS_FLAG_NAME=lint ng lint
+  - COVERALLS_FLAG_NAME=test npm run test
+  - COVERALLS_FLAG_NAME=e2e npm run e2e
+  - COVERALLS_FLAG_NAME=build npm run build
+notifications:
+  webhooks: https://coveralls.io/webhook
