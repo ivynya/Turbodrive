@@ -1,15 +1,23 @@
+.container {
+  flex-direction: column-reverse;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
 .sidebar {
   flex-direction: column;
   margin: 20px 0;
-  padding: 0 25px;
+  max-height: 750px;
 
   > img {
     margin: 0 auto;
-    max-height: 200px;
+    max-height: 170px;
   }
   
   > .text {
-    max-height: 400px;
+    flex: 1 1;
     overflow-y: auto;
   }
 
@@ -20,7 +28,7 @@
 
   @media (min-width: 768px) {
     margin: 0;
-    padding-left: 0;
+    padding-left: 25px;
     width: 300px;
 
     > img {
@@ -31,30 +39,75 @@
 }
 
 #assignments {
-  padding: 0 25px;
+  flex: 1 1;
 
-  .title-sm {
-    background-image: linear-gradient(to right, #789, #abc);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    color: var(--text-contrast);
-    font-weight: 600;
-    margin: 0;
-    padding: 5px 10px;
+  .assignment-group {
+    background-color: var(--bg-tertiary);
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow: hidden auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    .title-sm {
+      background-image: linear-gradient(to right, #789, #abc);
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      color: var(--text-contrast);
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+      margin-bottom: 5px;
+      padding: 15px 10px;
+    }
+  
+    .card {
+      border-left: var(--bg-tertiary) 5px solid;
+      border-radius: 0;
+      margin: 0;
+      font-size: 15px;
+  
+      &:last-of-type {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+  
+      &:hover {
+        border-left: var(--notify-color) 5px solid;
+      }
+    }
   }
 
-  .card {
-    border-left: var(--bg-tertiary) 5px solid;
-    border-radius: 0;
-    margin: 0;
+  @media (min-width: 768px) {
+    padding: 0 20px;
+  }
+  
+  @media (min-width: 1150px) {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
 
-    &:last-of-type {
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
+    .assignment-group {
+      margin-right: 10px;
+      height: 300px;
+      max-width: calc(50% - 10px);
 
-    &:hover {
-      border-left: var(--notify-color) 5px solid;
+      @media (min-width: 1500px) {
+        height: 370px;
+
+        .title-sm {
+          font-size: 1.2rem;
+          margin-bottom: 15px;
+          padding: 30px 20px;
+        }
+
+        max-width: calc(33% - 10px);
+      }
+
+      @media (min-width: 1800px) {
+        max-width: calc(25% - 10px);
+      }
     }
   }
 }

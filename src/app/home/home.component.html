@@ -2,15 +2,41 @@
   <app-navbar></app-navbar>
   <section class="page">
     <div class="container d-flex">
-      <div id="assignments" class="flex">
+      <div class="sidebar d-flex">
+        <img src="../../assets/img/Banner1.png" alt="Plant">
+        <div class="text">
+          <div class="card" *ngFor="let course of courses">
+            <span class="icon"></span>
+            <div class="text">
+              <b>{{course.name}}</b>
+              <p>{{course.courseState}}</p>
+            </div>
+          </div>
+          <div class="card text-center" *ngIf="!this.courses">
+            <p>No classes!</p>
+          </div>
+        </div>
+      </div>
+      <div id="assignments">
         <div class="assignment-group">
           <p class="title-sm">P1-Chinese 4H</p>
           <div class="card">
             <span class="icon"></span>
             <div class="text">
               <div class="row">
+                <span>Announcement</span>
+                <span>Posted 11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
                 <span>Assignment Title</span>
-                <span>11:59PM</span>
+                <span>Due Monday 11:59PM</span>
               </div>
             </div>
             <div class="actions">
@@ -39,13 +65,24 @@
             </div>
           </div>
         </div>
-        <br>
         <div class="assignment-group">
           <p class="title-sm">2019-2020 World Lit</p>
           <div class="card">
             <span class="icon"></span>
             <div class="text">
               <div class="row">
+                <span>Announcement</span>
+                <span>11:59PM</span>
+              </div>
+              <p>So I forgot to post attendance earlier, so I have extended the deadline. Please complete it when you see this post.</p>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
                 <span>Assignment Title</span>
                 <span>11:59PM</span>
               </div>
@@ -54,7 +91,6 @@
             </div>
           </div>
         </div>
-        <br>
         <div class="assignment-group">
           <p class="title-sm">P5 Chem H</p>
           <div class="card">
@@ -69,19 +105,145 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="sidebar d-flex">
-        <img src="../../assets/img/Banner1.png" alt="Plant">
-        <div class="text">
-          <div class="card" *ngFor="let course of courses">
+        <div class="assignment-group">
+          <p class="title-sm">P1-Chinese 4H</p>
+          <div class="card">
             <span class="icon"></span>
             <div class="text">
-              <b>{{course.name}}</b>
-              <p>{{course.courseState}}</p>
+              <div class="row">
+                <span>Announcement</span>
+                <span>Posted 11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
             </div>
           </div>
-          <div class="card text-center" *ngIf="!this.courses">
-            <p>No classes!</p>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>Due Monday 11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+        </div>
+        <div class="assignment-group">
+          <p class="title-sm">P1-Chinese 4H</p>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Announcement</span>
+                <span>Posted 11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>Due Monday 11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+        </div>
+        <div class="assignment-group">
+          <p class="title-sm">P1-Chinese 4H</p>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Announcement</span>
+                <span>Posted 11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>Due Monday 11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
+          </div>
+          <div class="card">
+            <span class="icon"></span>
+            <div class="text">
+              <div class="row">
+                <span>Assignment Title</span>
+                <span>11:59PM</span>
+              </div>
+            </div>
+            <div class="actions">
+            </div>
           </div>
         </div>
       </div>

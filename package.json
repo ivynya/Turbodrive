@@ -1,11 +1,11 @@
 {
-  "name": "angular-electron",
-  "version": "7.0.5",
-  "description": "Angular 9 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "Turbodrive",
+  "version": "0.1.0",
+  "description": "Turbocharged GSuite with Microsoft 365 Integration.",
+  "homepage": "https://github.com/SDBagel/Turbodrive",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "SDBagel",
+    "email": "sdbagel@gmail.com"
   },
   "keywords": [
     "angular",
