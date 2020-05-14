@@ -24,10 +24,11 @@
       height: 45px;
       width: 45px;
       margin: 0 10px;
+      outline: none;
       transition-duration: 0.2s;
       position: relative;
 
-      &:hover {
+      &:hover, &:focus {
         background-color: #ddd;
         border-radius: 10px;
       }
@@ -41,6 +42,25 @@
         height: 12px;
         width: 12px;
         z-index: 10;
+      }
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    .icon {
+      height: 25px;
+      width: 25px;
+      vertical-align: middle;
+      fill: var(--text-secondary);
+    }
+  
+    &:hover, &:focus {
+      .icon {
+        fill: var(--text-primary);
       }
     }
   }

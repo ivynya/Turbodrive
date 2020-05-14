@@ -21,10 +21,6 @@ export class HomeComponent implements OnInit {
       if (err) return console.error(err);
       const rcourses = res.data.courses;
       if (rcourses && rcourses.length) {
-        console.log('Courses:');
-        rcourses.forEach((course) => {
-          console.log(`${course.name} ${course.section} ${course.description} ${course.descriptionHeading} ${course.room}`);
-        });
         this.courses = res.data.courses;
       } else {
         console.log('No courses found.');

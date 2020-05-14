@@ -45,7 +45,7 @@
     transform: translateX(-50%) translateY(100%);
   }
 
-  &:hover {
+  &:hover, &:focus {
     /* Tooltip becomes visible on hover */
     &:before, &:after {
       visibility: visible;

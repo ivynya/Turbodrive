@@ -23,7 +23,7 @@
 
   .card {
     margin-right: 5px;
-    min-height: 50px;
+    min-height: 45px;
   }
 
   @media (min-width: 768px) {
@@ -40,6 +40,15 @@
 
 #assignments {
   flex: 1 1;
+  transition-duration: 0.2s;
+
+  @for $i from 0 through 20 {
+    > :nth-child(#{$i + 1}) {
+      opacity: 0;
+      animation: fade-in 1s forwards;
+      animation-delay: 0.06s * $i;
+    }
+  }
 
   .assignment-group {
     background-color: var(--bg-tertiary);
@@ -60,6 +69,11 @@
       margin: 0;
       margin-bottom: 5px;
       padding: 15px 10px;
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   
     .card {
@@ -67,12 +81,7 @@
       border-radius: 0;
       margin: 0;
       font-size: 15px;
-  
-      &:last-of-type {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
-  
+
       &:hover {
         border-left: var(--notify-color) 5px solid;
       }
@@ -109,5 +118,22 @@
         max-width: calc(25% - 10px);
       }
     }
+  }
+}
+
+@media (min-width: 1500px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
