@@ -38,17 +38,7 @@ export class AppComponent implements OnInit {
       "http://localhost:4200/oauthcallback"
     );
 
-    const scopes = [
-      'https://www.googleapis.com/auth/classroom.announcements.readonly',
-      'https://www.googleapis.com/auth/classroom.courses.readonly',
-      'https://www.googleapis.com/auth/classroom.coursework.me'
-    ];
-
-    const url = oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      scope: scopes
-    });
-
+    // If a stored refresh token exists, authenticate
     if (fs.existsSync(`${path}/tokens.json`)) {
       const stored = JSON.parse(fs.readFileSync(`${path}/tokens.json`, "utf8"));
       console.log(stored);
@@ -56,12 +46,26 @@ export class AppComponent implements OnInit {
         refresh_token: stored["refreshToken"]
       });
 
+      // Set to globally accessible
       google.options({
         auth: oauth2Client
       });
     }
-    else
+    // Otherwise, redirect to auth page
+    else {
+      const scopes = [
+        'https://www.googleapis.com/auth/classroom.announcements.readonly',
+        'https://www.googleapis.com/auth/classroom.courses.readonly',
+        'https://www.googleapis.com/auth/classroom.coursework.me'
+      ];
+
+      const url = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: scopes
+      });
+
       window.location.href = url;
+    }
   }
 
 }
