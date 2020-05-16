@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { google } from 'googleapis';
+import * as Store from 'electron-store';
 
 const app = require('electron').remote.app;
 import * as fs from 'fs';
@@ -40,8 +41,8 @@ export class AuthComponent implements OnInit {
           google.options({ auth: oauth2Client });
   
           // Save refresh token
-          const json = JSON.stringify({ "refreshToken" : tokens.refresh_token });
-          fs.writeFileSync(`${path}/tokens.json`, json);
+          const store = new Store();
+          store.set("refreshToken", tokens.refresh_token);
   
           // Redirect to home page
           window.location.pathname = "/";

@@ -6,6 +6,7 @@ import { AppConfig } from '../environments/environment';
 import { google } from 'googleapis';
 const app = require('electron').remote.app;
 import * as fs from 'fs';
+import * as Store from 'electron-store';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const path = `${app.getAppPath()}/src/data`;
     const secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
+    const store = new Store();
 
     const oauth2Client = new google.auth.OAuth2(
       secrets["googleClientId"],
@@ -39,11 +41,10 @@ export class AppComponent implements OnInit {
     );
 
     // If a stored refresh token exists, authenticate
-    if (fs.existsSync(`${path}/tokens.json`)) {
-      const stored = JSON.parse(fs.readFileSync(`${path}/tokens.json`, "utf8"));
-      console.log(stored);
+    if (store.has("refreshToken")) {
+      console.log(store.get("refreshToken"));
       oauth2Client.setCredentials({
-        refresh_token: stored["refreshToken"]
+        refresh_token: store.get("refreshToken")
       });
 
       // Set to globally accessible

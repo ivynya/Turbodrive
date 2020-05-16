@@ -93,6 +93,7 @@
     "node": ">=10.13.0"
   },
   "dependencies": {
+    "electron-store": "5.1.1",
     "googleapis": "49.0.0"
   }
 }
