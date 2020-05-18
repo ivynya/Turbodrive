@@ -53,8 +53,8 @@ There are currently additional functional and security considerations when packa
 The code that loads the `credentials.json` does not properly adjust for the app running when packaged (as it tries to look in `src/data` and not the correct `/data` folder due to local app pathing). This can be corrected by changing the path in `auth.component.ts` and `app.component.ts` or placing the id in directly.
 
 ### Security Considerations
-The `credentials.json` file is exposed to the user and isn't encrypted on package, which means a user can gain access to both the client id and secret. A workaround presented by Google is to register your oauth client as an iOS app, which allows you to only provide a client id and no secret. [More information can be found here]("https://github.com/googleapis/google-auth-library-nodejs#oauth2-with-installed-apps-electron"). The `credentials.json` can be modified to include an empty string for client secret.
+The `credentials.json` file is exposed to the user and isn't encrypted on package, which means a user can gain access to both the client id and secret. A workaround presented by Google is to register your oauth client as an iOS app, which allows you to only provide a client id and no secret. [More information can be found here](https://github.com/googleapis/google-auth-library-nodejs#oauth2-with-installed-apps-electron). The `credentials.json` can be modified to include an empty string for client secret.
 
-I don't understand why this is better since [as this issue mentions]("https://github.com/googleapis/google-auth-library-nodejs/issues/299#issuecomment-380939714") someone could impersonate your app.
+I don't understand why this is better since [as this issue mentions](https://github.com/googleapis/google-auth-library-nodejs/issues/299#issuecomment-380939714) someone could impersonate your app.
 
 As of commit `f772726` (#40) the refresh token is not encrypted.
