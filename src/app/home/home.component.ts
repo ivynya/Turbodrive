@@ -10,7 +10,7 @@ import * as Store from 'electron-store';
 })
 export class HomeComponent implements OnInit {
   courses: classroom_v1.Schema$Course[];
-  announcements: { [id: string] : classroom_v1.Schema$Announcement[] } = {};
+  announcements: { [id: string]: classroom_v1.Schema$Announcement[] } = {};
 
   constructor(private router: Router) { }
 
