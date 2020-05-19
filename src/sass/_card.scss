@@ -19,8 +19,10 @@
   }
 
   .text {
-    padding-left: 15px;
+    padding: 0 15px;
     flex: 1 1;
+    text-align: justify;
+    word-break: break-word;
 
     .row {
       display: flex;
@@ -38,8 +40,8 @@
     background-color: var(--bg-contrast);
     border-radius: 2px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    right: 20px;
     height: 30px;
     width: 60px;
     opacity: 0;

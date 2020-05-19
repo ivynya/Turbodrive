@@ -40,15 +40,6 @@
 
 #assignments {
   flex: 1 1;
-  transition-duration: 0.2s;
-
-  @for $i from 0 through 20 {
-    > :nth-child(#{$i + 1}) {
-      opacity: 0;
-      animation: fade-in 1s forwards;
-      animation-delay: 0.06s * $i;
-    }
-  }
 
   .assignment-group {
     background-color: var(--bg-tertiary);
@@ -126,14 +117,5 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
