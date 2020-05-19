@@ -9,8 +9,11 @@ node_js:
 dist: xenial
 services:
   - xvfb
+addons:
+  apt:
+    packages:
+    - libsecret-1-dev
 before_script:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install libsecret-1-dev;
   - export DISPLAY=:99.0
 install:
   - npm set progress=false
