@@ -38,7 +38,6 @@ export class AppComponent implements OnInit {
 
     // If a stored refresh token exists, authenticate
     if (store.has("refreshToken")) {
-      console.log(store.get("refreshToken"));
       oauth2Client.setCredentials({
         refresh_token: store.get("refreshToken")
       });

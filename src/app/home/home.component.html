@@ -29,6 +29,26 @@
                   <span>{{update.creationTime}}</span>
                 </div>
                 <p class="text-secondary">{{update.text}}</p>
+                <div class="materials">
+                  <div class="card" *ngFor="let material of update.materials">
+                    <a href="{{material.youtubeVideo.alternateLink}}" target="_blank" *ngIf="material.youtubeVideo">
+                      <span class="icon"></span>
+                      <p>{{material.youtubeVideo.title}}</p>
+                    </a>
+                    <a href="{{material.driveFile.alternateLink}}" target="_blank" *ngIf="material.driveFile">
+                      <span class="icon"></span>
+                      <p>{{material.driveFile}}</p>
+                    </a>
+                    <a href="{{material.link.url}}" target="_blank" *ngIf="material.link">
+                      <span class="icon"></span>
+                      <p>{{material.link.title}}</p>
+                    </a>
+                    <a href="{{material.form.formUrl}}" target="_blank" *ngIf="material.form">
+                      <span class="icon"></span>
+                      <p>{{material.form.title}}</p>
+                    </a>
+                  </div>
+                </div>
               </div>
               <div class="actions">
               </div>
