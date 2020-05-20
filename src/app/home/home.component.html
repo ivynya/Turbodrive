@@ -18,40 +18,42 @@
         </div>
       </div>
       <div id="assignments">
-        <div class="assignment-group" *ngFor="let course of courses; index as i">
+        <section class="assignment-group" *ngFor="let course of courses; index as i">
           <p class="title-sm">{{course.name}}</p>
-          <div class="card" *ngFor="let update of announcements[course.id].slice(0, 2)">
-            <span class="icon"></span>
-            <div class="text">
-              <div class="row">
-                <span>Announcement</span>
-                <span>{{update.creationTime}}</span>
+          <div class="scroll-group">
+            <div class="card" *ngFor="let update of announcements[course.id].slice(0, 2)">
+              <span class="icon"></span>
+              <div class="text">
+                <div class="row">
+                  <span>Announcement</span>
+                  <span>{{update.creationTime}}</span>
+                </div>
+                <p class="text-secondary">{{update.text}}</p>
               </div>
-              <p class="text-secondary">{{update.text}}</p>
-            </div>
-            <div class="actions">
-            </div>
-          </div>
-          <div class="card" *ngIf="announcements[course.id].length > 2">
-            <div class="text">
-              <div class="row">
-                <span>More Unread Announcements</span>
-              </div>
-              <p class="text-secondary">There are more unread announcements for this classroom.</p>
-            </div>
-          </div>
-          <div class="card">
-            <span class="icon"></span>
-            <div class="text">
-              <div class="row">
-                <span>Assignment</span>
-                <span>Due Monday 11:59PM</span>
+              <div class="actions">
               </div>
             </div>
-            <div class="actions">
+            <div class="card" *ngIf="announcements[course.id].length > 2">
+              <div class="text">
+                <div class="row">
+                  <span>More Unread Announcements</span>
+                </div>
+                <p class="text-secondary">There are more unread announcements for this classroom.</p>
+              </div>
+            </div>
+            <div class="card">
+              <span class="icon"></span>
+              <div class="text">
+                <div class="row">
+                  <span>Assignment</span>
+                  <span>Due Monday 11:59PM</span>
+                </div>
+              </div>
+              <div class="actions">
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </section>

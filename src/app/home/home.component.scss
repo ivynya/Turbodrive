@@ -46,7 +46,6 @@
     display: inline-block;
     margin-bottom: 10px;
     width: 100%;
-    overflow: hidden auto;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
@@ -65,6 +64,10 @@
         text-decoration: underline;
         cursor: pointer;
       }
+    }
+
+    .scroll-group {
+      overflow: hidden auto;
     }
   
     .card {
@@ -90,11 +93,16 @@
 
     .assignment-group {
       margin-right: 10px;
-      height: 300px;
       max-width: calc(50% - 10px);
 
+      .scroll-group {
+        height: 300px;
+      }
+
       @media (min-width: 1500px) {
-        height: 370px;
+        .scroll-group {
+          height: 370px;
+        }
 
         .title-sm {
           font-size: 1.2rem;
