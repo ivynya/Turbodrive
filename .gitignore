@@ -50,4 +50,4 @@ package-lock.json
 Thumbs.db
 
 # Data files
-src/data/*
+src/environments/environment.ts

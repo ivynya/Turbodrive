@@ -4,8 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 
 import { google } from 'googleapis';
-const app = require('electron').remote.app;
-import * as fs from 'fs';
 import * as Store from 'electron-store';
 
 @Component({
@@ -30,14 +28,12 @@ export class AppComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    const path = `${app.getAppPath()}/src/data`;
-    const secrets = JSON.parse(fs.readFileSync(`${path}/credentials.json`, "utf8"));
     const store = new Store();
 
     const oauth2Client = new google.auth.OAuth2(
-      secrets["googleClientId"],
-      secrets["googleClientSecret"],
-      "http://localhost:4200/oauthcallback"
+      AppConfig.googleClientId,
+      AppConfig.googleClientSecret,
+      AppConfig.googleCallbackUrl
     );
 
     // If a stored refresh token exists, authenticate
