@@ -26,7 +26,7 @@
               <div class="text">
                 <div class="row">
                   <span>Announcement</span>
-                  <span>{{update.creationTime}}</span>
+                  <span>{{update.creationTime | date}}</span>
                 </div>
                 <p class="text-secondary">{{update.text}}</p>
                 <div class="materials">
@@ -61,13 +61,14 @@
                 <p class="text-secondary">There are more unread announcements for this classroom.</p>
               </div>
             </div>
-            <div class="card">
+            <div class="card" *ngFor="let work of assignments[course.id].slice(0, 3)">
               <span class="icon"></span>
               <div class="text">
                 <div class="row">
-                  <span>Assignment</span>
-                  <span>Due Monday 11:59PM</span>
+                  <span>{{work.title}}</span>
                 </div>
+                <span class="title-caption">{{work.dueDate | dueDateTime: work.dueTime | date: "E L/d h:mm a"}}</span>
+                <p class="text-secondary">{{work.description}}</p>
               </div>
               <div class="actions">
               </div>

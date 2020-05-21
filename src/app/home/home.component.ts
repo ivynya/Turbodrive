@@ -11,6 +11,7 @@ import * as Store from 'electron-store';
 export class HomeComponent implements OnInit {
   courses: classroom_v1.Schema$Course[];
   announcements: { [id: string]: classroom_v1.Schema$Announcement[] } = {};
+  assignments: { [id: string]: classroom_v1.Schema$CourseWork[] } = {};
 
   constructor(private router: Router) { }
 
@@ -44,11 +45,18 @@ export class HomeComponent implements OnInit {
           }, (err, res) => {
             if (err) return console.error(err);
             this.announcements[course.id] = res.data.announcements;
-            this.announcements[course.id].forEach(a => {
-              a.creationTime = a.creationTime.slice(0, 10);
-            });
-
             store.set("announcements", this.announcements);
+          });
+        }); 
+        // Get coursework
+        this.courses.forEach((course) => {
+          classroom.courses.courseWork.list({
+            courseId: course.id,
+            orderBy: "updateTime",
+            pageSize: 5
+          }, (err, res) => {
+            if (err) return console.error(err);
+            this.assignments[course.id] = res.data.courseWork;
           });
         });
 
