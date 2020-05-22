@@ -5,15 +5,16 @@ import { classroom_v1 } from 'googleapis';
 export class DueDateTimePipe implements PipeTransform {
   transform(dueDate: classroom_v1.Schema$Date, 
             dueTime: classroom_v1.Schema$TimeOfDay): string {
-    let datetime: Date;
-
     // If no due date, return empty
     if (!dueDate)
       return "";
 
-    // If a due time is specified, add data
-    datetime = new Date(dueDate.year, dueDate.month, dueDate.day, 
-                        dueTime.hours ?? 0, dueTime.minutes ?? 0);
+    // Create Date object and set as UTC
+    const datetime: Date = new Date();
+    datetime.setUTCFullYear(dueDate.year, dueDate.month - 1, dueDate.day);
+    datetime.setUTCHours(dueTime.hours ?? 0); 
+    datetime.setUTCMinutes(dueTime.minutes ?? 0);
+    datetime.setUTCSeconds(0);
     
     // Return ISO string to be piped to date
     return datetime.toISOString();

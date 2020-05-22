@@ -28,22 +28,22 @@
                   <span>Announcement</span>
                   <span>{{update.creationTime | date}}</span>
                 </div>
-                <p class="text-secondary">{{update.text}}</p>
+                <p class="text-secondary description">{{update.text}}</p>
                 <div class="materials">
                   <div class="card" *ngFor="let material of update.materials">
-                    <a href="{{material.youtubeVideo.alternateLink}}" target="_blank" *ngIf="material.youtubeVideo">
+                    <a *ngIf="material.youtubeVideo" title="{{material.youtubeVideo.title}}" href="{{material.youtubeVideo.alternateLink}}" target="_blank">
                       <span class="icon"></span>
                       <p>{{material.youtubeVideo.title}}</p>
                     </a>
-                    <a href="{{material.driveFile.alternateLink}}" target="_blank" *ngIf="material.driveFile">
+                    <a *ngIf="material.driveFile" title="{{material.driveFile.title}}" href="{{material.driveFile.alternateLink}}" target="_blank">
                       <span class="icon"></span>
                       <p>{{material.driveFile}}</p>
                     </a>
-                    <a href="{{material.link.url}}" target="_blank" *ngIf="material.link">
+                    <a *ngIf="material.link" title="{{material.link.title}}" href="{{material.link.url}}" target="_blank">
                       <span class="icon"></span>
                       <p>{{material.link.title}}</p>
                     </a>
-                    <a href="{{material.form.formUrl}}" target="_blank" *ngIf="material.form">
+                    <a *ngIf="material.form" title="{{material.form.title}}" href="{{material.form.formUrl}}" target="_blank">
                       <span class="icon"></span>
                       <p>{{material.form.title}}</p>
                     </a>
@@ -58,7 +58,7 @@
                 <div class="row">
                   <span>More Unread Announcements</span>
                 </div>
-                <p class="text-secondary">There are more unread announcements for this classroom.</p>
+                <p class="text-secondary text-left">There are more unread announcements.</p>
               </div>
             </div>
             <div class="card" *ngFor="let work of assignments[course.id].slice(0, 3)">
@@ -68,7 +68,7 @@
                   <span>{{work.title}}</span>
                 </div>
                 <span class="title-caption">{{work.dueDate | dueDateTime: work.dueTime | date: "E L/d h:mm a"}}</span>
-                <p class="text-secondary">{{work.description}}</p>
+                <p class="text-secondary description">{{work.description}}</p>
               </div>
               <div class="actions">
               </div>

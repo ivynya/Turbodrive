@@ -65,14 +65,6 @@ html, body {
   font-family: 'Nunito', Arial, Helvetica, sans-serif;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.text-secondary {
-  color: var(--text-secondary);
-}
-
 .page {
   position: absolute;
   top: 60px;
@@ -108,18 +100,7 @@ html, body {
   }
 }
 
-.d-flex {
-  display: flex;
-  flex-direction: column;
-
-  .flex {
-    flex: 1 1;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-}
-
 @import 'sass/card';
 @import 'sass/tooltip';
+
+@import 'sass/utilities';
