@@ -12,9 +12,9 @@ export class HomeComponent implements OnInit {
   courses: classroom_v1.Schema$Course[];
   courseData: {
     [id: string]: {
-      announcements: classroom_v1.Schema$Announcement[],
-      assignments: classroom_v1.Schema$CourseWork[]
-    }
+      announcements: classroom_v1.Schema$Announcement[];
+      assignments: classroom_v1.Schema$CourseWork[];
+    };
   } = {};
 
   constructor(private router: Router) { }

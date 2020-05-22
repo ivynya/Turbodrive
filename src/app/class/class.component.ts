@@ -20,7 +20,7 @@ export class ClassComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(params => {
       this.course = courses.filter((c: classroom_v1.Schema$Course) => {
-        return c.id === this.activatedRoute.snapshot.params.id;
+        return c.id === params.id;
       })[0];
       console.log(this.course);
     });
