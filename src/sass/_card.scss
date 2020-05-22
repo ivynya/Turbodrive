@@ -63,3 +63,22 @@
     }
   }
 }
+
+/* Dialog Card */
+
+.dialog {
+  background-color: var(--bg-primary);
+  box-shadow: var(--box-shadow) 0 10px 30px;
+  padding: 0 20px;
+  width: 300px;
+  margin: auto;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  > * {
+    flex: 1 1;
+  }
+}

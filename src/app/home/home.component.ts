@@ -10,8 +10,12 @@ import * as Store from 'electron-store';
 })
 export class HomeComponent implements OnInit {
   courses: classroom_v1.Schema$Course[];
-  announcements: { [id: string]: classroom_v1.Schema$Announcement[] } = {};
-  assignments: { [id: string]: classroom_v1.Schema$CourseWork[] } = {};
+  courseData: {
+    [id: string]: {
+      announcements: classroom_v1.Schema$Announcement[],
+      assignments: classroom_v1.Schema$CourseWork[]
+    }
+  } = {};
 
   constructor(private router: Router) { }
 
@@ -22,8 +26,8 @@ export class HomeComponent implements OnInit {
     if (store.has("courses")) {
       this.courses = store.get("courses");
     }
-    if (store.has("announcements")) {
-      this.announcements = store.get("announcements");
+    if (store.has("courseData")) {
+      this.courseData = store.get("courseData");
     }
 
     // Update courses from API
@@ -35,32 +39,46 @@ export class HomeComponent implements OnInit {
 
       const rcourses = res.data.courses;
       if (rcourses && rcourses.length) {
+        // Define and cache courses
         this.courses = rcourses;
-        // Get announcements for each course
-        this.courses.forEach((course) => {
+        store.set("courses", this.courses);
+
+        // Get courseData
+        rcourses.forEach((course) => {
+          // Initialize if null
+          if (!this.courseData[course.id]) {
+            this.courseData[course.id] = { 
+               announcements: [],
+               assignments: []
+            };
+          }
+
+          // Get announcements for each course
           classroom.courses.announcements.list({
             courseId: course.id,
             orderBy: "updateTime",
             pageSize: 5
           }, (err, res) => {
             if (err) return console.error(err);
-            this.announcements[course.id] = res.data.announcements;
-            store.set("announcements", this.announcements);
+            this.courseData[course.id].announcements = res.data.announcements;
+
+            // Cache data
+            store.set("courseData", this.courseData);
           });
-        }); 
-        // Get coursework
-        this.courses.forEach((course) => {
+            
+          // Get coursework
           classroom.courses.courseWork.list({
             courseId: course.id,
             orderBy: "updateTime",
             pageSize: 5
           }, (err, res) => {
             if (err) return console.error(err);
-            this.assignments[course.id] = res.data.courseWork;
+            this.courseData[course.id].assignments = res.data.courseWork;
+
+            // Cache data
+            store.set("courseData", this.courseData);
           });
         });
-
-        store.set("courses", res.data.courses);
       } else {
         console.log('No courses found.');
       }

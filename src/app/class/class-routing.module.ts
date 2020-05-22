@@ -5,7 +5,7 @@ import { ClassComponent } from './class.component';
 
 const routes: Routes = [
   {
-    path: 'class',
+    path: 'class/:id',
     component: ClassComponent
   }
 ];

@@ -6,11 +6,7 @@
   </div>
   <div class="classes">
     <a routerLink="/" data-tt="Dashboard"><span data-notify></span></a>
-    <a routerLink="/" data-tt="Dashboard"></a>
-    <a routerLink="/" data-tt="Dashboard"></a>
-    <a routerLink="/" data-tt="Dashboard"></a>
-    <a routerLink="/auth" data-tt="Authorization"></a>
-    <a routerLink="/class" data-tt="Class Name Here"></a>
+    <a *ngFor="let c of courses" routerLink="/class/{{c.id}}" [attr.data-tt]="c.name"></a>
   </div>
   <div>
     <button aria-label="Add Class" data-tt="Add Class">
