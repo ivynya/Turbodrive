@@ -28,7 +28,7 @@
       transition-duration: 0.2s;
       position: relative;
 
-      &:hover, &:focus {
+      &:hover, &:focus, &.active {
         background-color: #ddd;
         border-radius: 10px;
       }
@@ -50,11 +50,12 @@
     background-color: transparent;
     border: none;
     outline: none;
-    margin: 0 10px;
+    margin: 0 5px;
 
     .icon {
       height: 25px;
       width: 25px;
+      padding: 10px;
       vertical-align: middle;
       fill: var(--text-secondary);
     }
@@ -69,6 +70,9 @@
   
     &:hover, &:focus {
       .icon {
+        background-color: var(--bg-tertiary);
+        border-radius: 50%;
+
         fill: var(--text-primary);
       }
     }
