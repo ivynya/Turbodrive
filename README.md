@@ -3,6 +3,8 @@
 
 Turbocharged GSuite. WIP.
 
+This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
+
 ## 😕 Google Got You Down?
 
 This project aims to heavily improve upon GSuite services including Google Classroom and Drive, increasing app responsiveness and your efficiency by radically redesigning the user experience. It's built on Google's API for developers with SSO, as a desktop app with Angular 9 & Electron 8 using [this boilerplate](https://github.com/maximegris/angular-electron).
@@ -21,7 +23,7 @@ Turbodrive is built with real user (student) feedback in mind. Google Classroom 
 If you have access to the Google APIs and the local filesystem, why not power up with Microsoft 365? Edit documents and work on Google Classroom assignments completely offline using Microsoft 365's comprehensive suite of tools. Manage your Microsoft To Do and Calendar directly in-app.
 
 # Setup
-Currently, there is no packaged release of Turbodrive due to the lack of almost everything. If you'd like to check out how this app is (barely) functioning, follow these steps.
+There is currently no packaged release of Turbodrive. Follow the steps below to get started with the source code.
 
 1) Clone the git repo [`https://github.com/SDBagel/Turbodrive.git`]
 
@@ -35,7 +37,7 @@ Currently, there is no packaged release of Turbodrive due to the lack of almost 
 
 6) Create a `src/environments/environment.ts` file to contain your client ID and secret and callback URL. The format of this file should look like the `src/environments/environment.example.ts` file.
 
-7) Run `npm start` to build and start the electron process. 
+7) Run `npm start` to build and start the electron process. Currently due to the use of the Google NodeJS auth library it is incompatible with running as a webserver only (without electron). There are plans to change this.
 
 The electron window will open and should redirect you to the Google Auth page. Sign in with Google and you will be redirected back to the home page where you can see all active Google Classrooms you are in (and maybe other stuff as this gets more updates).
 
