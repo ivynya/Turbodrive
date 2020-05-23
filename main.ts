@@ -1,4 +1,5 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
+import * as Store from 'electron-store';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -6,9 +7,9 @@ let win: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
-function createWindow(): BrowserWindow {
+const store: Store = new Store();
 
-  const electronScreen = screen;
+function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
@@ -73,6 +74,19 @@ try {
     if (win === null) {
       createWindow();
     }
+  });
+
+  ipcMain.on('store-get', (event, key: string) => {
+    event.returnValue = store.get(key);
+  });
+
+  ipcMain.on('store-set', (event, key: string, value: any) => {
+    store.set(key, value);
+    event.returnValue = true;
+  });
+
+  ipcMain.on('store-has', (event, key: string) => {
+    event.returnValue = store.has(key);
   });
 
 } catch (e) {

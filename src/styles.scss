@@ -16,7 +16,7 @@
   --selection: #7df5;
 }
 
-/*@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --bg-primary: #181818;
     --bg-secondary: #242424;
@@ -33,7 +33,7 @@
     --box-shadow: #111;
     --selection: #7dfa;
   }
-}*/
+}
 
 ::selection {
   background-color: var(--selection);
