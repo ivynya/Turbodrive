@@ -21,7 +21,7 @@
         <section class="assignment-group" *ngFor="let course of courses">
           <p class="title-sm">{{course.name}}</p>
           <div class="scroll-group">
-            <div class="card" *ngFor="let update of courseData[course.id].announcements.slice(0, 2)">
+            <div class="card" *ngFor="let update of courseData[course.id]?.announcements.slice(0, 2)">
               <span class="icon"></span>
               <div class="text">
                 <div class="row">
@@ -53,7 +53,7 @@
               <div class="actions">
               </div>
             </div>
-            <div class="card" *ngIf="courseData[course.id].announcements.length > 2">
+            <div class="card" *ngIf="courseData[course.id]?.announcements.length > 2">
               <div class="text">
                 <div class="row">
                   <span>More Unread Announcements</span>
@@ -61,7 +61,7 @@
                 <p class="text-secondary text-left">There are more unread announcements.</p>
               </div>
             </div>
-            <div class="card" *ngFor="let work of courseData[course.id].assignments.slice(0, 3)">
+            <div class="card" *ngFor="let work of courseData[course.id]?.assignments.slice(0, 3)">
               <span class="icon"></span>
               <div class="text">
                 <div class="row">

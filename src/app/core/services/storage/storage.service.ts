@@ -29,7 +29,6 @@ export class StorageService {
   }
 
   watch(key: string, callback: (newVal: any, oldVal: any) => any): void {
-    console.log(`${key} changed.`);
     this.store.onDidChange(key, callback);
   }
 }
