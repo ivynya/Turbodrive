@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ElectronService } from './core/services';
+import { ElectronService, StorageService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { google } from 'googleapis';
@@ -11,6 +11,7 @@ import { google } from 'googleapis';
 })
 export class AppComponent implements OnInit {
   constructor(public electron: ElectronService,
+              private storage: StorageService,
               private translate: TranslateService) {
     translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
@@ -33,9 +34,9 @@ export class AppComponent implements OnInit {
     );
 
     // If a stored refresh token exists, authenticate
-    if (this.electron.ipcRenderer.sendSync("store-has", "refreshToken")) {
-      oauth2Client.setCredentials({
-        refresh_token: this.electron.ipcRenderer.sendSync("store-get", "refreshToken")
+    if (this.storage.has("refreshToken")) {
+      oauth2Client.setCredentials({ 
+        refresh_token: this.storage.get("refreshToken")
       });
 
       // Set to globally accessible

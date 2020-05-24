@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { classroom_v1 } from 'googleapis';
-import { ElectronService } from '../core/services';
+import { StorageService } from '../core/services';
 
 @Component({
   selector: 'app-class',
@@ -12,19 +12,19 @@ export class ClassComponent implements OnInit {
   course: classroom_v1.Schema$Course;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private electron: ElectronService) {}
+              private storage: StorageService) {}
 
   ngOnInit(): void {
     let courses: any;
-    if (this.electron.ipcRenderer.sendSync("store-has", "courses")) {
-      courses = this.electron.ipcRenderer.sendSync("store-get", "courses");
-    }
+    if (this.storage.has("courses")) {
+      courses = this.storage.get("courses");
 
-    this.activatedRoute.params.subscribe(params => {
-      this.course = courses.filter((c: classroom_v1.Schema$Course) => {
-        return c.id === params.id;
-      })[0];
-      console.log(this.course);
-    });
+      this.activatedRoute.params.subscribe(params => {
+        this.course = courses.filter((c: classroom_v1.Schema$Course) => {
+          return c.id === params.id;
+        })[0];
+        console.log(this.course);
+      });
+    }
   }
 }

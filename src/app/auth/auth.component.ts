@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppConfig } from '../../environments/environment';
-import { ElectronService } from '../core/services';
+import { StorageService } from '../core/services';
 import { google } from 'googleapis';
 
 @Component({
@@ -12,7 +12,7 @@ import { google } from 'googleapis';
 export class AuthComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
-              private electron: ElectronService) { }
+              private storage: StorageService) { }
 
   ngOnInit(): void {
     // Try get credentials from config
@@ -38,7 +38,7 @@ export class AuthComponent implements OnInit {
           google.options({ auth: oauth2Client });
   
           // Save refresh token
-          this.electron.ipcRenderer.sendSync("store-set", "refreshToken", tokens.refresh_token);
+          this.storage.set("refreshToken", tokens.refresh_token);
   
           // Redirect to home page
           window.location.pathname = "/";

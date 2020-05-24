@@ -1,13 +1,10 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
-import * as Store from 'electron-store';
+import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
-
-const store: Store = new Store();
 
 function createWindow(): BrowserWindow {
 
@@ -46,6 +43,13 @@ function createWindow(): BrowserWindow {
     win = null;
   });
 
+  // Open links with _target="blank" externally
+  // https://stackoverflow.com/a/32427579/9627251
+  win.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    require('electron').shell.openExternal(url);
+  });
+
   return win;
 }
 
@@ -74,19 +78,6 @@ try {
     if (win === null) {
       createWindow();
     }
-  });
-
-  ipcMain.on('store-get', (event, key: string) => {
-    event.returnValue = store.get(key);
-  });
-
-  ipcMain.on('store-set', (event, key: string, value: any) => {
-    store.set(key, value);
-    event.returnValue = true;
-  });
-
-  ipcMain.on('store-has', (event, key: string) => {
-    event.returnValue = store.has(key);
   });
 
 } catch (e) {

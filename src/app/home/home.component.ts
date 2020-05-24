@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../core/services';
 import { google, classroom_v1 } from 'googleapis';
-import { ElectronService } from '../core/services';
 
 @Component({
   selector: 'app-home',
@@ -18,15 +18,15 @@ export class HomeComponent implements OnInit {
   } = {};
 
   constructor(private router: Router,
-              private electron: ElectronService) { }
+              private storage: StorageService) { }
 
   ngOnInit(): void {
     // If cached, load data
-    if (this.electron.ipcRenderer.sendSync('store-has', "courses")) {
-      this.courses = this.electron.ipcRenderer.sendSync('store-get', "courses");
+    if (this.storage.has("courses")) {
+      this.courses = this.storage.get("courses");
     }
-    if (this.electron.ipcRenderer.sendSync('store-has', "courseData")) {
-      this.courseData = this.electron.ipcRenderer.sendSync('store-get', "courseData");
+    if (this.storage.has("courseData")) {
+      this.courseData = this.storage.get("courseData");
     }
 
     // Update courses from API
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
       if (rcourses && rcourses.length) {
         // Define and cache courses
         this.courses = rcourses;
-        this.electron.ipcRenderer.sendSync('store-set', "courses", rcourses);
+        this.storage.set("courses", rcourses);
 
         // Get courseData
         rcourses.forEach((course) => {
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
             this.courseData[course.id].announcements = res.data.announcements;
 
             // Cache data
-            this.electron.ipcRenderer.sendSync('store-set', "courseData", this.courseData);
+            this.storage.set("courseData", this.courseData);
           });
             
           // Get coursework
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
             this.courseData[course.id].assignments = res.data.courseWork;
 
             // Cache data
-            this.electron.ipcRenderer.sendSync('store-set', "courseData", this.courseData);
+            this.storage.set("courseData", this.courseData);
           });
         });
       } else {
