@@ -54,7 +54,7 @@ describe('NavbarComponent', () => {
 
   it('should watch for course changes', () => {
     // Add new data and set store
-    let newData = defaultData;
+    const newData = defaultData;
     newData.courses.push(
       { "id": "123", "name": "Class", "ownerId": "", "creationTime": "",
         "updateTime": "", "enrollmentCode": "", "courseState": "",
