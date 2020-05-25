@@ -4,11 +4,17 @@ import { StorageService } from './storage.service';
 import * as Store from 'electron-store';
 
 describe('ElectronService', () => {
+  const store = new Store();
+
   beforeEach(() => {
     TestBed.configureTestingModule({});
     // Generic preset data to test off of
-    const store = new Store();
     store.store = {"courses": [{ "id": "123", "name": "Class Name" }]};
+  });
+
+  afterEach(() => {
+    // Make sure storage cleared for other tests
+    store.clear();
   });
 
   it('should be created', () => {
@@ -31,7 +37,7 @@ describe('ElectronService', () => {
     const service: StorageService = TestBed.get(StorageService);
     const data = { "123": { "announcements": [{ "courseId": "123", "id": "456" }],
       "assignments": [{ "courseId": "123", "id": "456", "title": "Title" }]}};
-    service.set("courseData", data);
+    store.set("courseData", data);
     expect(service.get("courseData")).toEqual(data);
   });
 });

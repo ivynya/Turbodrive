@@ -23,7 +23,6 @@ export class ClassComponent implements OnInit {
         this.course = courses.filter((c: classroom_v1.Schema$Course) => {
           return c.id === params.id;
         })[0];
-        console.log(this.course);
       });
     }
   }
