@@ -37,7 +37,7 @@ describe('ElectronService', () => {
     const service: StorageService = TestBed.get(StorageService);
     const data = { "123": { "announcements": [{ "courseId": "123", "id": "456" }],
       "assignments": [{ "courseId": "123", "id": "456", "title": "Title" }]}};
-    store.set("courseData", data);
+    service.set("courseData", data);
     expect(store.get("courseData")).toEqual(data);
   });
 });
