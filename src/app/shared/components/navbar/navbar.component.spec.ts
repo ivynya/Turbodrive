@@ -65,6 +65,6 @@ describe('NavbarComponent', () => {
     // Give time for the watch function to update
     setTimeout(() => {
       expect(component.courses).toEqual(newData.courses);
-    }, 100);
+    }, 500);
   })
 });

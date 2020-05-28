@@ -10,6 +10,12 @@ import { StorageService } from '../core/services';
 })
 export class ClassComponent implements OnInit {
   course: classroom_v1.Schema$Course;
+  courseData: {
+    [id: string]: {
+      announcements: classroom_v1.Schema$Announcement[];
+      assignments: classroom_v1.Schema$CourseWork[];
+    };
+  } = {};
 
   constructor(private activatedRoute: ActivatedRoute,
               private storage: StorageService) {}
@@ -24,6 +30,10 @@ export class ClassComponent implements OnInit {
           return c.id === params.id;
         })[0];
       });
+    }
+
+    if (this.storage.has("courseData")) {
+      this.courseData = this.storage.get("courseData");
     }
   }
 }
