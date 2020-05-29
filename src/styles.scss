@@ -7,6 +7,9 @@
   --text-primary: #333;
   --text-secondary: #777;
   --text-contrast: #fff;
+    
+  --link-primary: #46a;
+  --link-secondary: #68c;
 
   --scroll-bg: #f3f3f3;
   --scroll-primary: #ddd;
@@ -27,6 +30,9 @@
     --text-primary: #fff;
     --text-secondary: #ccc;
     --text-contrast: #fff;
+
+    --link-primary: #abf;
+    --link-secondary: #89d;
 
     --scroll-bg: #333;
     --scroll-primary: #555;
@@ -99,6 +105,15 @@ html, body {
 
   @media (min-width: 1150px) {
     max-width: 1900px;
+  }
+}
+
+a {
+  color: var(--link-primary);
+  transition-duration: 0.1s;
+
+  &:hover {
+    color: var(--link-secondary);
   }
 }
 

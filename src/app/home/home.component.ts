@@ -46,10 +46,7 @@ export class HomeComponent implements OnInit {
         rcourses.forEach((course) => {
           // Initialize if null
           if (!this.courseData[course.id]) {
-            this.courseData[course.id] = { 
-               announcements: [],
-               assignments: []
-            };
+            this.courseData[course.id] = { announcements: [], assignments: [] };
           }
 
           // Get announcements for each course
