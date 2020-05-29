@@ -13,13 +13,13 @@ describe('ClassComponent', () => {
 
   // Spec according to courseData and courses schemas
   const defaultData: { 
-    courses: classroom_v1.Schema$Course[], 
+    courses: classroom_v1.Schema$Course[];
     courseData: {
       [id: string]: {
-        announcements: classroom_v1.Schema$Announcement[],
-        assignments: classroom_v1.Schema$CourseWork[]
-      }
-    }
+        announcements: classroom_v1.Schema$Announcement[];
+        assignments: classroom_v1.Schema$CourseWork[];
+      };
+    };
   } = { 
     "courses": [{ "id": "123", 
       "name": "Class", "ownerId": "", "creationTime": "",
