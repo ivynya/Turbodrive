@@ -4,10 +4,13 @@ import { StorageService } from './storage.service';
 import * as Store from 'electron-store';
 
 describe('ElectronService', () => {
+  let service: StorageService;
   const store = new Store();
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
+    service = TestBed.get(StorageService);
+
     // Generic preset data to test off of
     store.store = {"courses": [{ "id": "123", "name": "Class Name" }]};
   });
@@ -18,26 +21,31 @@ describe('ElectronService', () => {
   });
 
   it('should be created', () => {
-    const service: StorageService = TestBed.get(StorageService);
     expect(service).toBeTruthy();
   });
 
   it('should return correct values for has', () => {
-    const service: StorageService = TestBed.get(StorageService);
     expect(service.has("courses")).toBeTrue();
     expect(service.has("courseData")).toBeFalse();
   });
 
   it('should return correct values for get', () => {
-    const service: StorageService = TestBed.get(StorageService);
     expect(service.get("courses")).toEqual([{ "id": "123", "name": "Class Name" }]);
   });
 
   it('should set values correctly', () => {
-    const service: StorageService = TestBed.get(StorageService);
     const data = { "123": { "announcements": [{ "courseId": "123", "id": "456" }],
       "assignments": [{ "courseId": "123", "id": "456", "title": "Title" }]}};
     service.set("courseData", data);
     expect(store.get("courseData")).toEqual(data);
+  });
+
+  it('should update values correctly', () => {
+    let data = [{ "id": "123", "name": "Class Name" }];
+    expect(service.update("courses", data)).toBeFalse();
+
+    data = [{ "id": "456", "name": "Class Name" }];
+    expect(service.update("courses", data)).toBeTrue();
+    expect(store.get("courses")).toEqual(data);
   });
 });

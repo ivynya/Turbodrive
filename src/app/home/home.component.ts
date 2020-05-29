@@ -59,10 +59,10 @@ export class HomeComponent implements OnInit {
             pageSize: 5
           }, (err, res) => {
             if (err) return console.error(err);
-            this.courseData[course.id].announcements = res.data.announcements;
 
-            // Cache data
-            this.storage.set("courseData", this.courseData);
+            if (this.storage.update(`courseData.${course.id}.announcements`, res.data.announcements)) {
+              this.courseData[course.id].announcements = res.data.announcements;
+            }
           });
             
           // Get coursework
@@ -72,10 +72,10 @@ export class HomeComponent implements OnInit {
             pageSize: 5
           }, (err, res) => {
             if (err) return console.error(err);
-            this.courseData[course.id].assignments = res.data.courseWork;
 
-            // Cache data
-            this.storage.set("courseData", this.courseData);
+            if (this.storage.update(`courseData.${course.id}.assignments`, res.data.courseWork)) {
+              this.courseData[course.id].announcements = res.data.courseWork;
+            }
           });
         });
       } else {

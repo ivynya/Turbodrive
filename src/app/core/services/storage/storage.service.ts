@@ -28,6 +28,23 @@ export class StorageService {
     this.store.set(key, value);
   }
 
+  // Set function that only updates if a new value is provided
+  // Returns false if values match (nothing changes) or true if not
+  update(key: string, value: any): boolean {
+    // Referring to the following for performance considerations
+    // https://www.mattzeunert.com/2016/01/28/javascript-deep-equal.html
+    const stored = JSON.stringify(this.store.get(key));
+    const updated = JSON.stringify(value);
+
+    if (stored !== updated) {
+      this.store.set(key, value);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   watch(key: string, callback: (newVal: any, oldVal: any) => any): void {
     this.store.onDidChange(key, callback);
   }
