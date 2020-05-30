@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from '../../../core/services';
+import { DataService } from '../../../core/services';
 import { classroom_v1 } from 'googleapis';
 
 @Component({
@@ -12,15 +12,11 @@ export class NavbarComponent implements OnInit {
   courses: classroom_v1.Schema$Course[] = [];
   
   constructor(private router: Router,
-              private storage: StorageService) { }
+              private data: DataService) { }
 
   ngOnInit(): void {
-    if (this.storage.has("courses")) {
-      this.courses = this.storage.get("courses");
-    }
-
-    this.storage.watch("courses", (n, o) => {
-      this.courses = n;
+    this.data.subscribeCourses((data) => {
+      this.courses = data.courses;
     });
   }
 }

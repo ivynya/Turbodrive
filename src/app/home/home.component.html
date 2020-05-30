@@ -9,7 +9,7 @@
             <span class="icon"></span>
             <div class="text">
               <b>{{course.name}}</b>
-              <p class="text-secondary">{{course.id}}</p>
+              <p class="text-secondary">Created on {{course.creationTime | date}}</p>
             </div>
           </div>
           <div class="card text-center" *ngIf="!this.courses">
