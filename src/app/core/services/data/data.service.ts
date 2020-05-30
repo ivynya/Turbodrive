@@ -94,7 +94,7 @@ export class DataService {
   }
 
   // Update most recent 5 announcements
-  updateAnnouncements(courseId: string, callback?: (res: classroom_v1.Schema$ListAnnouncementsResponse) => void): void {
+  updateAnnouncements(courseId: string): void {
     // Get announcements for course ID
     this.classroom.courses.announcements.list({
       courseId: courseId,
@@ -104,7 +104,6 @@ export class DataService {
       if (err) return console.error(err);
 
       this.storage.update(`courseData.${courseId}.announcements`, res.data.announcements);
-      if (callback) callback(res.data);
     });
   }
 
