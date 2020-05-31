@@ -36,13 +36,16 @@ export class DataService {
                             assignments: classroom_v1.Schema$CourseWork[];
                         };}) => void,
                         forceUpdate = false): void {
+    this.storage.watch("courseData", (n, o) => {
+      callback(n);
+    });
+
     // Subscribe to course changes
     this.subscribeCourses((data) => {
-      // For each course subscribe to data event
+      // For each course trigger an update
       data.courses.forEach((course) => {
-        this.subscribeCourseData(course.id, (data) => {
-          callback(this.storage.get("courseData"));
-        }, forceUpdate);
+        this.updateAnnouncements(course.id);
+        this.updateAssignments(course.id);
       });
     }, forceUpdate);
   }
