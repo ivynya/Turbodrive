@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { DueDateTimePipe } from '../shared/pipes/due-date-time.pipe';
 import { HomeComponent } from './home.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -10,7 +11,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
+      declarations: [DueDateTimePipe, HomeComponent],
       imports: [TranslateModule.forRoot(), RouterTestingModule]
     }).compileComponents();
   }));
