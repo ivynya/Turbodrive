@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { classroom_v1 } from 'googleapis';
-import { StorageService } from '../core/services';
+import { DataService, StorageService, Schema$CourseData } from '../core/services';
 
 @Component({
   selector: 'app-class',
@@ -10,14 +10,10 @@ import { StorageService } from '../core/services';
 })
 export class ClassComponent implements OnInit {
   course: classroom_v1.Schema$Course;
-  courseData: {
-    [id: string]: {
-      announcements: classroom_v1.Schema$Announcement[];
-      assignments: classroom_v1.Schema$CourseWork[];
-    };
-  } = {};
+  courseData: { [id: string]: Schema$CourseData } = {};
 
   constructor(private activatedRoute: ActivatedRoute,
+              private data: DataService,
               private storage: StorageService) {}
 
   ngOnInit(): void {
@@ -29,11 +25,11 @@ export class ClassComponent implements OnInit {
         this.course = courses.filter((c: classroom_v1.Schema$Course) => {
           return c.id === params.id;
         })[0];
-      });
-    }
 
-    if (this.storage.has("courseData")) {
-      this.courseData = this.storage.get("courseData");
+        this.data.subscribeCourseData(this.course.id, (data) => {
+          this.courseData[this.course.id] = data;
+        }, true);
+      });
     }
   }
 }

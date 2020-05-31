@@ -3,6 +3,11 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { google, classroom_v1 } from 'googleapis';
 
+export interface Schema$CourseData {
+  announcements: classroom_v1.Schema$Announcement[];
+  assignments: classroom_v1.Schema$CourseWork[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class DataService {
   private classroom: classroom_v1.Classroom;
@@ -31,10 +36,7 @@ export class DataService {
     }
   }
 
-  subscribeCourseDataAll(callback: (data: { [id: string]: {
-                            announcements: classroom_v1.Schema$Announcement[];
-                            assignments: classroom_v1.Schema$CourseWork[];
-                        };}) => void,
+  subscribeCourseDataAll(callback: (data: { [id: string]: Schema$CourseData}) => void,
                         forceUpdate = false): void {
     // Watch all courseData for changes 
     this.storage.watch("courseData", (n, o) => {
@@ -56,11 +58,7 @@ export class DataService {
     }, forceUpdate);
   }
 
-  subscribeCourseData(courseId: string, 
-                      callback: (data: {
-                        announcements: classroom_v1.Schema$Announcement[];
-                        assignments: classroom_v1.Schema$CourseWork[];
-                      }) => void,
+  subscribeCourseData(courseId: string, callback: (data: Schema$CourseData) => void,
                       forceUpdate = false): void {
     const selector = `courseData.${courseId}`;
 
