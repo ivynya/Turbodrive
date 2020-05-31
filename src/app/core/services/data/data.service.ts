@@ -36,9 +36,15 @@ export class DataService {
                             assignments: classroom_v1.Schema$CourseWork[];
                         };}) => void,
                         forceUpdate = false): void {
+    // Watch all courseData for changes 
     this.storage.watch("courseData", (n, o) => {
       callback(n);
     });
+
+    // If course data exists, return it
+    if (this.storage.has("courseData")) {
+      callback(this.storage.get("courseData"));
+    }
 
     // Subscribe to course changes
     this.subscribeCourses((data) => {
