@@ -2,6 +2,7 @@
   --bg-primary: #fff;
   --bg-secondary: #fff;
   --bg-tertiary: #eee;
+  --bg-highlight: #ddd;
   --bg-contrast: #444;
 
   --text-primary: #333;
@@ -25,11 +26,12 @@
     --bg-primary: #181818;
     --bg-secondary: #242424;
     --bg-tertiary: #2E2E2E;
-    --bg-contrast: #555;
+    --bg-highlight: #555;
+    --bg-contrast: #fff;
 
     --text-primary: #fff;
     --text-secondary: #ccc;
-    --text-contrast: #fff;
+    --text-contrast: #333;
 
     --link-primary: #abf;
     --link-secondary: #89d;
@@ -39,6 +41,7 @@
     
     --box-shadow: #111;
     --default-banner: #2b2f77;
+    --notify-color: #fa0;
     --selection: #7dfa;
   }
 }

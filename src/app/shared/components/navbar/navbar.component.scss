@@ -21,6 +21,10 @@
       background-color: var(--bg-tertiary);
       border-radius: 50%;
       display: block;
+      color: var(--text-primary);
+      line-height: 45px;
+      text-align: center;
+      text-decoration: none;
       height: 45px;
       width: 45px;
       margin: 0 10px;
@@ -29,7 +33,7 @@
       position: relative;
 
       &:hover, &:focus, &.active {
-        background-color: #ddd;
+        background-color: var(--bg-highlight);
         border-radius: 10px;
       }
 

@@ -13,9 +13,15 @@
   .icon {
     background-color: var(--bg-secondary);
     border-radius: 50%;
-    display: block;
+    display: flex;
+    justify-content: center;
     height: 35px;
     width: 35px;
+    
+    > svg {
+      width: 20px;
+      fill: var(--text-secondary);
+    }
   }
 
   .text {
@@ -45,7 +51,7 @@
   }
 
   .actions {
-    background-color: var(--bg-contrast);
+    background-color: var(--bg-highlight);
     border-radius: 2px;
     padding: 2px;
     position: absolute;

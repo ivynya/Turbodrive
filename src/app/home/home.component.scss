@@ -53,7 +53,7 @@
       background-image: linear-gradient(to right, #789, #abc);
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
-      color: var(--text-contrast);
+      color: #fff;
       font-size: 1rem;
       font-weight: 600;
       margin: 0;
@@ -67,6 +67,8 @@
     }
 
     .scroll-group {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
       overflow: hidden auto;
   
       .card {
@@ -152,13 +154,9 @@
       }
 
       @media (min-width: 1500px) {
-        .scroll-group {
-          height: 280px;
-        }
-
         .title-sm {
           font-size: 1.2rem;
-          padding: 30px 20px;
+          padding: 20px;
         }
 
         max-width: calc(33% - 10px);

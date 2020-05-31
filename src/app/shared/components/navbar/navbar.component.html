@@ -11,6 +11,7 @@
     </a>
     <a *ngFor="let c of courses" routerLink="/class/{{c.id}}" routerLinkActive="active" 
       [routerLinkActiveOptions]="{exact: true}" [attr.data-tt]="c.name">
+      {{c.name[0]}}
     </a>
   </div>
   <div>
