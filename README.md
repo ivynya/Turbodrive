@@ -5,9 +5,15 @@ Turbocharged GSuite. WIP.
 
 This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
 
+### A quick complaint to Google:
+
+The Google Classroom API crucially does not include an endpoint for Material-type CourseWork, causing a gap to appear in the Turbodrive app where something should be, but isn't, with no indication otherwise. Who even thinks it's a good idea to leave [a gaping hole in the API for over two years](https://issuetracker.google.com/issues/115421140)??
+
+Until this gets added (probably never at this rate) Turbodrive won't be able to load Material posts.
+
 ## 😕 Google Got You Down?
 
-This project aims to heavily improve upon GSuite services including Google Classroom and Drive, increasing app responsiveness and your efficiency by radically redesigning the user experience. It's built on Google's API for developers with SSO, as a desktop app with Angular 9 & Electron 8 using [this boilerplate](https://github.com/maximegris/angular-electron).
+This project aims to heavily improve upon GSuite services including Google Classroom and Drive, increasing app responsiveness and your efficiency by radically redesigning the user experience. It's built on Google's API for developers with SSO, as a desktop app with Angular 9 & Electron 8.
 
 ## 🛠 Designed By Users, for Users
 
