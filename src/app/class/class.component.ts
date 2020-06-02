@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { classroom_v1 } from 'googleapis';
-import { DataService, StorageService, Schema$CourseData } from '../core/services';
+import { DataService, StorageService } from '../core/services';
 
 @Component({
   selector: 'app-class',
@@ -10,7 +10,10 @@ import { DataService, StorageService, Schema$CourseData } from '../core/services
 })
 export class ClassComponent implements OnInit {
   course: classroom_v1.Schema$Course;
-  courseData: { [id: string]: Schema$CourseData } = {};
+  courseData: { [id: string]: {
+    announcements: classroom_v1.Schema$Announcement[];
+    assignments: classroom_v1.Schema$CourseWork[];
+  }} = {};
 
   constructor(private activatedRoute: ActivatedRoute,
               private data: DataService,
@@ -18,17 +21,20 @@ export class ClassComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.storage.has("courses")) {
-      let courses: any;
-      courses = this.storage.get("courses");
+      const courses = this.storage.get("courses");
 
       this.activatedRoute.params.subscribe(params => {
-        this.course = courses.filter((c: classroom_v1.Schema$Course) => {
-          return c.id === params.id;
-        })[0];
+        courses.forEach(course => {
+          if (course.id === params.id) {
+            this.course = course;
 
-        this.data.subscribeCourseData(this.course.id, (data) => {
-          this.courseData[this.course.id] = data;
-        }, true);
+            this.data.subscribeCourseData(this.course.id, (data) => {
+              this.courseData[this.course.id] = data;
+            }, true);
+
+            return;
+          }
+        });
       });
     }
   }

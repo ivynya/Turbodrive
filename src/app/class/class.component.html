@@ -13,7 +13,7 @@
       <h2>Upcoming Work</h2>
     </section>
     <section id="stream">
-      <div class="card" *ngFor="let update of courseData[course.id].announcements">
+      <div class="card" *ngFor="let update of courseData[course?.id]?.announcements">
         <span class="icon"></span>
         <div class="text">
           <div class="row">

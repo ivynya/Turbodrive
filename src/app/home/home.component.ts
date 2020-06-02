@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService, Schema$CourseData } from '../core/services';
+import { DataService } from '../core/services';
 import { classroom_v1 } from 'googleapis';
 
 @Component({
@@ -10,7 +10,10 @@ import { classroom_v1 } from 'googleapis';
 })
 export class HomeComponent implements OnInit {
   courses: classroom_v1.Schema$Course[];
-  courseData: { [id: string]: Schema$CourseData } = {};
+  courseData: { [id: string]: {
+    announcements: classroom_v1.Schema$Announcement[];
+    assignments: classroom_v1.Schema$CourseWork[];
+  }} = {};
 
   constructor(private router: Router,
               private data: DataService) { }
