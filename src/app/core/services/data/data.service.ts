@@ -34,7 +34,7 @@ export class DataService {
   subscribeCourseDataAll(callback: (data: { [id: string]: {
     announcements: classroom_v1.Schema$Announcement[];
     assignments: classroom_v1.Schema$CourseWork[];
-  }}) => void, forceUpdate = false): void {
+  };}) => void, forceUpdate = false): void {
     // Watch all courseData for changes 
     this.storage.watch("courseData", (n, o) => {
       callback(n);

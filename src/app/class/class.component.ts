@@ -13,7 +13,7 @@ export class ClassComponent implements OnInit {
   courseData: { [id: string]: {
     announcements: classroom_v1.Schema$Announcement[];
     assignments: classroom_v1.Schema$CourseWork[];
-  }} = {};
+  };} = {};
 
   constructor(private activatedRoute: ActivatedRoute,
               private data: DataService,
