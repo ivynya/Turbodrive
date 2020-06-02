@@ -17,8 +17,8 @@ export class ClassComponent implements OnInit {
               private storage: StorageService) {}
 
   ngOnInit(): void {
-    let courses: any;
     if (this.storage.has("courses")) {
+      let courses: any;
       courses = this.storage.get("courses");
 
       this.activatedRoute.params.subscribe(params => {

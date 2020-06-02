@@ -1,53 +1,51 @@
 <div>
   <app-navbar></app-navbar>
   <div class="banner">
-    <h1>{{course?.name}}</h1>
+    <div class="container">
+      <h1>{{course?.name}}</h1>
+      <div class="actions">
+        <a href="{{course?.alternateLink}}" target="blank">View in Classroom</a>
+      </div>
+    </div>
   </div>
-  <div id="coursework">
+  <div id="coursework" class="container">
     <section id="upcoming" class="card">
       <h2>Upcoming Work</h2>
     </section>
     <section id="stream">
-      <div class="card">
+      <div class="card" *ngFor="let update of courseData[course.id].announcements">
         <span class="icon"></span>
         <div class="text">
           <div class="row">
             <span>Announcement</span>
+            <span>{{update.creationTime | date}}</span>
           </div>
           <div class="actions">
             <button class="action" title="Copy Text">c</button>
             <button class="action" title="Add to To Do">t</button>
             <button class="action" title="Mark Read">r</button>
           </div>
-          <p class="text-secondary description">update.text</p>
-        </div>
-      </div>
-      <div class="card">
-        <span class="icon"></span>
-        <div class="text">
-          <div class="row">
-            <span>Announcement</span>
+          <p class="text-secondary description text-left">{{update.text}}</p>
+          <div class="materials">
+            <div class="card" *ngFor="let material of update.materials">
+              <a *ngIf="material.youtubeVideo" title="{{material.youtubeVideo.title}}" href="{{material.youtubeVideo.alternateLink}}" target="_blank">
+                <span class="icon"></span>
+                <p>{{material.youtubeVideo.title}}</p>
+              </a>
+              <a *ngIf="material.driveFile" title="{{material.driveFile.title}}" href="{{material.driveFile.alternateLink}}" target="_blank">
+                <span class="icon"></span>
+                <p>{{material.driveFile}}</p>
+              </a>
+              <a *ngIf="material.link" title="{{material.link.title}}" href="{{material.link.url}}" target="_blank">
+                <span class="icon"></span>
+                <p>{{material.link.title}}</p>
+              </a>
+              <a *ngIf="material.form" title="{{material.form.title}}" href="{{material.form.formUrl}}" target="_blank">
+                <span class="icon"></span>
+                <p>{{material.form.title}}</p>
+              </a>
+            </div>
           </div>
-          <div class="actions">
-            <button class="action" title="Copy Text">c</button>
-            <button class="action" title="Add to To Do">t</button>
-            <button class="action" title="Mark Read">r</button>
-          </div>
-          <p class="text-secondary description">update.text</p>
-        </div>
-      </div>
-      <div class="card">
-        <span class="icon"></span>
-        <div class="text">
-          <div class="row">
-            <span>Announcement</span>
-          </div>
-          <div class="actions">
-            <button class="action" title="Copy Text">c</button>
-            <button class="action" title="Add to To Do">t</button>
-            <button class="action" title="Mark Read">r</button>
-          </div>
-          <p class="text-secondary description">update.text</p>
         </div>
       </div>
     </section>

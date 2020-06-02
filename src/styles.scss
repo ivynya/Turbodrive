@@ -85,7 +85,7 @@ html, body {
   overflow-y: auto;
 }
 
-.container {
+.container, .container-full {
   padding: 25px 10px;
   margin: auto;
   transition-duration: 0.3s;
@@ -93,7 +93,23 @@ html, body {
   @media (min-width: 512px) {
     max-width: 512px;
   }
+}
 
+.container {
+  @media (min-width: 768px) {
+    max-width: 740px;
+  }
+
+  @media (min-width: 1000px) {
+    max-width: 900px;
+  }
+
+  @media (min-width: 1150px) {
+    max-width: 1000px;
+  }
+}
+
+.container-full {
   @media (min-width: 768px) {
     max-width: 900px;
 

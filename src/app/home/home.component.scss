@@ -71,7 +71,7 @@
       border-bottom-right-radius: 5px;
       overflow: hidden auto;
   
-      .card {
+      > .card {
         border-left: var(--bg-tertiary) 5px solid;
         border-radius: 0;
         margin: 0;
@@ -79,58 +79,6 @@
   
         &:hover {
           border-left: var(--notify-color) 5px solid;
-        }
-      }
-
-      .materials { 
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 5px;
-
-        .card {
-          border: var(--bg-primary) 1px solid;
-          border-radius: 5px;
-          color: var(--text-primary);
-          flex: 1 1;
-          min-width: 100px;
-          margin-right: 5px;
-          margin-bottom: 5px;
-          padding: 5px;
-
-          a {
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            padding-right: 5px;
-            position: relative;
-            width: 100%;
-
-            .icon {
-              border-radius: 5px;
-              width: 20px;
-              height: 20px;
-            }
-  
-            p {
-              margin: 0;
-              position: absolute;
-              right: 10px;
-              top: 0;
-              bottom: 0;
-              left: 25px;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-
-            &:hover {
-              color: var(--text-primary);
-            }
-          }
-
-          &:hover {
-            border-color: var(--bg-contrast);
-          }
         }
       }
     }
