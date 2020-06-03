@@ -32,9 +32,9 @@
                 <span class="icon"></span>
                 <p>{{material.youtubeVideo.title}}</p>
               </a>
-              <a *ngIf="material.driveFile" title="{{material.driveFile.title}}" href="{{material.driveFile.alternateLink}}" target="_blank">
+              <a *ngIf="material.driveFile" title="{{material.driveFile.driveFile.title}}" href="{{material.driveFile.driveFile.alternateLink}}" target="_blank">
                 <span class="icon"></span>
-                <p>{{material.driveFile}}</p>
+                <p>{{material.driveFile.driveFile.title}}</p>
               </a>
               <a *ngIf="material.link" title="{{material.link.title}}" href="{{material.link.url}}" target="_blank">
                 <span class="icon"></span>

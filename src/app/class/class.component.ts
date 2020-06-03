@@ -31,8 +31,6 @@ export class ClassComponent implements OnInit {
             this.data.subscribeCourseData(this.course.id, (data) => {
               this.courseData[this.course.id] = data;
             }, true);
-
-            return;
           }
         });
       });

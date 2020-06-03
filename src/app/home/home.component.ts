@@ -29,4 +29,8 @@ export class HomeComponent implements OnInit {
       this.courseData = data;
     }, true);
   }
+
+  markAnnouncementAsRead(): void {
+    
+  }
 }
