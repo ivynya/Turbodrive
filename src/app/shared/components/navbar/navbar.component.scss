@@ -13,6 +13,10 @@
   flex-direction: row;
   justify-content: space-between;
 
+  div {
+    white-space: nowrap;
+  }
+
   .classes {
     display: flex;
     align-items: center;

@@ -83,6 +83,9 @@ export class DataService {
     }
   }
 
+  markRead(id: string, time: number) {
+  }
+
   // Update all courses from API
   updateCourses(): void {
     this.classroom.courses.list({ courseStates: ["ACTIVE"] }, 
