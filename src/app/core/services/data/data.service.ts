@@ -32,7 +32,7 @@ export class DataService {
     }
   }
 
-  subscribeCourseDataAll(callback: (data: {[id: string]: Schema$CourseData;}) => void, 
+  subscribeCourseDataAll(callback: (data: {[id: string]: Schema$CourseData}) => void, 
                         forceUpdate = false): void {
     // Watch all courseData for changes 
     this.storage.watch("courseData", (n, o) => {
