@@ -15,6 +15,7 @@ export class DueDateTimePipe implements PipeTransform {
     datetime.setUTCHours(dueTime.hours ?? 0); 
     datetime.setUTCMinutes(dueTime.minutes ?? 0);
     datetime.setUTCSeconds(0);
+    datetime.setUTCMilliseconds(0);
     
     // Return ISO string to be piped to date
     return datetime.toISOString();
