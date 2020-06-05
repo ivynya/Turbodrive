@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { Schema$CourseData } from '../../schemas';
 import { StorageService } from '../storage/storage.service';
 import { google, classroom_v1 } from 'googleapis';
 
@@ -31,10 +32,8 @@ export class DataService {
     }
   }
 
-  subscribeCourseDataAll(callback: (data: { [id: string]: {
-    announcements: classroom_v1.Schema$Announcement[];
-    assignments: classroom_v1.Schema$CourseWork[];
-  };}) => void, forceUpdate = false): void {
+  subscribeCourseDataAll(callback: (data: {[id: string]: Schema$CourseData;}) => void, 
+                        forceUpdate = false): void {
     // Watch all courseData for changes 
     this.storage.watch("courseData", (n, o) => {
       callback(n);
@@ -55,10 +54,8 @@ export class DataService {
     }, forceUpdate);
   }
 
-  subscribeCourseData(courseId: string, callback: (data: {
-    announcements: classroom_v1.Schema$Announcement[];
-    assignments: classroom_v1.Schema$CourseWork[];
-  }) => void, forceUpdate = false): void {
+  subscribeCourseData(courseId: string, callback: (data: Schema$CourseData) => void, 
+                      forceUpdate = false): void {
     const selector = `courseData.${courseId}`;
 
     // Set watcher to callback
@@ -83,7 +80,13 @@ export class DataService {
     }
   }
 
-  markRead(id: string, time: number) {
+  markRead(courseId: string, id: string): void {
+    let read: string[] = [];
+    if (this.storage.has(`courseData.${courseId}.read`)) {
+      read = this.storage.get(`courseData.${courseId}.read`);
+    }
+    read.push(id);
+    this.storage.set(`courseData.${courseId}.read`, read);
   }
 
   // Update all courses from API

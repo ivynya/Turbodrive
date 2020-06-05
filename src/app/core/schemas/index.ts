@@ -1,0 +1,1 @@
+export * from './course-data/course-data.schema';

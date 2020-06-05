@@ -21,41 +21,43 @@
         <section class="assignment-group" *ngFor="let course of courses">
           <p class="title-sm">{{course.name}}</p>
           <div class="scroll-group">
-            <div class="card" *ngFor="let update of courseData[course.id]?.announcements.slice(0, 2)">
-              <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect x="68" y="68" width="120" height="40" rx="10" transform="translate(40 216) rotate(-90)"/><rect x="108" y="188" width="40" height="40" rx="10" transform="translate(-80 336) rotate(-90)"/></svg></span>
-              <div class="text">
-                <div class="row">
-                  <span>Announcement</span>
-                  <span>{{update.creationTime | date}}</span>
-                </div>
-                <div class="actions">
-                  <button class="action" title="Copy Text">c</button>
-                  <button class="action" title="Add to To Do">t</button>
-                  <button class="action" title="Mark Read">r</button>
-                </div>
-                <p class="text-secondary description">{{update.text}}</p>
-                <div class="materials">
-                  <div class="card" *ngFor="let material of update.materials">
-                    <a *ngIf="material.youtubeVideo" title="{{material.youtubeVideo.title}}" href="{{material.youtubeVideo.alternateLink}}" target="_blank">
-                      <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
-                      <p>{{material.youtubeVideo.title}}</p>
-                    </a>
-                    <a *ngIf="material.driveFile" title="{{material.driveFile.driveFile.title}}" href="{{material.driveFile.driveFile.alternateLink}}" target="_blank">
-                      <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
-                      <p>{{material.driveFile.driveFile.title}}</p>
-                    </a>
-                    <a *ngIf="material.link" title="{{material.link.title}}" href="{{material.link.url}}" target="_blank">
-                      <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
-                      <p>{{material.link.title}}</p>
-                    </a>
-                    <a *ngIf="material.form" title="{{material.form.title}}" href="{{material.form.formUrl}}" target="_blank">
-                      <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
-                      <p>{{material.form.title}}</p>
-                    </a>
+            <ng-container *ngFor="let update of courseData[course.id]?.announcements">
+              <div class="card" *ngIf="!courseData[course.id]?.read?.includes(update.id)">
+                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect x="68" y="68" width="120" height="40" rx="10" transform="translate(40 216) rotate(-90)"/><rect x="108" y="188" width="40" height="40" rx="10" transform="translate(-80 336) rotate(-90)"/></svg></span>
+                <div class="text">
+                  <div class="row">
+                    <span>Announcement</span>
+                    <span>{{update.creationTime | date}}</span>
+                  </div>
+                  <div class="actions">
+                    <button class="action" title="Copy Text">c</button>
+                    <button class="action" title="Add to To Do">t</button>
+                    <button class="action" title="Mark Read" (click)="markAsRead(course.id, update.id)">r</button>
+                  </div>
+                  <p class="text-secondary description">{{update.text}}</p>
+                  <div class="materials">
+                    <div class="card" *ngFor="let material of update.materials">
+                      <a *ngIf="material.youtubeVideo" title="{{material.youtubeVideo.title}}" href="{{material.youtubeVideo.alternateLink}}" target="_blank">
+                        <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
+                        <p>{{material.youtubeVideo.title}}</p>
+                      </a>
+                      <a *ngIf="material.driveFile" title="{{material.driveFile.driveFile.title}}" href="{{material.driveFile.driveFile.alternateLink}}" target="_blank">
+                        <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
+                        <p>{{material.driveFile.driveFile.title}}</p>
+                      </a>
+                      <a *ngIf="material.link" title="{{material.link.title}}" href="{{material.link.url}}" target="_blank">
+                        <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
+                        <p>{{material.link.title}}</p>
+                      </a>
+                      <a *ngIf="material.form" title="{{material.form.title}}" href="{{material.form.formUrl}}" target="_blank">
+                        <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M225.25,28.07l-74.81,20a2.19,2.19,0,0,0-1,3.67L161,63.34,90.48,133.86a4.5,4.5,0,0,0,0,6.37l25.29,25.29a4.5,4.5,0,0,0,6.37,0L192.67,95l11.55,11.55a2.19,2.19,0,0,0,3.67-1l20.05-74.8A2.2,2.2,0,0,0,225.25,28.07Z"/><path d="M178,138v58a2,2,0,0,1-2,2H60a2,2,0,0,1-2-2V80a2,2,0,0,1,2-2h58V48H38A10,10,0,0,0,28,58V218a10,10,0,0,0,10,10H198a10,10,0,0,0,10-10V138Z"/></svg></span>
+                        <p>{{material.form.title}}</p>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </ng-container>
             <div class="card" *ngIf="courseData[course.id]?.announcements.length > 2">
               <div class="text">
                 <div class="row">

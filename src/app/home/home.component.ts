@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     }, true);
   }
 
-  markAnnouncementAsRead(): void {
-    
+  markAsRead(courseId: string, id: string): void {
+    this.data.markRead(courseId, id);
   }
 }
