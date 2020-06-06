@@ -5,12 +5,6 @@ Turbocharged GSuite. WIP.
 
 This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
 
-### A quick complaint to Google:
-
-The Google Classroom API crucially does not include an endpoint for Material-type CourseWork, causing a gap to appear in the Turbodrive app where something should be, but isn't, with no indication otherwise. Who even thinks it's a good idea to leave [a gaping hole in the API for over two years](https://issuetracker.google.com/issues/115421140)??
-
-Until this gets added (probably never at this rate) Turbodrive won't be able to load Material posts.
-
 ## 😕 Google Got You Down?
 
 This project aims to heavily improve upon GSuite services including Google Classroom and Drive, increasing app responsiveness and your efficiency by radically redesigning the user experience. It's built on Google's API for developers with SSO, as a desktop app with Angular 9 & Electron 8.
@@ -29,31 +23,27 @@ Turbodrive is built with real user (student) feedback in mind. Google Classroom 
 If you have access to the Google APIs and the local filesystem, why not power up with Microsoft 365? Edit documents and work on Google Classroom assignments completely offline using Microsoft 365's comprehensive suite of tools. Manage your Microsoft To Do and Calendar directly in-app.
 
 # Setup
-There is currently no packaged release of Turbodrive. Follow the steps below to get started with the source code.
+There is currently no packaged release of Turbodrive. Follow the steps below to get started with the source code. Also see [Known Issues](#Issues) below.
 
 1) Clone the git repo [`https://github.com/SDBagel/Turbodrive.git`]
 
 2) Run `npm install` (This boilerplate has issues with yarn!)
 
-3) Register your Google OAuth Credentials as a web application and get the client ID and secret with steps 4-6. Please read and note the additional security considerations under [Distribution](#Distribution) which change steps 4-6.
+3) Create a project & OAuth 2.0 **iOS Application** with the [Google Developer Console](https://console.developers.google.com/apis/credentials). This is the Google recommended workaround to not publishing a client secret with the app.
 
-4) Create a project & OAuth 2.0 webapp client with the [Google Developer Console](https://console.developers.google.com/apis/credentials).
+4) Set the callback URL of your app to be `http://localhost:4200/oauthcallback`
 
-5) Set the callback URL of your app to be `http://localhost:4200/oauthcallback`
+5) Create a `src/environments/environment.ts` file to contain your client ID and callback URL. The format of this file should look like the `src/environments/environment.example.ts` file. A spot for a client secret is provided but should be left empty unless you know what you are doing.
 
-6) Create a `src/environments/environment.ts` file to contain your client ID and secret and callback URL. The format of this file should look like the `src/environments/environment.example.ts` file.
-
-7) Run `npm start` to build and start the electron process. Currently due to the use of the Google NodeJS auth library it is incompatible with running as a webserver only (without electron). There are plans to change this.
+6) Run `npm start` to build and start the electron process. Due to the use of the Google NodeJS auth library it is incompatible running as a webserver only. There may be plans to change this.
 
 The electron window will open and should redirect you to the Google Auth page. Sign in with Google and you will be redirected back to the home page where you can see all active Google Classrooms you are in (and maybe other stuff as this gets more updates).
 
-## Distribution
+## Known Issues
 
-There are currently additional security considerations when packaging this app. 
+### Not my problem:
+- Google does not include an endpoint for CourseMaterials. This is solved by adding a very helpful link that just leads to the actual Google Classroom page. Until an endpoint is added, not much can be done. [The feature request can be found here.](https://issuetracker.google.com/issues/115421140)
 
-### Credentials Security
-Because the credentials are packaged with the app without encryption, the user can access this data. If you are doing anything except taking a look, do not include a client secret. A workaround presented by Google is to register your oauth client as an iOS app, which allows you to only provide a client id and no secret. [More information can be found here](https://github.com/googleapis/google-auth-library-nodejs#oauth2-with-installed-apps-electron). The AppConfig can be modified to include an empty string for client secret.
-
-I don't understand why this is better since [as this issue mentions](https://github.com/googleapis/google-auth-library-nodejs/issues/299#issuecomment-380939714) someone could impersonate your app.
-
-As of commit `f772726` (#40) no data is encrypted.
+### Pretty much my problem:
+ - Authentication doesn't work on the packaged application because the OAuth library takes a callback URL. Electron in production does not host a webserver, and as such, the tokens cannot be obtained directly. Authentication is also what is limiting this app to only functioning on Electron as Google's Node library requires fs.
+ - As of commit `f772726` (#40) no stored (local) data is encrypted.
