@@ -7,9 +7,15 @@ import { google, classroom_v1 } from 'googleapis';
 @Injectable({ providedIn: 'root' })
 export class DataService {
   private classroom: classroom_v1.Classroom;
+  // Next page tokens
+  tokens: {
+    announcements: string;
+    assignments: string;
+  }
 
   constructor(private storage: StorageService) {
     this.classroom = google.classroom({version: 'v1'});
+    this.tokens = { announcements: "", assignments: "" };
   }
 
   subscribeCourses(callback: (data: classroom_v1.Schema$ListCoursesResponse) => void, 
@@ -105,31 +111,33 @@ export class DataService {
     });
   }
 
-  // Update most recent 5 announcements
+  // Update most recent 10 announcements
   updateAnnouncements(courseId: string): void {
     // Get announcements for course ID
     this.classroom.courses.announcements.list({
       courseId: courseId,
       orderBy: "updateTime",
-      pageSize: 5
+      pageSize: 10
     }, (err, res) => {
       if (err) return console.error(err);
 
       this.storage.update(`courseData.${courseId}.announcements`, res.data.announcements);
+      this.tokens.announcements = res.data.nextPageToken;
     });
   }
 
-  // Update most recent 5 assignments
+  // Update most recent 15 assignments
   updateAssignments(courseId: string): void {
     // Get coursework
     this.classroom.courses.courseWork.list({
       courseId: courseId,
       orderBy: "updateTime",
-      pageSize: 5
+      pageSize: 15
     }, (err, res) => {
       if (err) return console.error(err);
 
-      this.storage.update(`courseData.${courseId}.assignments`, res.data.courseWork)
+      this.storage.update(`courseData.${courseId}.assignments`, res.data.courseWork);
+      this.tokens.assignments = res.data.nextPageToken;
     });
   }
 }

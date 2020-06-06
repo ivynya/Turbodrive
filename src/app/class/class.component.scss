@@ -48,6 +48,27 @@
   #stream {
     flex: 2 1;
 
+    #tab-selector {
+      width: 100%;
+      margin-bottom: 10px;
+
+      button {
+        background: none;
+        border: none;
+        border-bottom: transparent 1px solid;
+        color: var(--text-primary);
+        font-size: 14px;
+        font-family: inherit;
+        padding-bottom: 3px;
+        margin-right: 5px;
+        transition-duration: 0.2s;
+
+        &.active, &:hover {
+          border-bottom-color: var(--text-primary);
+        }
+      }
+    }
+
     .card .description {
       line-height: 25px;
     }

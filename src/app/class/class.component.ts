@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { classroom_v1 } from 'googleapis';
 import { DataService, StorageService } from '../core/services';
+import { Schema$CourseData } from '../core/schemas';
 
 @Component({
   selector: 'app-class',
@@ -10,10 +11,7 @@ import { DataService, StorageService } from '../core/services';
 })
 export class ClassComponent implements OnInit {
   course: classroom_v1.Schema$Course;
-  courseData: { [id: string]: {
-    announcements: classroom_v1.Schema$Announcement[];
-    assignments: classroom_v1.Schema$CourseWork[];
-  };} = {};
+  feed: Array<classroom_v1.Schema$Announcement|classroom_v1.Schema$CourseWork> = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private data: DataService,
@@ -29,7 +27,14 @@ export class ClassComponent implements OnInit {
             this.course = course;
 
             this.data.subscribeCourseData(this.course.id, (data) => {
-              this.courseData[this.course.id] = data;
+              // Reset feed
+              this.feed = [];
+              // Concatenates all items, sorts by updateTime descending
+              this.feed = this.feed.concat(data.announcements);
+              this.feed = this.feed.concat(data.assignments);
+              this.feed = this.feed.sort((a, b) => { 
+                return (a.updateTime < b.updateTime) ? 1 : -1
+              });
             }, true);
           }
         });
