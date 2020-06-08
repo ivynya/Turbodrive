@@ -38,7 +38,7 @@ export class AuthComponent implements OnInit {
       'https://www.googleapis.com/auth/drive.file'
     ];
 
-    async function authenticate(scopes: string[]) {
+    async function authenticate(scopes: string[]): Promise<any> {
       return new Promise((resolve, reject) => {
         const authorizeUrl = oauth2Client.generateAuthUrl({
           access_type: 'offline',
@@ -47,25 +47,16 @@ export class AuthComponent implements OnInit {
   
         // Temporary HTTP server to get code
         const server = http
-          .createServer(async (req, res) => {
+          .createServer((req, res) => {
             try {
-              if (req.url.indexOf('/oauth2callback') > -1) {
+              if (req.url.includes('/oauth2callback')) {
                 // Get params and kill server
                 const qs = new url.URL(req.url, 'http://localhost:3000').searchParams;
                 res.end('Success! You can now close this window.');
                 server.close();
-  
-                // Get tokens from code
-                const { tokens } = await oauth2Client.getToken(qs.get('code'));
-                oauth2Client.setCredentials(tokens);
-
-                // Set as globally accessible
-                google.options({
-                  auth: oauth2Client
-                });
                 
-                // Return tokens to be stored
-                resolve(tokens);
+                // Return code to get tokens
+                resolve(qs.get("code"));
               }
             } catch (e) {
               reject(e);
@@ -78,8 +69,20 @@ export class AuthComponent implements OnInit {
       });
     }
 
-    authenticate(scopes).then((tokens: any) => {
+    authenticate(scopes).then(async (code: any) => {
+      // Get tokens from code
+      const { tokens } = await oauth2Client.getToken(code);
+      oauth2Client.setCredentials(tokens);
+  
+      // Set as globally accessible
+      google.options({
+        auth: oauth2Client
+      });
+
+      // Store locally
       this.storage.set("refreshToken", tokens.refresh_token);
+
+      // Redirect to home, forcing reload
       window.location.href = "/";
     });
   }

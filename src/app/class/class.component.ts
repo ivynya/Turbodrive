@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { classroom_v1 } from 'googleapis';
 import { DataService, StorageService } from '../core/services';
-import { Schema$CourseData } from '../core/schemas';
 
 @Component({
   selector: 'app-class',
@@ -22,7 +21,7 @@ export class ClassComponent implements OnInit {
       const courses = this.storage.get("courses");
 
       this.activatedRoute.params.subscribe(params => {
-        courses.forEach(course => {
+        courses.forEach((course: classroom_v1.Schema$Course) => {
           if (course.id === params.id) {
             this.course = course;
 
