@@ -8,5 +8,5 @@ export const AppConfig = {
   environment: 'LOCAL',
   googleClientId: 'your client id here',
   googleClientSecret: '',
-  googleCallbackUrl: 'http://localhost:4200/oauthcallback'
+  googleCallbackUrl: 'http://localhost:3000/oauth2callback'
 };

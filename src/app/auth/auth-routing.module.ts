@@ -7,10 +7,6 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent
-  },
-  {
-    path: 'oauthcallback',
-    component: AuthComponent
   }
 ];
 
