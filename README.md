@@ -45,5 +45,4 @@ The electron window will open and should redirect you to the Google Auth page. S
 - Google does not include an endpoint for CourseMaterials. This is solved by adding a very helpful link that just leads to the actual Google Classroom page. Until an endpoint is added, not much can be done. [The feature request can be found here.](https://issuetracker.google.com/issues/115421140)
 
 ### Pretty much my problem:
- - Authentication doesn't work on the packaged application because the OAuth library takes a callback URL. Electron in production does not host a webserver, and as such, the tokens cannot be obtained directly. Authentication is also what is limiting this app to only functioning on Electron as Google's Node library requires fs.
  - As of commit `f772726` (#40) no stored (local) data is encrypted.
