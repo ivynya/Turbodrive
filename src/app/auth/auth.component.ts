@@ -38,6 +38,8 @@ export class AuthComponent implements OnInit {
       'https://www.googleapis.com/auth/drive.file'
     ];
 
+    // Modified from https://github.com/googleapis/google-api-nodejs-client/blob/master/samples/oauth2.js
+    // Apache 2.0 License http://www.apache.org/licenses/LICENSE-2.0
     async function authenticate(scopes: string[]): Promise<any> {
       return new Promise((resolve, reject) => {
         const authorizeUrl = oauth2Client.generateAuthUrl({
