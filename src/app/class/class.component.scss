@@ -12,6 +12,11 @@
     h1 {
       font-size: 2.2rem;
       margin: 0;
+      text-align: center;
+
+      @media (min-width: 768px) {
+        text-align: left;
+      }
     }
   
     .actions {
@@ -31,17 +36,27 @@
 
 #coursework {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   
-  #upcoming {
-    height: 200px;
-    width: 250px;
-    margin-right: 30px;
-    padding: 15px;
+  #pinboard {
+    flex: 1 1;
+
+    .card {
+      flex-direction: column;
+      height: 150px;
+      padding: 15px;
+    }
     
     h2 {
       margin: 0;
       font-size: 18px;
+    }
+
+    @media (min-width: 768px) {
+      flex: none;
+      margin-right: 25px;
+      width: 250px;
     }
   }
 
@@ -72,5 +87,9 @@
     .card .description {
       line-height: 25px;
     }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 }
