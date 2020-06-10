@@ -54,15 +54,16 @@
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       color: #fff;
+      display: block;
       font-size: 1rem;
       font-weight: 600;
+      text-decoration: none;
       margin: 0;
       margin-bottom: 5px;
       padding: 15px 10px;
 
       &:hover {
         text-decoration: underline;
-        cursor: pointer;
       }
     }
 

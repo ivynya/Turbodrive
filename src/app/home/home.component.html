@@ -19,7 +19,7 @@
       </div>
       <div id="assignments">
         <section class="assignment-group" *ngFor="let course of courses">
-          <p class="title-sm">{{course.name}}</p>
+          <a routerLink="/class/{{course.id}}" class="title-sm">{{course.name}}</a>
           <div class="scroll-group">
             <ng-container *ngFor="let update of courseData[course.id]?.announcements?.slice(0, 2)">
               <div class="card" *ngIf="!courseData[course.id]?.read?.includes(update.id)">
