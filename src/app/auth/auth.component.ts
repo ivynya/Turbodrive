@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 import { AppConfig } from '../../environments/environment';
 import { StorageService } from '../core/services';
 
@@ -14,7 +15,7 @@ import * as opn from 'open';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(private router: Router,
               private storage: StorageService) { }
 
   ngOnInit(): void {
@@ -85,7 +86,7 @@ export class AuthComponent implements OnInit {
       this.storage.set("refreshToken", tokens.refresh_token);
 
       // Redirect to home, forcing reload
-      window.location.href = "/";
+      this.router.navigateByUrl("/");
     });
   }
 }

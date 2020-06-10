@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { ElectronService, StorageService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
@@ -12,7 +14,8 @@ import { google } from 'googleapis';
 export class AppComponent implements OnInit {
   constructor(public electron: ElectronService,
               private storage: StorageService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private router: Router) {
     translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
 
@@ -45,8 +48,8 @@ export class AppComponent implements OnInit {
       });
     }
     // Otherwise, redirect to auth page
-    else if (window.location.pathname != "/auth") {
-      window.location.href = "/auth";
+    else {
+      this.router.navigateByUrl("/auth");
     }
   }
 }

@@ -11,6 +11,13 @@ describe("DueDateTimePipe", () => {
     expect(pipe).toBeTruthy();
   });
 
+  it('should return empty string with null or undefined', () => {
+    const nullResult = pipe.transform(null, null);
+    const undefResult = pipe.transform(undefined, undefined);
+    expect(nullResult).toEqual("");
+    expect(undefResult).toEqual("");
+  })
+
   it('should return correct ISO string for given UTC date objects', () => {
     const result = pipe.transform({year: 2020, month: 5, day: 30}, 
       {hours: 6, minutes: 59, seconds: 0});
