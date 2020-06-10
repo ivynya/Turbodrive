@@ -61,3 +61,16 @@
     }
   }
 }
+
+/* Notify Tooltip */
+
+[data-notify] {
+  background-color: var(--notify-color);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 12px;
+  width: 12px;
+  z-index: 10;
+}

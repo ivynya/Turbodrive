@@ -19,4 +19,11 @@ export class NavbarComponent implements OnInit {
       this.courses = data.courses;
     });
   }
+
+  refresh(): void {
+    this.courses.forEach(course => {
+      this.data.updateAnnouncements(course.id);
+      this.data.updateAssignments(course.id);
+    });
+  }
 }

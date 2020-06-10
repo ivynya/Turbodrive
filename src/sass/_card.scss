@@ -17,10 +17,16 @@
     justify-content: center;
     height: 35px;
     width: 35px;
+    position: relative;
     
     > svg {
       width: 20px;
       fill: var(--text-secondary);
+    }
+
+    [data-notify] {
+      height: 8px;
+      width: 8px;
     }
   }
 

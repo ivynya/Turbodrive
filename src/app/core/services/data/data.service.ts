@@ -48,6 +48,8 @@ export class DataService {
     // If course data exists, return it
     if (this.storage.has("courseData")) {
       callback(this.storage.get("courseData"));
+
+      if (!forceUpdate) return;
     }
 
     // Subscribe to course changes
@@ -57,7 +59,7 @@ export class DataService {
         this.updateAnnouncements(course.id);
         this.updateAssignments(course.id);
       });
-    }, forceUpdate);
+    });
   }
 
   subscribeCourseData(courseId: string, callback: (data: Schema$CourseData) => void, 
