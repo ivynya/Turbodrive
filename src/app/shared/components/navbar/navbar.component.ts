@@ -10,6 +10,7 @@ import { classroom_v1 } from 'googleapis';
 })
 export class NavbarComponent implements OnInit {
   courses: classroom_v1.Schema$Course[] = [];
+  showSidebar: boolean = false;
   
   constructor(private router: Router,
               private data: DataService) { }

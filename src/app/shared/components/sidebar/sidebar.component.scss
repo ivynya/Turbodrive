@@ -1,0 +1,48 @@
+.page {
+  background-color: var(--box-shadow);
+  z-index: 10;
+}
+
+#sidebar {
+  background-color: var(--bg-primary);
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+
+  hr {
+    margin: 20px 0;
+  }
+
+  .card {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 15px 20px;
+
+    p {
+      margin: 0;
+    }
+
+    &:hover {
+      background-color: var(--bg-highlight);
+    }
+  }
+
+  #turbopro {
+    animation: bg-scroll 6s linear forwards infinite;
+    background-image: linear-gradient(45deg, #fda 30%, #fff, #fda 70%);
+    background-position-x: 50px;
+    color: #860;
+  }
+
+  @keyframes bg-scroll {
+    0% {
+      background-position-x: 50px;
+    }
+    100% {
+      background-position-x: 350px;
+    }
+  }
+}

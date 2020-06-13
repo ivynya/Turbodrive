@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div>
-    <button aria-label="Menu" data-tt="Menu">
+    <button aria-label="Menu" data-tt="Menu" (click)="sidebar.toggleShow()">
       <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect x="108" y="28" width="40" height="200" rx="10.2" transform="translate(0 256) rotate(-90)"/><rect x="108" y="-32" width="40" height="200" rx="10.2" transform="translate(60 196) rotate(-90)"/><rect x="108" y="88" width="40" height="200" rx="10.2" transform="translate(-60 316) rotate(-90)"/></svg>
     </button>
   </div>
@@ -10,7 +10,7 @@
       <span data-notify></span>
     </a>
     <a *ngFor="let c of courses" routerLink="/class/{{c.id}}" routerLinkActive="active" 
-      [routerLinkActiveOptions]="{exact: true}" [attr.data-tt]="c.name">
+      [routerLinkActiveOptions]="{exact: true}" [attr.data-tt]="c.name" (click)="hideMenu()">
       {{c.name[0]}}
     </a>
   </div>
@@ -23,3 +23,4 @@
     </button>
   </div>
 </nav>
+<app-sidebar #sidebar [show]=showSidebar></app-sidebar>
