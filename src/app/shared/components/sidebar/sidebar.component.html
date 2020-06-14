@@ -1,10 +1,16 @@
-<div class="page" *ngIf="this.show">
-  <section id="sidebar">
+<div class="page" *ngIf="this.show" (click)="hide()">
+  <section id="sidebar" (click)="stopPropagation($event)">
     <a routerLink="/" class="card" (click)="hide()">
       <p>Classroom</p>
     </a>
     <div class="card">
       <p>Drive</p>
+    </div>
+    <div id="courses" *ngIf="this.courses">
+      <hr>
+      <a class="card" routerLink="/class/{{course.id}}" *ngFor="let course of this.courses" (click)="hide()">
+        {{course.name}}
+      </a>
     </div>
     <hr>
     <div class="card" id="turbopro">

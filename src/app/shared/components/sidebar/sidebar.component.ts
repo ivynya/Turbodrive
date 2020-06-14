@@ -20,4 +20,8 @@ export class SidebarComponent {
   hide() {
     this.show = false;
   }
+  
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
 }

@@ -1,6 +1,6 @@
 .page {
   background-color: var(--box-shadow);
-  z-index: 10;
+  z-index: 2;
 }
 
 #sidebar {
@@ -11,6 +11,7 @@
   left: 0;
   bottom: 0;
   width: 300px;
+  overflow: auto;
 
   hr {
     margin: 20px 0;
@@ -30,11 +31,22 @@
     }
   }
 
+  #courses {
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
   #turbopro {
     animation: bg-scroll 6s linear forwards infinite;
     background-image: linear-gradient(45deg, #fda 30%, #fff, #fda 70%);
     background-position-x: 50px;
     color: #860;
+    transition-duration: 0.3s;
+
+    &:hover {
+      box-shadow: #fda 0 0 10px;
+    }
   }
 
   @keyframes bg-scroll {
