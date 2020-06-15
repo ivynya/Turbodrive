@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../core/services';
 import { classroom_v1 } from 'googleapis';
+import { Turbo$CourseData } from '../core/schemas';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,7 @@ import { classroom_v1 } from 'googleapis';
 })
 export class HomeComponent implements OnInit {
   courses: classroom_v1.Schema$Course[];
-  courseData: { [id: string]: {
-    announcements: classroom_v1.Schema$Announcement[];
-    assignments: classroom_v1.Schema$CourseWork[];
-  };} = {};
+  courseData: { [id: string]: Turbo$CourseData } = {};
 
   constructor(private router: Router,
               private data: DataService) { }
@@ -26,11 +24,22 @@ export class HomeComponent implements OnInit {
 
     // Subscribe to course data
     this.data.subscribeCourseDataAll((data) => {
+      // Set announcements to only be unread ones
+      Object.keys(data).forEach((key: string) => {
+        data[key].announcements = data[key].announcements.filter((a) => {
+          return !a.read; });
+      });
+
+      // Update this.courseData with filtered data
       this.courseData = data;
     }, true);
   }
 
-  markAsRead(courseId: string, id: string): void {
-    this.data.markRead(courseId, id);
+  markAsRead(courseId: string, type: string, id: string): void {
+    this.data.markRead(courseId, type, id);
+  }
+
+  markAllRead(courseId: string, type: string): void {
+    this.data.markAllRead(courseId, type, 2);
   }
 }

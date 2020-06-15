@@ -13,15 +13,15 @@ export class SidebarComponent {
   
   constructor(private router: Router) { }
 
-  toggleShow() {
+  toggleShow(): void {
     this.show = !this.show;
   }
 
-  hide() {
+  hide(): void {
     this.show = false;
   }
   
-  stopPropagation(event: Event) {
+  stopPropagation(event: Event): void {
     event.stopPropagation();
   }
 }

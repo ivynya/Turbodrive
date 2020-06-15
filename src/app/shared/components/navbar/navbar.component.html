@@ -10,7 +10,7 @@
       <span data-notify></span>
     </a>
     <a *ngFor="let c of courses" routerLink="/class/{{c.id}}" routerLinkActive="active" 
-      [routerLinkActiveOptions]="{exact: true}" [attr.data-tt]="c.name" (click)="hideMenu()">
+      [routerLinkActiveOptions]="{exact: true}" [attr.data-tt]="c.name" (click)="sidebar.hide()">
       {{c.name[0]}}
     </a>
   </div>

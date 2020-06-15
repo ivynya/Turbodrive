@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { classroom_v1 } from 'googleapis';
 import { DataService, StorageService } from '../core/services';
+import { Turbo$Announcement, Turbo$CourseWork } from '../core/schemas';
 
 @Component({
   selector: 'app-class',
@@ -10,7 +11,7 @@ import { DataService, StorageService } from '../core/services';
 })
 export class ClassComponent implements OnInit {
   course: classroom_v1.Schema$Course;
-  feed: Array<classroom_v1.Schema$Announcement|classroom_v1.Schema$CourseWork> = [];
+  feed: Array<Turbo$Announcement|Turbo$CourseWork> = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private data: DataService,
@@ -39,5 +40,9 @@ export class ClassComponent implements OnInit {
         });
       });
     }
+  }
+  
+  markAsRead(courseId: string, type: string, id: string): void {
+    this.data.markRead(courseId, type, id);
   }
 }

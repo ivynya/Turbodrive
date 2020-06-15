@@ -22,7 +22,7 @@
           <a routerLink="/class/{{course.id}}" class="title-sm">{{course.name}}</a>
           <div class="scroll-group">
             <ng-container *ngFor="let update of courseData[course.id]?.announcements?.slice(0, 2)">
-              <div class="card" *ngIf="!courseData[course.id]?.read?.includes(update.id)">
+              <div class="card" *ngIf="!update.read">
                 <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect x="68" y="68" width="120" height="40" rx="10" transform="translate(40 216) rotate(-90)"/><rect x="108" y="188" width="40" height="40" rx="10" transform="translate(-80 336) rotate(-90)"/></svg></span>
                 <div class="text">
                   <div class="row">
@@ -32,7 +32,7 @@
                   <div class="actions">
                     <button class="action" title="Copy Text">c</button>
                     <button class="action" title="Add to To Do">t</button>
-                    <button class="action" title="Mark Read" (click)="markAsRead(course.id, update.id)">r</button>
+                    <button class="action" title="Mark Read" (click)="markAsRead(course.id, 'announcements', update.id)">r</button>
                   </div>
                   <p class="text-secondary description">{{update.text}}</p>
                   <card-materials [materials]=update.materials></card-materials>
@@ -45,7 +45,7 @@
                   <span>More Unread Announcements</span>
                 </div>
                 <div class="actions">
-                  <button class="action" title="Mark All as Read" (click)="markAsRead(course.id, update.id)">r</button>
+                  <button class="action" title="Mark All as Read" (click)="markAllRead(course.id, 'announcements')">r</button>
                 </div>
                 <p class="text-secondary description text-left">There are more unread announcements.</p>
               </div>

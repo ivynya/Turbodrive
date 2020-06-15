@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Schema$CourseData } from '../../schemas';
+import { Turbo$CourseData, Turbo$Announcement, Turbo$CourseWork } from '../../schemas';
 import { StorageService } from '../storage/storage.service';
 import { google, classroom_v1 } from 'googleapis';
 
@@ -38,7 +38,7 @@ export class DataService {
     }
   }
 
-  subscribeCourseDataAll(callback: (data: {[id: string]: Schema$CourseData}) => void, 
+  subscribeCourseDataAll(callback: (data: {[id: string]: Turbo$CourseData}) => void, 
                         forceUpdate = false): void {
     // Watch all courseData for changes 
     this.storage.watch("courseData", (n, o) => {
@@ -62,7 +62,7 @@ export class DataService {
     });
   }
 
-  subscribeCourseData(courseId: string, callback: (data: Schema$CourseData) => void, 
+  subscribeCourseData(courseId: string, callback: (data: Turbo$CourseData) => void, 
                       forceUpdate = false): void {
     const selector = `courseData.${courseId}`;
 
@@ -88,13 +88,39 @@ export class DataService {
     }
   }
 
-  markRead(courseId: string, id: string): void {
-    let read: string[] = [];
-    if (this.storage.has(`courseData.${courseId}.read`)) {
-      read = this.storage.get(`courseData.${courseId}.read`);
+  // Mark an item with type (announcements, assignments) and id as read
+  markRead(courseId: string, type: string, id: string): void {
+    const selector = `courseData.${courseId}.${type}`;
+
+    if (this.storage.has(selector)) {
+      const items = this.storage.get(selector);
+      const index = items.findIndex((el: Turbo$CourseWork|Turbo$Announcement) => {
+        return el.id == id; });
+      items[index].read = true;
+      this.storage.set(selector, items);
     }
-    read.push(id);
-    this.storage.set(`courseData.${courseId}.read`, read);
+    else {
+      console.error(`Error: Storage does not have ${type} in course ${courseId}.`);
+    }
+  }
+
+  // Mark all items in a course's category as read
+  markAllRead(courseId: string, type: string, startIndex = 0): void {
+    const selector = `courseData.${courseId}.${type}`;
+    
+    if (this.storage.has(selector)) {
+      const items = this.storage.get(selector);
+      items.forEach((el: Turbo$CourseWork|Turbo$Announcement, i: number) => {
+        if (i >= startIndex) {
+          el.read = true;
+          items[i] = el;
+        }
+      });
+      this.storage.set(selector, items);
+    }
+    else {
+      console.error(`Error: Storage does not have ${type} in course ${courseId}.`);
+    }
   }
 
   // Update all courses from API
@@ -122,6 +148,7 @@ export class DataService {
       pageSize: 10
     }, (err, res) => {
       if (err) return console.error(err);
+
 
       this.storage.update(`courseData.${courseId}.announcements`, res.data.announcements);
       this.tokens.announcements = res.data.nextPageToken;
