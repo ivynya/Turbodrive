@@ -8,22 +8,33 @@ import { google, classroom_v1 } from 'googleapis';
 export class DataService {
   private classroom: classroom_v1.Classroom;
   // Next page tokens
-  tokens: {
+  private tokens: {
     announcements: string;
     assignments: string;
+  }
+  private unsubscribers: {
+    courses: Function;
+    courseData: Function;
   }
 
   constructor(private storage: StorageService) {
     this.classroom = google.classroom({version: 'v1'});
     this.tokens = { announcements: "", assignments: "" };
+    this.unsubscribers = { courses: undefined, courseData: undefined };
   }
 
   subscribeCourses(callback: (data: classroom_v1.Schema$ListCoursesResponse) => void, 
                   forceUpdate = false): void {
+    // If a previous unsubscriber exists, unsubscribe
+    if (this.unsubscribers.courses)
+      this.unsubscribers.courses();
+    
     // Set watcher to callback function
-    this.storage.watch("courses", (n, o) => {
+    const unsub = this.storage.watch("courses", (n, o) => {
       callback({ courses: n });
     });
+    // Set a new unsubscriber
+    this.unsubscribers.courses = unsub;
 
     // If cache exists, immediately return it
     if (this.storage.has("courses")) {
@@ -40,10 +51,16 @@ export class DataService {
 
   subscribeCourseDataAll(callback: (data: {[id: string]: Turbo$CourseData}) => void, 
                         forceUpdate = false): void {
+    // If a previous unsubscriber exists, unsubscribe
+    if (this.unsubscribers.courseData)
+      this.unsubscribers.courseData();
+
     // Watch all courseData for changes 
-    this.storage.watch("courseData", (n, o) => {
+    const unsub = this.storage.watch("courseData", (n, o) => {
       callback(n);
     });
+    // Set a new unsubscriber
+    this.unsubscribers.courseData = unsub;
 
     // If course data exists, return it
     if (this.storage.has("courseData")) {
@@ -66,10 +83,16 @@ export class DataService {
                       forceUpdate = false): void {
     const selector = `courseData.${courseId}`;
 
+    // If a previous unsubscriber exists, unsubscribe
+    if (this.unsubscribers.courseData)
+      this.unsubscribers.courseData();
+
     // Set watcher to callback
-    this.storage.watch(selector, (n, o) => {
+    const unsub = this.storage.watch(selector, (n, o) => {
       callback(n);
     });
+    // Set a new unsubscriber
+    this.unsubscribers.courseData = unsub;
 
     // If cache exists, immediately return it
     if (this.storage.has(selector)) {

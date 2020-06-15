@@ -45,7 +45,8 @@ export class StorageService {
     }
   }
 
-  watch(key: string, callback: (newVal: any, oldVal: any) => any): void {
-    this.store.onDidChange(key, callback);
+  // Watch a value, returns unsubscribe callback
+  watch(key: string, callback: (newVal: any, oldVal: any) => any): () => void {
+    return this.store.onDidChange(key, callback);
   }
 }
