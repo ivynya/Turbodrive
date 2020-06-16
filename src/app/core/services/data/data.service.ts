@@ -127,12 +127,13 @@ export class DataService {
     }
   }
 
-  // Mark all items in a course's category as read
+  // Mark all unread items in a course's category as read
   markAllRead(courseId: string, type: string, startIndex = 0): void {
     const selector = `courseData.${courseId}.${type}`;
     
     if (this.storage.has(selector)) {
-      const items = this.storage.get(selector);
+      let items: (Turbo$CourseWork|Turbo$Announcement)[] = this.storage.get(selector);
+      items = items.filter((i) => { return !i.read });
       items.forEach((el: Turbo$CourseWork|Turbo$Announcement, i: number) => {
         if (i >= startIndex) {
           el.read = true;
@@ -172,9 +173,31 @@ export class DataService {
     }, (err, res) => {
       if (err) return console.error(err);
 
-
-      this.storage.update(`courseData.${courseId}.announcements`, res.data.announcements);
+      // Set next page token
       this.tokens.announcements = res.data.nextPageToken;
+
+      // Get cached items for ref
+      const selector = `courseData.${courseId}.announcements`;
+      const cached: Turbo$Announcement[] = this.storage.get(selector);
+      if (!cached) {
+        // If no cache, set it
+        this.storage.set(selector, res.data.announcements);
+        return;
+      }
+
+      // Transfer existing read values to new data
+      let newValues = [];
+      for (var i = 0; i < res.data.announcements.length; i++) {
+        const a: Turbo$Announcement = res.data.announcements[i];
+        if (cached.some((c) => {return (c.id === a.id && c.updateTime === a.updateTime && c.read)}))
+          a.read = true;
+        else
+          a.read = false;
+        newValues.push(a);
+      }
+
+      // Set data
+      this.storage.set(selector, newValues);
     });
   }
 
