@@ -186,8 +186,8 @@ export class DataService {
       }
 
       // Transfer existing read values to new data
-      let newValues = [];
-      for (var i = 0; i < res.data.announcements.length; i++) {
+      const newValues = [];
+      for (let i = 0; i < res.data.announcements.length; i++) {
         const a: Turbo$Announcement = res.data.announcements[i];
         if (cached.some((c) => {return (c.id === a.id && c.updateTime === a.updateTime && c.read)}))
           a.read = true;
