@@ -44,8 +44,10 @@
   .assignment-group {
     background-color: var(--bg-tertiary);
     display: inline-block;
+    flex-direction: column;
     margin-bottom: 10px;
     width: 100%;
+    min-height: 150px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
@@ -70,6 +72,9 @@
     .scroll-group {
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
+      flex: 1 1;
+      height: 150px;
+      position: relative;
       overflow: hidden auto;
   
       > .card {
@@ -80,6 +85,24 @@
   
         &:hover {
           border-left: var(--notify-color) 5px solid;
+        }
+      }
+
+      .icon-finished {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        fill: var(--text-primary);
+        min-height: 100%;
+        
+        svg {
+          width: 50px;
         }
       }
     }
@@ -101,19 +124,23 @@
       .scroll-group {
         height: 300px;
       }
+    }
+  }
 
-      @media (min-width: 1500px) {
-        .title-sm {
-          font-size: 1.2rem;
-          padding: 20px;
-        }
+  @media (min-width: 1500px) {
+    .assignment-group {
+      max-width: calc(33% - 10px);
 
-        max-width: calc(33% - 10px);
+      .title-sm {
+        font-size: 1.2rem;
+        padding: 20px;
       }
+    }
+  }
 
-      @media (min-width: 1800px) {
-        max-width: calc(25% - 10px);
-      }
+  @media (min-width: 1800px) {
+    .assignment-group {
+      max-width: calc(25% - 10px);
     }
   }
 }
