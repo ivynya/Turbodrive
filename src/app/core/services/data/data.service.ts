@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Turbo$CourseData, Turbo$Announcement, Turbo$CourseWork } from '../../schemas';
+import { 
+  Turbo$Announcement, 
+  Turbo$CourseData, 
+  Turbo$CourseWork,
+  Turbo$Course
+} from '../../schemas';
 import { StorageService } from '../storage/storage.service';
 import { google, classroom_v1 } from 'googleapis';
 
@@ -23,7 +28,7 @@ export class DataService {
     this.unsubscribers = { courses: undefined, courseData: undefined };
   }
 
-  subscribeCourses(callback: (data: classroom_v1.Schema$ListCoursesResponse) => void, 
+  subscribeCourses(callback: (data: Turbo$Course[]) => void, 
                   forceUpdate = false): void {
     // If a previous unsubscriber exists, unsubscribe
     if (this.unsubscribers.courses)
@@ -31,14 +36,14 @@ export class DataService {
     
     // Set watcher to callback function
     const unsub = this.storage.watch("courses", (n, o) => {
-      callback({ courses: n });
+      callback(n);
     });
     // Set a new unsubscriber
     this.unsubscribers.courses = unsub;
 
     // If cache exists, immediately return it
     if (this.storage.has("courses")) {
-      callback({ courses: this.storage.get("courses") });
+      callback(this.storage.get("courses"));
 
       // Force updates the cache if set to true
       if (forceUpdate) this.updateCourses();
@@ -72,7 +77,7 @@ export class DataService {
     // Subscribe to course changes
     this.subscribeCourses((data) => {
       // For each course trigger an update
-      data.courses.forEach((course) => {
+      data.forEach((course) => {
         this.updateAnnouncements(course.id);
         this.updateAssignments(course.id);
       });
@@ -116,11 +121,16 @@ export class DataService {
     const selector = `courseData.${courseId}.${type}`;
 
     if (this.storage.has(selector)) {
-      const items = this.storage.get(selector);
-      const index = items.findIndex((el: Turbo$CourseWork|Turbo$Announcement) => {
+      const items: (Turbo$CourseWork|Turbo$Announcement)[] = this.storage.get(selector);
+      const index = items.findIndex((el) => {
         return el.id == id; });
       items[index].read = true;
       this.storage.set(selector, items);
+
+      // If announcements and no items unread, mark all read
+      if (type === "announcements" && !items.some((i) => !i.read)) {
+        this.markCourseRead(courseId);
+      }
     }
     else {
       console.error(`Error: Storage does not have ${type} in course ${courseId}.`);
@@ -140,11 +150,41 @@ export class DataService {
           items[i] = el;
         }
       });
+
+      // Send new items to storage
       this.storage.set(selector, items);
+      // Mark course as read if type is announcements
+      if (type === "announcements" && startIndex === 0)
+        this.markCourseRead(courseId);
     }
     else {
       console.error(`Error: Storage does not have ${type} in course ${courseId}.`);
     }
+  }
+
+  // Checks course announcements, tries to mark read
+  tryMarkCourseRead(courseId: string): void {
+    const selector = `courseData.${courseId}.announcements`;
+    const items: Turbo$Announcement[] = this.storage.get(selector);
+    if (!items.some((item) => !item.read)) {
+      this.markCourseRead(courseId);
+    }
+  }
+
+  // Marks a course as having no unread items
+  private markCourseRead(courseId: string): void {
+    const courses: Turbo$Course[] = this.storage.get("courses");
+    const thisCourse = courses.findIndex((c) => c.id === courseId);
+    courses[thisCourse].hasUnread = false;
+    this.storage.set("courses", courses);
+  }
+
+  // Marks a course as having unread items
+  private markCourseUnread(courseId: string): void {
+    const courses: Turbo$Course[] = this.storage.get("courses");
+    const thisCourse = courses.findIndex((c) => c.id === courseId);
+    courses[thisCourse].hasUnread = true;
+    this.storage.set("courses", courses);
   }
 
   // Update all courses from API
@@ -154,12 +194,26 @@ export class DataService {
       if (err) return console.error(err);
       
       const rcourses = res.data.courses;
-      if (rcourses && rcourses.length) {
-        // Update courses, will trigger watchers if changed
-        this.storage.update("courses", rcourses);
-      } else {
-        console.log('No courses found.');
-      }
+      const cached: Turbo$Course[] = this.storage.get("courses");
+
+      const newValues = [];
+      rcourses.forEach((course) => {
+        const newCourse: Turbo$Course = course;
+        const find = cached.find((c) => c.id === course.id);
+        if (find) {
+          // Transfer values to new data
+          newCourse.hasUnread = find.hasUnread;
+          newCourse.rank = find.rank;
+        }
+        else {
+          // Set default values
+          newCourse.hasUnread = true;
+          newCourse.rank = newValues.length;
+        }
+        newValues.push(newCourse);
+      });
+
+      this.storage.update("courses", newValues);
     });
   }
 
@@ -172,16 +226,15 @@ export class DataService {
       pageSize: 10
     }, (err, res) => {
       if (err) return console.error(err);
-
-      // Set next page token
       this.tokens.announcements = res.data.nextPageToken;
 
-      // Get cached items for ref
+      // Get cached items for reference
       const selector = `courseData.${courseId}.announcements`;
       const cached: Turbo$Announcement[] = this.storage.get(selector);
       if (!cached) {
         // If no cache, set it
         this.storage.set(selector, res.data.announcements);
+        this.markCourseUnread(courseId);
         return;
       }
 
@@ -196,8 +249,10 @@ export class DataService {
         newValues.push(a);
       }
 
-      // Set data
-      this.storage.set(selector, newValues);
+      // Set data, mark unread if there are updates
+      if (this.storage.update(selector, newValues)) {
+        this.markCourseUnread(courseId);
+      }
     });
   }
 
@@ -210,9 +265,32 @@ export class DataService {
       pageSize: 15
     }, (err, res) => {
       if (err) return console.error(err);
-
-      this.storage.update(`courseData.${courseId}.assignments`, res.data.courseWork);
       this.tokens.assignments = res.data.nextPageToken;
+
+      // Get cached items for reference
+      const selector = `courseData.${courseId}.assignments`;
+      const cached: Turbo$CourseWork[] = this.storage.get(selector);
+      if (!cached) {
+        // If no cache, set it
+        this.storage.set(selector, res.data.courseWork);
+        this.markCourseUnread(courseId);
+        return;
+      }
+
+      // Transfer existing read values to new data
+      const newValues = [];
+      for (let i = 0; i < res.data.courseWork.length; i++) {
+        const a: Turbo$CourseWork = res.data.courseWork[i];
+        if (cached.some((c) => {return (c.id === a.id && c.updateTime === a.updateTime && c.read)}))
+          a.read = true;
+        else
+          a.read = false;
+        newValues.push(a);
+      }
+
+      if (this.storage.update(`courseData.${courseId}.assignments`, newValues)) {
+        this.markCourseUnread(courseId);
+      }
     });
   }
 }

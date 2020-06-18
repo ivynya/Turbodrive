@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../../core/services';
-import { classroom_v1 } from 'googleapis';
+import { Turbo$Course } from '../../../core/schemas';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +9,14 @@ import { classroom_v1 } from 'googleapis';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  courses: classroom_v1.Schema$Course[] = [];
+  courses: Turbo$Course[] = [];
   
   constructor(private router: Router,
               private data: DataService) { }
 
   ngOnInit(): void {
     this.data.subscribeCourses((data) => {
-      this.courses = data.courses;
+      this.courses = data;
     });
   }
 

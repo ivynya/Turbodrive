@@ -45,7 +45,7 @@
                   <span>More Unread Announcements</span>
                 </div>
                 <div class="actions">
-                  <button class="action" title="Mark All as Read" (click)="markAllRead(course.id, 'announcements')">r</button>
+                  <button class="action" title="Mark All as Read" (click)="markAllRead(course.id, 'announcements', 2)">r</button>
                 </div>
                 <p class="text-secondary description text-left">There are more unread announcements.</p>
               </div>
@@ -57,8 +57,8 @@
                   <span>{{work.title}}</span>
                 </div>
                 <div class="actions">
-                  <button class="action" title="Dismiss for 24hr">h</button>
                   <button class="action" title="Add to To Do">t</button>
+                  <button class="action" title="Dismiss" (click)="markAsRead(course.id, 'assignments', work.id)">d</button>
                   <button class="action" title="Submit">s</button>
                 </div>
                 <span class="title-caption">{{work.dueDate | dueDateTime: work.dueTime | date: "E L/d h:mm a"}}</span>
@@ -66,6 +66,15 @@
                 <card-materials [materials]=work.materials></card-materials>
               </div>
             </div>
+            <div class="card" *ngIf="courseData[course.id]?.assignments?.length > 3">
+              <div class="text">
+                <div class="row">
+                  <span>More Incomplete Assignments</span>
+                </div>
+                <p class="text-secondary description text-left">There are more incomplete assignments.</p>
+              </div>
+            </div>
+            <br>
           </div>
         </section>
       </div>
