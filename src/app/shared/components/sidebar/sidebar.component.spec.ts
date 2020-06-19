@@ -23,5 +23,22 @@ describe('SidebarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.show).toBeFalse();
+  });
+
+  it('should toggleShow correctly', () => {
+    component.toggleShow();
+    expect(component.show).toBeTrue();
+    component.toggleShow();
+    expect(component.show).toBeFalse();
+  });
+
+  it('should hide correctly', () => {
+    // Setup
+    component.show = true;
+    expect(component.show).toBeTrue();
+    // Test
+    component.hide();
+    expect(component.show).toBeFalse();
   });
 });

@@ -5,10 +5,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { classroom_v1 } from 'googleapis';
 import * as Store from 'electron-store';
+import { DataService } from '../../../core/services';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
+  let dataService: DataService;
+  let dataSpyAnnouncements, dataSpyAssignments;
   let store: Store;
 
   // Spec according to classroom_v1.Schema$Course
@@ -24,7 +27,8 @@ describe('NavbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NavbarComponent ],
-      imports: [ RouterTestingModule ]
+      imports: [ RouterTestingModule ],
+      providers: [ DataService ]
     })
     .compileComponents();
   }));
@@ -37,6 +41,10 @@ describe('NavbarComponent', () => {
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    dataService = fixture.debugElement.injector.get(DataService);
+    dataSpyAnnouncements = spyOn(dataService, 'updateAnnouncements');
+    dataSpyAssignments = spyOn(dataService, 'updateAssignments');
   });
 
   afterEach(() => {
@@ -52,20 +60,9 @@ describe('NavbarComponent', () => {
     expect(component.courses).toEqual(defaultData.courses);
   });
 
-  // Test problematic due to timeout and not synchronous updates. fix later
-  /*it('should watch for course changes', () => {
-    // Add new data and set store
-    const newData = defaultData;
-    newData.courses.push(
-      { "id": "123", "name": "Class", "ownerId": "", "creationTime": "",
-        "updateTime": "", "enrollmentCode": "", "courseState": "",
-        "alternateLink": "", "teacherGroupEmail": "",
-        "courseGroupEmail": "", "guardiansEnabled": false, "calendarId": ""});
-    store.store = newData;
-    
-    // Give time for the watch function to update
-    setTimeout(() => {
-      expect(component.courses).toEqual(newData.courses);
-    }, 100);
-  })*/
+  it('should call data service refresh on refresh', () => {
+    component.refresh();
+    expect(dataSpyAnnouncements).toHaveBeenCalled();
+    expect(dataSpyAssignments).toHaveBeenCalled();
+  });
 });
