@@ -3,9 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { classroom_v1 } from 'googleapis';
 import * as Store from 'electron-store';
 import { DataService } from '../../../core/services';
+import { Turbo$Course } from '../../../core/schemas';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -15,12 +15,12 @@ describe('NavbarComponent', () => {
   let store: Store;
 
   // Spec according to classroom_v1.Schema$Course
-  const defaultData: { courses: classroom_v1.Schema$Course[] } = 
+  const defaultData: { courses: Turbo$Course[] } = 
     { "courses": [
       { "id": "123", "name": "Class", "ownerId": "", "creationTime": "",
         "updateTime": "", "enrollmentCode": "", "courseState": "",
-        "alternateLink": "", "teacherGroupEmail": "",
-        "courseGroupEmail": "", "guardiansEnabled": false, "calendarId": ""
+        "alternateLink": "", "teacherGroupEmail": "", "courseGroupEmail": "", 
+        "guardiansEnabled": false, "calendarId": "", "hasUnread": false, "rank": 0
       }]
     };
 
@@ -62,7 +62,7 @@ describe('NavbarComponent', () => {
 
   it('should call data service refresh on refresh', () => {
     component.refresh();
-    expect(dataSpyAnnouncements).toHaveBeenCalled();
-    expect(dataSpyAssignments).toHaveBeenCalled();
+    expect(dataSpyAnnouncements).toHaveBeenCalledWith('123');
+    expect(dataSpyAssignments).toHaveBeenCalledWith('123');
   });
 });
