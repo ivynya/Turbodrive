@@ -41,9 +41,4 @@ describe('SidebarComponent', () => {
     component.hide();
     expect(component.show).toBeFalse();
   });
-
-  it('should be able to stop propagation', () => {
-    component.stopPropagation(event);
-    expect(component).not.toThrowError();
-  })
 });
