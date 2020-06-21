@@ -35,7 +35,7 @@ export class DataService {
       this.unsubscribers.courses();
     
     // Set watcher to callback function
-    const unsub = this.storage.watch("courses", (n, o) => {
+    const unsub = this.storage.watch("courses", (n) => {
       callback(n);
     });
     // Set a new unsubscriber
@@ -61,7 +61,7 @@ export class DataService {
       this.unsubscribers.courseData();
 
     // Watch all courseData for changes 
-    const unsub = this.storage.watch("courseData", (n, o) => {
+    const unsub = this.storage.watch("courseData", (n) => {
       callback(n);
     });
     // Set a new unsubscriber
@@ -93,7 +93,7 @@ export class DataService {
       this.unsubscribers.courseData();
 
     // Set watcher to callback
-    const unsub = this.storage.watch(selector, (n, o) => {
+    const unsub = this.storage.watch(selector, (n) => {
       callback(n);
     });
     // Set a new unsubscriber

@@ -44,7 +44,7 @@ export class ClassComponent implements OnInit {
     }
   }
 
-  generateLateFeed(assignments: Turbo$CourseWork[]) {
+  generateLateFeed(assignments: Turbo$CourseWork[]): void {
     // Generate late work feed
     this.late = assignments.filter((work) => {
       if (!work.dueDate) return false;
