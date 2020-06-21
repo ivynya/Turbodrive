@@ -3,6 +3,7 @@ import { DefaultData } from '../../mocks/test-data';
 
 import * as Store from 'electron-store';
 
+import { Turbo$Announcement } from '../../schemas';
 import { DataService } from './data.service';
 
 describe('DataService', () => {
@@ -36,5 +37,33 @@ describe('DataService', () => {
     service.subscribeCourseData("123", (data) => {
       expect(data).toEqual(DefaultData.courseData["123"]);
     }, false);
+  });
+
+  it('should be able to mark items as read', () => {
+    store.onDidChange("courseData.456.announcements", (n)  => {
+      expect(n[0].read).toBeTrue();
+    });
+    service.markRead("456", "announcements", "4567");
+  });
+
+  it('should be able to mark all items as read', () => {
+    store.onDidChange("courseData.456.announcements", (n)  => {
+      n.forEach((a: Turbo$Announcement) => {
+        expect(a.read).toBeTrue();
+      });
+    });
+    service.markAllRead("456", "announcements");
+  });
+
+  it('should mark course read on tryMarkCourseRead if all announcements read', () => {
+    store.onDidChange("courses", (n) => {
+      expect(n[1].hasUnread).toBeFalse();
+    });
+    
+    let newData = DefaultData;
+    newData.courseData["456"].announcements[0].read = true;
+    store.store = newData;
+
+    service.tryMarkCourseRead("456");
   });
 });
