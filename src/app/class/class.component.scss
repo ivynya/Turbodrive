@@ -42,15 +42,37 @@
   #pinboard {
     flex: 1 1;
 
-    .card {
+    > .card {
       flex-direction: column;
-      height: 150px;
       padding: 15px;
+      max-height: 400px;
+      overflow: auto;
     }
     
     h2 {
       margin: 0;
       font-size: 18px;
+    }
+
+    #latework {
+      > .card {
+        padding: 5px 0;
+
+        .row > span {
+          white-space: nowrap;
+          max-width: 150px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        &:first-of-type {
+          margin-top: 10px;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
     }
 
     @media (min-width: 768px) {
