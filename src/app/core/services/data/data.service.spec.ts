@@ -60,7 +60,7 @@ describe('DataService', () => {
       expect(n[1].hasUnread).toBeFalse();
     });
     
-    let newData = DefaultData;
+    const newData = DefaultData;
     newData.courseData["456"].announcements[0].read = true;
     store.store = newData;
 
