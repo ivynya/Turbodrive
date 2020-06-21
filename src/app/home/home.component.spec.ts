@@ -1,14 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DefaultData } from '../core/mocks/test-data';
 
-import { DueDateTimePipe } from '../shared/pipes/due-date-time.pipe';
-import { HomeComponent } from './home.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import * as Store from 'electron-store';
+
+import { DueDateTimePipe } from '../shared/pipes/due-date-time.pipe';
 import { DataService } from '../core/services';
+import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let store: Store;
   let dataService: DataService;
   let dataSpyRead, dataSpyReadAll;
 
@@ -21,6 +25,9 @@ describe('HomeComponent', () => {
   }));
 
   beforeEach(() => {
+    store = new Store();
+    store.store = DefaultData;
+
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

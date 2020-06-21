@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { DefaultData } from '../../mocks/test-data';
 
 import { StorageService } from './storage.service';
 import * as Store from 'electron-store';
@@ -12,7 +13,7 @@ describe('ElectronService', () => {
     service = TestBed.get(StorageService);
 
     // Generic preset data to test off of
-    store.store = {"courses": [{ "id": "123", "name": "Class Name" }]};
+    store.store = DefaultData;
   });
 
   afterEach(() => {
@@ -26,25 +27,37 @@ describe('ElectronService', () => {
 
   it('should return correct values for has', () => {
     expect(service.has("courses")).toBeTrue();
-    expect(service.has("courseData")).toBeFalse();
+    expect(service.has("courseData")).toBeTrue();
+    expect(service.has("nonExistentValue")).toBeFalse();
   });
 
   it('should return correct values for get', () => {
-    expect(service.get("courses")).toEqual([{ "id": "123", "name": "Class Name" }]);
+    expect(service.get("courses")).toEqual(DefaultData.courses);
   });
 
   it('should set values correctly', () => {
-    const data = { "123": { "announcements": [{ "courseId": "123", "id": "456" }],
-      "assignments": [{ "courseId": "123", "id": "456", "title": "Title" }]}};
+    const data = { 
+      "123": { 
+        "announcements": [{ 
+          "courseId": "123", 
+          "id": "456" 
+        }],
+        "assignments": [{ 
+          "courseId": "123", 
+          "id": "456", 
+          "title": "Title" 
+        }]
+      }
+    };
+
     service.set("courseData", data);
     expect(store.get("courseData")).toEqual(data);
   });
 
   it('should update values correctly', () => {
-    let data = [{ "id": "123", "name": "Class Name" }];
-    expect(service.update("courses", data)).toBeFalse();
+    expect(service.update("courses", DefaultData.courses)).toBeFalse();
 
-    data = [{ "id": "456", "name": "Class Name" }];
+    let data = [{ "id": "456", "name": "Class Name" }];
     expect(service.update("courses", data)).toBeTrue();
     expect(store.get("courses")).toEqual(data);
   });
