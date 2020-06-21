@@ -1,11 +1,11 @@
 import { Turbo$Course, Turbo$CourseData } from '../schemas';
 
 interface Data {
-  refreshToken: string,
-  courses: Turbo$Course[],
+  refreshToken: string;
+  courses: Turbo$Course[];
   courseData: {
-    [id: string]: Turbo$CourseData
-  }
+    [id: string]: Turbo$CourseData;
+  };
 }
 
 export const DefaultData: Data = {
