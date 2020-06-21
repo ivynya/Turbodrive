@@ -57,7 +57,7 @@ describe('ElectronService', () => {
   it('should update values correctly', () => {
     expect(service.update("courses", DefaultData.courses)).toBeFalse();
 
-    let data = [{ "id": "456", "name": "Class Name" }];
+    const data = [{ "id": "456", "name": "Class Name" }];
     expect(service.update("courses", data)).toBeTrue();
     expect(store.get("courses")).toEqual(data);
   });

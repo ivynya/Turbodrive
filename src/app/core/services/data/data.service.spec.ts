@@ -7,7 +7,7 @@ import { DataService } from './data.service';
 
 describe('DataService', () => {
   let service: DataService;
-  let store: Store = new Store();
+  const store: Store = new Store();
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
