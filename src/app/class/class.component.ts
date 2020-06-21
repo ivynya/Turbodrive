@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService, StorageService } from '../core/services';
 import { Turbo$Announcement, Turbo$CourseWork, Turbo$Course } from '../core/schemas';
-import { WriteKeyExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-class',
@@ -23,7 +22,9 @@ export class ClassComponent implements OnInit {
       const courses: Turbo$Course[] = this.storage.get("courses");
 
       this.activatedRoute.params.subscribe(params => {
+        // Try and find requested course
         this.course = courses.find((c) => c.id === params.id);
+        if (!this.course) return;
 
         this.data.subscribeCourseData(this.course.id, (data) => {
           // Reset feed

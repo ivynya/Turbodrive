@@ -73,7 +73,8 @@
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       flex: 1 1;
-      height: 150px;
+      min-height: 150px;
+      max-height: 500px;
       position: relative;
       overflow: hidden auto;
   

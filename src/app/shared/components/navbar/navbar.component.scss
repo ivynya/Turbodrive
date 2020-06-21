@@ -29,10 +29,11 @@
     a {
       background-color: var(--bg-tertiary);
       border-radius: 50%;
-      display: block;
-      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-secondary);
       line-height: 45px;
-      text-align: center;
       text-decoration: none;
       height: 45px;
       width: 45px;
@@ -41,9 +42,19 @@
       transition-duration: 0.2s;
       position: relative;
 
+      svg {
+        height: 30px;
+        stroke: var(--text-secondary);
+      }
+
       &:hover, &:focus, &.active {
         background-color: var(--bg-highlight);
         border-radius: 10px;
+        color: var(--text-primary);
+
+        svg {
+          stroke: var(--text-primary);
+        }
       }
     }
   }
