@@ -54,6 +54,12 @@
       font-size: 18px;
     }
 
+    #upcoming {
+      .icon-finished p {
+        margin-bottom: 0;
+      }
+    }
+
     #latework {
       > .card {
         padding: 5px 0;
@@ -98,6 +104,7 @@
         font-family: inherit;
         padding-bottom: 3px;
         margin-right: 5px;
+        outline: none;
         transition-duration: 0.2s;
 
         &.active, &:hover {

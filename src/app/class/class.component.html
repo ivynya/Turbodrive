@@ -12,7 +12,14 @@
     <div id="coursework" class="container">
       <section id="pinboard">
         <div class="card">
-          <h2>Upcoming Work</h2>
+          <section id="upcoming">
+            <h2>Upcoming Work</h2>
+            <div class="icon-finished" *ngIf="upcoming.length === 0">
+              <br>
+              <svg><use xlink:href="assets/icons/icons.svg#turbo-check"></use></svg>
+              <p>Whew! All done.</p>
+            </div>
+          </section>
           <br>
           <section id="latework" *ngIf="late.length > 0">
             <h2>Late Work</h2>
@@ -36,12 +43,13 @@
       </section>
       <section id="stream">
         <div id="tab-selector">
-          <button class="active">Stream</button>
           <button>Announcements</button>
-          <button>Assignments</button>
-          <button>Topics</button>
+          <button id="ft-0" (click)="setFeedType(0)" class="active">Stream</button>
+          <button id="ft-1" (click)="setFeedType(1)">Announcements</button>
+          <button id="ft-2" (click)="setFeedType(2)">Assignments</button>
+          <button id="ft-3" (click)="setFeedType(3)">Topics</button>
         </div>
-        <ng-container *ngFor="let item of feed">
+        <ng-container id="feed" *ngFor="let item of feed">
           <div class="card" *ngIf="item.text">
             <span class="icon">
               <svg><use xlink:href="assets/icons/icons.svg#turbo-important"></use></svg>
