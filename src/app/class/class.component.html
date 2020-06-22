@@ -48,7 +48,7 @@
           <button id="ft-2" (click)="setFeedType(2)">Assignments</button>
           <button id="ft-3" (click)="setFeedType(3)">Topics</button>
         </div>
-        <ng-container id="feed" *ngFor="let item of feed">
+        <ng-container *ngFor="let item of feed">
           <div class="card" *ngIf="item.text">
             <span class="icon">
               <svg><use xlink:href="assets/icons/icons.svg#turbo-important"></use></svg>

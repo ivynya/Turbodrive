@@ -44,8 +44,6 @@ export class ClassComponent implements OnInit {
           this.updateFeed(data);
           this.generateLateFeed(data.assignments);
         }, true);
-
-        this.data.tryMarkCourseRead(this.course.id);
       });
     }
   }
@@ -67,9 +65,11 @@ export class ClassComponent implements OnInit {
     switch (this.feedType) {
       case FeedType.Stream:
         this.generateStream(data);
+        this.data.tryMarkCourseRead(this.course.id);
         break;
       case FeedType.Announcements:
         this.generateAnnouncements(data.announcements);
+        this.data.tryMarkCourseRead(this.course.id);
         break;
       case FeedType.Assignments:
         this.generateAssignments(data.assignments);
@@ -105,7 +105,7 @@ export class ClassComponent implements OnInit {
       if (!work.dueDate) return false;
 
       const wd = new Date();
-      wd.setUTCFullYear(work.dueDate.year, work.dueDate.month, work.dueDate.day);
+      wd.setUTCFullYear(work.dueDate.year, work.dueDate.month - 1, work.dueDate.day);
       wd.setUTCHours(work.dueTime.hours);
       wd.setUTCMinutes(work.dueTime.minutes ?? 0);
       wd.setUTCSeconds(0);
@@ -120,7 +120,7 @@ export class ClassComponent implements OnInit {
       if (!work.dueDate) return false;
 
       const wd = new Date();
-      wd.setUTCFullYear(work.dueDate.year, work.dueDate.month, work.dueDate.day);
+      wd.setUTCFullYear(work.dueDate.year, work.dueDate.month - 1, work.dueDate.day);
       wd.setUTCHours(work.dueTime.hours);
       wd.setUTCMinutes(work.dueTime.minutes ?? 0);
       wd.setUTCSeconds(0);
