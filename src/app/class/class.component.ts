@@ -53,7 +53,8 @@ export class ClassComponent implements OnInit {
     document.getElementById(`ft-${type}`).classList.add("active");
 
     this.feedType = type;
-    this.updateFeed(this.courseData);
+    if (this.courseData)
+      this.updateFeed(this.courseData);
   }
 
   // Update main feed based on current feed type
