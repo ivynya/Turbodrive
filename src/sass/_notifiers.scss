@@ -1,0 +1,51 @@
+
+/* Notify Icons */
+
+[data-notify] {
+  background-color: var(--notify-color);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 12px;
+  width: 12px;
+}
+
+[data-notify-check] {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+
+  &:before{
+    background-color: var(--notify-turned-in);
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    left: 3px;
+    top: 0;
+  }
+
+  &:after{
+    background-color: var(--notify-turned-in);
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    left: 0;
+    top: 6px;
+  }
+}
+
+[data-notify-green] {
+  background-color: var(--notify-turned-in);
+}
+
+[data-notify-red] {
+  background-color: var(--notify-late);
+}

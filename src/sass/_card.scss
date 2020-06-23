@@ -90,7 +90,7 @@
   }
 
   &:hover, &:focus-within {
-    .actions {
+    > .text > .actions {
       opacity: 1;
     }
   }
