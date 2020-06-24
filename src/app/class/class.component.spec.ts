@@ -89,10 +89,9 @@ describe('ClassComponent', () => {
       {dueDate: {year: 2030, month: 2, day: 1}, dueTime: {hours: 7}, read: false}
     ];
     component.generateUpcomingFeed(assignments);
-    setTimeout(() => {
-      // Expect upcoming to only contain future assignments
-      expect(component.upcoming).toContain(assignments[1]);
-    }, 1000);
+    // Expect upcoming to only contain future assignments
+    expect(component.upcoming).not.toContain(assignments[0]);
+    expect(component.upcoming).toContain(assignments[1]);
   });
 
   it('should generate late feed', () => {
@@ -100,10 +99,9 @@ describe('ClassComponent', () => {
       {dueDate: {year: 2000, month: 2, day: 1}, dueTime: {hours: 7}, read: false},
       {dueDate: {year: 2030, month: 2, day: 1}, dueTime: {hours: 7}, read: false}
     ];
-    component.generateUpcomingFeed(assignments);
-    setTimeout(() => {
-      // Expect late to only contain past assignments
-      expect(component.upcoming).toContain(assignments[0]);
-    }, 1000);
+    component.generateLateFeed(assignments);
+    // Expect late to only contain past assignments
+    expect(component.late).toContain(assignments[0]);
+    expect(component.late).not.toContain(assignments[1]);
   });
 });

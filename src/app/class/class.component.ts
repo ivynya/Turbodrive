@@ -101,8 +101,8 @@ export class ClassComponent implements OnInit {
   }
 
   generateUpcomingFeed(assignments: Turbo$CourseWork[]): void {
-    // Generate late work feed
-    this.late = assignments.filter((work) => {
+    // Generate ucpoming work feed
+    this.upcoming = assignments.filter((work) => {
       if (!work.dueDate) return false;
 
       const wd = new Date();
