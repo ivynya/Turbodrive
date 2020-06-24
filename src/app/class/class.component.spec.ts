@@ -7,6 +7,7 @@ import * as Store from 'electron-store';
 import { DataService } from '../core/services';
 import { ClassComponent } from './class.component';
 import { Turbo$CourseWork } from '../core/schemas';
+import { doesNotReject } from 'assert';
 
 describe('ClassComponent', () => {
   let component: ClassComponent;
@@ -80,5 +81,29 @@ describe('ClassComponent', () => {
     // Expect only assignments to appear
     expect(component.feed).not.toContain(data.announcements[0]);
     expect(component.feed).toContain(data.assignments[0]);
+  });
+
+  it('should generate upcoming feed', () => {
+    const assignments: Turbo$CourseWork[] = [
+      {dueDate: {year: 2000, month: 2, day: 1}, dueTime: {hours: 7}, read: false},
+      {dueDate: {year: 2030, month: 2, day: 1}, dueTime: {hours: 7}, read: false}
+    ];
+    component.generateUpcomingFeed(assignments);
+    setTimeout(() => {
+      // Expect upcoming to only contain future assignments
+      expect(component.upcoming).toContain(assignments[1]);
+    }, 1000);
+  });
+
+  it('should generate late feed', () => {
+    const assignments: Turbo$CourseWork[] = [
+      {dueDate: {year: 2000, month: 2, day: 1}, dueTime: {hours: 7}, read: false},
+      {dueDate: {year: 2030, month: 2, day: 1}, dueTime: {hours: 7}, read: false}
+    ];
+    component.generateUpcomingFeed(assignments);
+    setTimeout(() => {
+      // Expect late to only contain past assignments
+      expect(component.upcoming).toContain(assignments[0]);
+    }, 1000);
   });
 });
