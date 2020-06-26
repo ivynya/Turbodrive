@@ -28,6 +28,7 @@ export class DataService {
     this.unsubscribers = { courses: undefined, courseData: undefined };
   }
 
+  // Subscribe data methods used by components
   subscribeCourses(callback: (data: Turbo$Course[]) => void, 
                   forceUpdate = false): void {
     // If a previous unsubscriber exists, unsubscribe
@@ -281,10 +282,16 @@ export class DataService {
       const newValues = [];
       for (let i = 0; i < res.data.courseWork.length; i++) {
         const a: Turbo$CourseWork = res.data.courseWork[i];
-        if (cached.some((c) => {return (c.id === a.id && c.updateTime === a.updateTime && c.read)}))
-          a.read = true;
-        else
+        // Find an assignment that matches the metadata
+        const c = cached.find((c) => {return (c.id === a.id && c.updateTime === a.updateTime)});
+        if (c && (c.read || c.submitted)) {
+          a.read = c.read ?? false;
+          a.submitted = c.submitted ?? false;
+        }
+        else {
           a.read = false;
+          a.submitted = false;
+        }
         newValues.push(a);
       }
 
