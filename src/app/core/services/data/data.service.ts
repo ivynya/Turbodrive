@@ -200,7 +200,11 @@ export class DataService {
       const newValues = [];
       rcourses.forEach((course) => {
         const newCourse: Turbo$Course = course;
-        const find = cached.find((c) => c.id === course.id);
+        let find: Turbo$Course;
+        if (cached) {
+          find = cached.find((c) => c.id === course.id);
+        }
+        
         if (find) {
           // Transfer values to new data
           newCourse.hasUnread = find.hasUnread;
