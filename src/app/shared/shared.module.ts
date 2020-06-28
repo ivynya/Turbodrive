@@ -9,8 +9,11 @@ import {
   SidebarComponent,
   PageNotFoundComponent, 
   NavbarComponent, 
-  MaterialsComponent 
+  CardAnnouncementComponent,
+  MaterialsComponent,
+  CardAssignmentComponent
 } from './components/';
+
 import { WebviewDirective } from './directives/';
 import { FormsModule } from '@angular/forms';
 
@@ -19,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     PageNotFoundComponent, 
     WebviewDirective, 
     NavbarComponent, 
+    CardAnnouncementComponent,
+    CardAssignmentComponent,
     MaterialsComponent, 
     SidebarComponent,
     DueDateTimePipe
@@ -28,7 +33,9 @@ import { FormsModule } from '@angular/forms';
     TranslateModule, 
     WebviewDirective, 
     FormsModule, 
-    NavbarComponent, 
+    NavbarComponent,
+    CardAnnouncementComponent,
+    CardAssignmentComponent,
     MaterialsComponent, 
     SidebarComponent,
     DueDateTimePipe

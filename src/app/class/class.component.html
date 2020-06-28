@@ -49,46 +49,10 @@
           <button id="ft-3" (click)="setFeedType(3)">Topics</button>
         </div>
         <ng-container *ngFor="let item of feed">
-          <div class="card" *ngIf="item.text">
-            <span class="icon">
-              <svg><use xlink:href="assets/icons/icons.svg#turbo-important"></use></svg>
-              <span data-notify *ngIf="!item.read"></span>
-            </span>
-            <div class="text">
-              <div class="row">
-                <span>Announcement</span>
-                <span>{{item.creationTime | date}}</span>
-              </div>
-              <div class="actions">
-                <button class="action" title="Copy Text">c</button>
-                <button class="action" title="Add to To Do">t</button>
-                <button class="action" title="Mark Read" (click)="markAsRead(course.id, 'announcements', item.id)">r</button>
-              </div>
-              <p class="text-secondary description text-left">{{item.text}}</p>
-              <card-materials [materials]="item.materials"></card-materials>
-            </div>
-          </div>
-          <div class="card" *ngIf="item.workType">
-            <span class="icon">
-              <svg><use xlink:href="assets/icons/icons.svg#turbo-clipboard"></use></svg>
-              <span data-notify *ngIf="!item.read"></span>
-              <span data-notify data-notify-green *ngIf="item.read && !item.submitted"></span>
-              <span data-notify-check *ngIf="item.submitted"></span>
-            </span>
-            <div class="text">
-              <div class="row">
-                <span>{{item.title}}</span>
-              </div>
-              <div class="actions">
-                <button class="action" title="Add to To Do">t</button>
-                <button class="action" title="Dismiss" (click)="markAsRead(course.id, 'assignments', item.id)">d</button>
-                <button class="action" title="Submit">s</button>
-              </div>
-              <span class="title-caption">{{item.dueDate | dueDateTime: item.dueTime | date: "E L/d h:mm a"}}</span>
-              <p class="text-secondary description">{{item.description}}</p>
-              <card-materials [materials]=item.materials></card-materials>
-            </div>
-          </div>
+          <card-announcement *ngIf="item.text" [announcement]="item" [useNotifiers]=true
+          (markRead)="markAsRead(course.id, 'announcements', $event)"></card-announcement>
+          <card-assignment *ngIf="item.workType" [assignment]="item" [useNotifiers]=true
+          (markRead)="markAsRead(course.id, 'assignments', $event)"></card-assignment>
         </ng-container>
       </section>
     </div>

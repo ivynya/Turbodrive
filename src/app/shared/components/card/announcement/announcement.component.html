@@ -1,0 +1,19 @@
+<div class="card">
+  <span class="icon">
+    <svg><use xlink:href="assets/icons/icons.svg#turbo-important"></use></svg>
+    <span data-notify *ngIf="this.useNotifiers && !announcement.read"></span>
+  </span>
+  <div class="text">
+    <div class="row">
+      <span>Announcement</span>
+      <span>{{announcement.creationTime | date}}</span>
+    </div>
+    <div class="actions">
+      <button class="action" title="Copy Text">c</button>
+      <button class="action" title="Add to To Do">t</button>
+      <button class="action" title="Mark Read" (click)="markAsRead()">r</button>
+    </div>
+    <p class="text-secondary description">{{announcement.text}}</p>
+    <card-materials [materials]=announcement.materials></card-materials>
+  </div>
+</div>

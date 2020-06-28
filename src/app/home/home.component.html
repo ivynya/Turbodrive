@@ -26,22 +26,8 @@
               <p>Whew! Finished.</p>
             </span>
             <ng-container *ngFor="let update of courseData[course.id]?.announcements?.slice(0, 2)">
-              <div class="card" *ngIf="!update.read">
-                <span class="icon"><svg><use xlink:href="assets/icons/icons.svg#turbo-important"></use></svg></span>
-                <div class="text">
-                  <div class="row">
-                    <span>Announcement</span>
-                    <span>{{update.creationTime | date}}</span>
-                  </div>
-                  <div class="actions">
-                    <button class="action" title="Copy Text">c</button>
-                    <button class="action" title="Add to To Do">t</button>
-                    <button class="action" title="Mark Read" (click)="markAsRead(course.id, 'announcements', update.id)">r</button>
-                  </div>
-                  <p class="text-secondary description">{{update.text}}</p>
-                  <card-materials [materials]=update.materials></card-materials>
-                </div>
-              </div>
+              <card-announcement *ngIf="!update.read" [announcement]=update 
+              (markRead)="markAsRead(course.id, 'announcements', $event)"></card-announcement>
             </ng-container>
             <div class="card" *ngIf="courseData[course.id]?.announcements?.length > 2">
               <div class="text">
@@ -54,22 +40,10 @@
                 <p class="text-secondary description text-left">There are more unread announcements.</p>
               </div>
             </div>
-            <div class="card" *ngFor="let work of courseData[course.id]?.assignments?.slice(0, 3)">
-              <span class="icon"><svg><use xlink:href="assets/icons/icons.svg#turbo-clipboard"></use></svg></span>
-              <div class="text">
-                <div class="row">
-                  <span>{{work.title}}</span>
-                </div>
-                <div class="actions">
-                  <button class="action" title="Add to To Do">t</button>
-                  <button class="action" title="Dismiss" (click)="markAsRead(course.id, 'assignments', work.id)">d</button>
-                  <button class="action" title="Submit">s</button>
-                </div>
-                <span class="title-caption">{{work.dueDate | dueDateTime: work.dueTime | date: "E L/d h:mm a"}}</span>
-                <p class="text-secondary description">{{work.description}}</p>
-                <card-materials [materials]=work.materials></card-materials>
-              </div>
-            </div>
+            <ng-container *ngFor="let work of courseData[course.id]?.assignments?.slice(0, 3)">
+              <card-assignment *ngIf="!work.read" [assignment]=work
+              (markRead)="markAsRead(course.id, 'assignment', $event)"></card-assignment>
+            </ng-container>
             <div class="card" *ngIf="courseData[course.id]?.assignments?.length > 3">
               <div class="text">
                 <div class="row">

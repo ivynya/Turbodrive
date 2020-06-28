@@ -1,0 +1,23 @@
+<div class="card">
+  <span class="icon">
+    <svg><use xlink:href="assets/icons/icons.svg#turbo-clipboard"></use></svg>
+    <ng-container *ngIf="this.useNotifiers">
+      <span data-notify *ngIf="!assignment.read"></span>
+      <span data-notify data-notify-green *ngIf="assignment.read && !assignment.submitted"></span>
+      <span data-notify-check *ngIf="assignment.submitted"></span>
+    </ng-container>
+  </span>
+  <div class="text">
+    <div class="row">
+      <span>{{assignment.title}}</span>
+    </div>
+    <div class="actions">
+      <button class="action" title="Add to To Do">t</button>
+      <button class="action" title="Dismiss" (click)="markAsRead()">d</button>
+      <button class="action" title="Submit">s</button>
+    </div>
+    <span class="title-caption">{{assignment.dueDate | dueDateTime: assignment.dueTime | date: "E L/d h:mm a"}}</span>
+    <p class="text-secondary description">{{assignment.description}}</p>
+    <card-materials [materials]=assignment.materials></card-materials>
+  </div>
+</div>
