@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [ngClass]="this.compact? 'compact' : ''">
   <span class="icon">
     <svg><use xlink:href="assets/icons/icons.svg#turbo-clipboard"></use></svg>
     <ng-container *ngIf="this.useNotifiers">
@@ -8,15 +8,15 @@
     </ng-container>
   </span>
   <div class="text">
-    <div class="row">
-      <span>{{assignment.title}}</span>
-    </div>
     <div class="actions">
       <button class="action" title="Add to To Do">t</button>
       <button class="action" title="Dismiss" (click)="markAsRead()">d</button>
       <button class="action" title="Submit">s</button>
     </div>
-    <span class="title-caption">{{assignment.dueDate | dueDateTime: assignment.dueTime | date: "E L/d h:mm a"}}</span>
+    <h4 class="title">{{assignment.title}}</h4>
+    <p class="title-caption" *ngIf="assignment.dueDate">
+      Due {{assignment.dueDate | dueDateTime: assignment.dueTime | date: "E L/d h:mm a"}}
+    </p>
     <p class="text-secondary description">{{assignment.description}}</p>
     <card-materials [materials]=assignment.materials></card-materials>
   </div>

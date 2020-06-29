@@ -27,18 +27,3 @@
     flex-direction: row;
   }
 }
-
-/* Shared css snippets */
-
-.icon-finished {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  fill: var(--text-primary);
-  
-  svg {
-    height: 50px;
-    width: 50px;
-  }
-}

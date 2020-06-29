@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { DueDateTimePipe } from './pipes/due-date-time.pipe';
+import { DueDateTimePipe } from './pipes/due-date-time/due-date-time.pipe';
 
 import { 
   SidebarComponent,

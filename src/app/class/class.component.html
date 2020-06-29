@@ -14,13 +14,10 @@
         <div class="card">
           <section id="upcoming">
             <h2>Upcoming Work</h2>
-            <div class="icon-finished" *ngIf="upcoming.length === 0">
-              <br>
-              <svg><use xlink:href="assets/icons/icons.svg#turbo-check"></use></svg>
-              <p>Whew! All done.</p>
+            <div *ngIf="upcoming.length === 0">
+              <p class="text-secondary">Whew! All done.</p>
             </div>
           </section>
-          <br>
           <section id="latework" *ngIf="late.length > 0">
             <h2>Late Work</h2>
             <div class="card" *ngFor="let item of late">
@@ -29,9 +26,7 @@
                 <span data-notify data-notify-red></span>
               </span>
               <div class="text">
-                <div class="row">
-                  <span>{{item.title}}</span>
-                </div>
+                <h4 class="title">{{item.title}}</h4>
                 <span class="title-caption text-secondary">{{item.dueDate | dueDateTime: item.dueTime | date: "E L/d h:mm a"}}</span>
               </div>
             </div>
@@ -39,6 +34,7 @@
         </div>
         <div class="card">
           <h2>Shared</h2>
+          <p class="text-secondary">No shared items.</p>
         </div>
       </section>
       <section id="stream">

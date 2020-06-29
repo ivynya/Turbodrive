@@ -8,6 +8,7 @@ import { Turbo$Announcement } from '../../../../core/schemas';
 })
 export class CardAnnouncementComponent {
   @Input() announcement: Turbo$Announcement;
+  @Input() compact = false;
   @Input() useNotifiers = false;
 
   @Output() markRead = new EventEmitter<string>();

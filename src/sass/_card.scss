@@ -3,11 +3,13 @@
 .card {
   background-color: var(--bg-tertiary);
   border-radius: 5px;
+  max-width: 100%;
   margin-bottom: 10px;
   padding: 10px;
   transition-duration: 0.2s;
 
   display: flex;
+  flex-direction: row;
   position: relative;
 
   .icon {
@@ -31,29 +33,31 @@
   }
 
   .text {
+    min-width: 0;
     padding: 0 15px;
     flex: 1 1;
-    text-align: justify;
-    word-break: break-word;
+    
+    display: flex;
+    flex-direction: column;
 
-    .row {
-      display: flex;
-      flex: 1 1;
-      justify-content: space-between;
+    .title {
+      margin: 0;
+      font-weight: normal;
     }
-
+    
     .title-caption {
-      margin-top: 0;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+      margin-bottom: 0;
       font-size: 12px;
     }
 
     .description {
+      line-height: 18px;
       font-size: 13px;
-      margin-top: 5px;
-    }
-
-    > * {
+      margin-top: 6px;
       margin-bottom: 0;
+      white-space: pre-wrap;
     }
   }
 
@@ -92,6 +96,17 @@
   &:hover, &:focus-within {
     > .text > .actions {
       opacity: 1;
+    }
+  }
+
+  &.compact {
+    margin-bottom: 0;
+    padding-bottom: 5px;
+
+    .text {
+      .description {
+        white-space: initial;
+      }
     }
   }
 }

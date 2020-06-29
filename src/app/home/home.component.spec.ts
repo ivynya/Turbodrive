@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import * as Store from 'electron-store';
 
-import { DueDateTimePipe } from '../shared/pipes/due-date-time.pipe';
+import { DueDateTimePipe } from '../shared/pipes/due-date-time/due-date-time.pipe';
 import { DataService } from '../core/services';
 import { HomeComponent } from './home.component';
 

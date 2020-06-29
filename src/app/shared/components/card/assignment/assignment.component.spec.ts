@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DefaultData } from '../../../../core/mocks/test-data';
 
-import { DueDateTimePipe } from '../../../../shared/pipes/due-date-time.pipe';
+import { DueDateTimePipe } from '../../../../shared/pipes/due-date-time/due-date-time.pipe';
 import { CardAssignmentComponent } from './assignment.component';
 
 describe('CardAssignmentComponent', () => {

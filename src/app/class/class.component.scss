@@ -65,16 +65,11 @@
         margin-bottom: 5px;
         padding: 5px 0;
 
-        .row > span {
+        .title {
           font-size: 14px;
-          max-width: 180px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
           overflow: hidden;
-
-          @media (min-width: 768px) {
-            max-width: 140px;
-          }
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         &:first-of-type {
@@ -117,10 +112,6 @@
           border-bottom-color: var(--text-primary);
         }
       }
-    }
-
-    .card .description {
-      line-height: 25px;
     }
   }
 

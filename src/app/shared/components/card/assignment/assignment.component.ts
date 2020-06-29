@@ -8,6 +8,7 @@ import { Turbo$CourseWork } from '../../../../core/schemas';
 })
 export class CardAssignmentComponent {
   @Input() assignment: Turbo$CourseWork;
+  @Input() compact = false;
   @Input() useNotifiers = false;
 
   @Output() markRead = new EventEmitter<string>();
