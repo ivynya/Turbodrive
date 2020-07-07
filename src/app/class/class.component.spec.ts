@@ -7,7 +7,6 @@ import * as Store from 'electron-store';
 import { DataService } from '../core/services';
 import { ClassComponent } from './class.component';
 import { Turbo$CourseWork } from '../core/schemas';
-import { doesNotReject } from 'assert';
 
 describe('ClassComponent', () => {
   let component: ClassComponent;
