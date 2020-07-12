@@ -1,0 +1,15 @@
+<div class="class-bar d-flex">
+  <img src="assets/img/Banner1.png" alt="TurboPlant">
+  <div class="text">
+    <div class="card" *ngFor="let course of courses">
+      <span class="icon"><svg><use xlink:href="assets/icons/icons.svg#turbo-roster"></use></svg></span>
+      <div class="text">
+        <b>{{course.name}}</b>
+        <p class="text-secondary description">Created on {{course.creationTime | date}}</p>
+      </div>
+    </div>
+    <div class="card text-center" *ngIf="!this.courses">
+      <p>No classes!</p>
+    </div>
+  </div>
+</div>
