@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ElectronService, StorageService } from './core/services';
+import { ElectronService, CacheService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { google } from 'googleapis';
@@ -13,7 +13,7 @@ import { google } from 'googleapis';
 })
 export class AppComponent implements OnInit {
   constructor(public electron: ElectronService,
-              private storage: StorageService,
+              private cache: CacheService,
               private translate: TranslateService,
               private router: Router) {
     translate.setDefaultLang('en');
@@ -37,9 +37,9 @@ export class AppComponent implements OnInit {
     );
 
     // If a stored refresh token exists, authenticate
-    if (this.storage.has("refreshToken")) {
+    if (this.cache.has("refreshToken")) {
       oauth2Client.setCredentials({ 
-        refresh_token: this.storage.get("refreshToken")
+        refresh_token: this.cache.get("refreshToken")
       });
 
       // Set to globally accessible

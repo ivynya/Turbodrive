@@ -1,8 +1,5 @@
-import { Injectable } from '@angular/core';
-
 import * as Store from 'electron-store';
 
-@Injectable({ providedIn: 'root' })
 export class StorageService {
   private store: Store;
 
@@ -10,9 +7,12 @@ export class StorageService {
     return !!(window && window.process && window.process.type);
   }
 
-  constructor() { 
+  // StorageService takes namespace for file name
+  constructor(namespace: string) { 
     if (this.isElectron) {
-      this.store = new Store();
+      this.store = new Store({
+        name: namespace
+      });
     }
   }
 

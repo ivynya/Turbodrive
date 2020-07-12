@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppConfig } from '../../environments/environment';
-import { StorageService } from '../core/services';
+import { CacheService } from '../core/services';
 
 import { google } from 'googleapis';
 import * as http from 'http';
@@ -16,7 +16,7 @@ import * as opn from 'open';
 })
 export class AuthComponent implements OnInit {
   constructor(private router: Router,
-              private storage: StorageService) { }
+              private cache: CacheService) { }
 
   ngOnInit(): void {
     // Try get credentials from config
@@ -83,7 +83,7 @@ export class AuthComponent implements OnInit {
       });
 
       // Store locally
-      this.storage.set("refreshToken", tokens.refresh_token);
+      this.cache.set("refreshToken", tokens.refresh_token);
 
       // Redirect to home, forcing reload
       this.router.navigateByUrl("/");

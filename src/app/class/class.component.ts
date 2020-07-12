@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService, StorageService } from '../core/services';
-import { Turbo$Announcement, Turbo$CourseWork, Turbo$Course, Turbo$CourseData } from '../core/schemas';
+import { DataService, CacheService } from '../core/services';
+
+import { 
+  Turbo$Announcement, 
+  Turbo$CourseWork, 
+  Turbo$Course, 
+  Turbo$CourseData 
+} from '../core/schemas';
 
 enum FeedType {
   Stream,
@@ -27,11 +33,11 @@ export class ClassComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private data: DataService,
-              private storage: StorageService) {}
+              private cache: CacheService) {}
 
   ngOnInit(): void {
-    if (this.storage.has("courses")) {
-      const courses: Turbo$Course[] = this.storage.get("courses");
+    if (this.cache.has("courses")) {
+      const courses: Turbo$Course[] = this.cache.get("courses");
 
       this.activatedRoute.params.subscribe(params => {
         // Try and find requested course
