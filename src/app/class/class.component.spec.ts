@@ -11,7 +11,7 @@ import { Turbo$CourseWork } from '../core/schemas';
 describe('ClassComponent', () => {
   let component: ClassComponent;
   let fixture: ComponentFixture<ClassComponent>;
-  const store: Store = new Store();
+  const store: Store = new Store({ name: "cache" });
   let dataService: DataService;
   let dataSpyRead;
 

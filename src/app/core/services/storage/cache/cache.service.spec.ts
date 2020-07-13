@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-import { DefaultData } from '../../mocks/test-data';
+import { DefaultData } from '../../../mocks/test-data';
 
-import { StorageService } from './storage.service';
+import { CacheService } from './cache.service';
 import * as Store from 'electron-store';
 
-describe('ElectronService', () => {
-  let service: StorageService;
-  const store = new Store();
+describe('CacheService', () => {
+  let service: CacheService;
+  const store = new Store({ name: "cache" });
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.get(StorageService);
+    service = TestBed.get(CacheService);
 
     // Generic preset data to test off of
     store.store = DefaultData;

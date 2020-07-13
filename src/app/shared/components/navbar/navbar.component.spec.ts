@@ -35,7 +35,7 @@ describe('NavbarComponent', () => {
 
   beforeEach(() => {
     // Set default storage per test
-    store = new Store();
+    store = new Store({ name: "cache" });
     store.store = defaultData;
 
     fixture = TestBed.createComponent(NavbarComponent);
