@@ -6,9 +6,35 @@
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
 </head>
 <body>
+  <header id="titlebar">
+    <div class="draggable">
+      <div id="window-title">
+        <img src="assets/icons/favicon.256x256.png" alt="Turbodrive Logo">
+        <span>Turbodrive</span>
+      </div>
+      <div id="window-controls">
+        <div class="button" id="min-button">
+          <svg class="icon" draggable="false"><use xlink:href="assets/icons/icons.svg#window-minimize"></use></svg>
+        </div>
+
+        <div class="button" id="max-button">
+          <svg class="icon" draggable="false"><use xlink:href="assets/icons/icons.svg#window-maximize"></use></svg>
+        </div>
+
+        <div class="button" id="restore-button">
+          <svg class="icon" draggable="false"><use xlink:href="assets/icons/icons.svg#window-restore"></use></svg>
+        </div>
+
+        <div class="button" id="close-button">
+          <svg class="icon" draggable="false"><use xlink:href="assets/icons/icons.svg#window-close"></use></svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <app-root>
     <div class="page">
       <p class="text-center">Loading...</p>
