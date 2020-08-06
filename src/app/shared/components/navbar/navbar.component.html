@@ -16,11 +16,11 @@
     </a>
   </div>
   <div>
+    <button aria-label="Refresh Data" [attr.data-tt]="'Refreshed: ' + (this.lastRefreshed | date: 'h:mm a')" (click)="refresh()">
+      <svg class="icon"><use xlink:href="assets/icons/icons.svg#turbo-refresh"></use></svg>
+    </button>
     <button aria-label="Add Class" data-tt="Add Class">
       <svg class="icon"><use xlink:href="assets/icons/icons.svg#turbo-add"></use></svg>
-    </button>
-    <button aria-label="Refresh Data" data-tt="Refresh" (click)="refresh()">
-      <svg class="icon"><use xlink:href="assets/icons/icons.svg#turbo-refresh"></use></svg>
     </button>
   </div>
 </nav>

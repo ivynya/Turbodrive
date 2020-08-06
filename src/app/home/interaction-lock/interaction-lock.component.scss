@@ -1,0 +1,14 @@
+.interaction-lock {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  p {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+  }
+}

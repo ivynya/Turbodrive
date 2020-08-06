@@ -10,6 +10,7 @@ import { Turbo$Course } from '../../../core/schemas';
 })
 export class NavbarComponent implements OnInit {
   courses: Turbo$Course[] = [];
+  lastRefreshed: string;
   
   constructor(private router: Router,
               private data: DataService) { }
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit {
     this.data.subscribeCourses((data) => {
       this.courses = data;
     });
+    this.lastRefreshed = (new Date).toString();
   }
 
   refresh(): void {
@@ -25,5 +27,6 @@ export class NavbarComponent implements OnInit {
       this.data.updateAnnouncements(course.id);
       this.data.updateAssignments(course.id);
     });
+    this.lastRefreshed = (new Date).toString();
   }
 }

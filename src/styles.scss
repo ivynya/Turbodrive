@@ -91,6 +91,10 @@ html, body {
   overflow-y: auto;
 }
 
+.lockable {
+  position: relative;
+}
+
 .container, .container-full {
   padding: 25px 10px;
   margin: auto;

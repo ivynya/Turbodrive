@@ -1,7 +1,7 @@
 <div>
   <app-navbar></app-navbar>
   <section class="page">
-    <div class="container-full d-flex">
+    <div class="container-full d-flex lockable">
       <home-class-bar [courses]=courses></home-class-bar>
       <div id="assignments">
         <section class="assignment-group" *ngFor="let course of courses">
@@ -42,6 +42,7 @@
           </div>
         </section>
       </div>
+      <interaction-lock></interaction-lock>
     </div>
   </section>
 </div>
