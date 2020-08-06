@@ -7,6 +7,9 @@
   right: 0;
 
   p {
+    background-color: var(--bg-secondary);
+    border-radius: 5px;
+    padding: 10px;
     position: fixed;
     bottom: 20px;
     left: 20px;
