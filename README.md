@@ -1,13 +1,19 @@
 # Turbodrive
 [![Build Status](https://travis-ci.com/SDBagel/Turbodrive.svg?branch=master)](https://travis-ci.com/SDBagel/Turbodrive) [![codecov](https://codecov.io/gh/SDBagel/Turbodrive/branch/master/graph/badge.svg)](https://codecov.io/gh/SDBagel/Turbodrive)
 
-Turbocharged GSuite. WIP.
+Turbocharged.
 
 This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
 
-## 😕 Google Got You Down?
+## 😕 Google Got Me Down.
 
-This project aims to heavily improve upon GSuite services including Google Classroom and Drive, increasing app responsiveness and your efficiency by radically redesigning the user experience. It's built on Google's API for developers with SSO, as a desktop app with Angular 9 & Electron 8.
+This project was originally intended to be a simple file sync between Classroom assignments and OneDrive/Microsoft 365, allowing students to work on files in Microsoft Word, Excel, and PowerPoint. It quickly blossomed into a full-fledged Classroom and partial Drive client - however, due to the severe limitations in Google's APIs, this is not feasible.
+
+Core functionality is completely fine, and the plan is to finish that up before re-scoping this project. Announcements and assignments along with their work and materials can be viewed. Due dates, classes, and other basic information is accessible. Original OneDrive sync will still be implemented. If possible, Turbodrive Widgets may be added.
+
+However, Google's API does not include [material groups](https://issuetracker.google.com/issues/115421140), [certain parts of class management, comments, and teacher comments (DMs)](https://developers.google.com/classroom/reference/rest). I personally consider these features close enough to the core that a proper client is not feasible at this moment. I'd appreciate if more attention was brought to these issues on the Google forums and feedback tools.
+
+Below is the full original project statement which is now not entirely true.
 
 ## 🛠 Designed By Users, for Users
 
