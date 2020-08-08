@@ -61,6 +61,58 @@
     }
   }
 
+  .comment {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    
+    .input {
+      background-color: var(--bg-primary);
+      border: none;
+      border-radius: 15px;
+      color: var(--text-primary);
+      font-family: inherit;
+      line-height: 20px;
+      height: 20px;
+      min-height: 20px;
+      resize: vertical;
+      flex: 1 1;
+      margin-right: 10px;
+      padding: 5px 15px;
+
+      &:focus {
+        border: var(--text-secondary) 1px solid;
+        outline: none;
+      }
+    }
+
+    .submit {
+      background-color: var(--bg-primary);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      width: 30px;
+      transition-duration: 0.3s;
+
+      svg {
+        fill: var(--text-secondary);
+        height: 18px;
+        width: 18px;
+      }
+
+      &:hover {
+        background-color: var(--bg-highlight);
+
+        svg {
+          fill: var(--text-primary);
+        }
+      }
+    }
+  }
+
   .actions {
     background-color: var(--bg-highlight);
     border-radius: 2px;

@@ -5,7 +5,7 @@
   </span>
   <div class="text">
     <div class="actions">
-      <button class="action" title="Copy Text">c</button>
+      <button class="action" title="Comment" (click)="comment()">c</button>
       <button class="action" title="Add to To Do">t</button>
       <button class="action" title="Mark Read" (click)="markAsRead()">r</button>
     </div>
@@ -15,5 +15,11 @@
     </p>
     <p class="text-secondary description">{{announcement.text}}</p>
     <card-materials [materials]=announcement.materials></card-materials>
+    <div class="comment" *ngIf="this.showComment">
+      <textarea class="input" aria-label="Add a comment" placeholder="Add a comment" #comment></textarea>
+      <button class="submit">
+        <svg><use xlink:href="assets/icons/icons.svg#turbo-send"></use></svg>
+      </button>
+    </div>
   </div>
 </div>
