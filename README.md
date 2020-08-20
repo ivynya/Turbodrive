@@ -5,15 +5,15 @@ Turbocharged.
 
 This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
 
-## 😕 Google Got Me Down.
+## Change of Plans Notice
 
 This project was originally intended to be a simple file sync between Classroom assignments and OneDrive/Microsoft 365, allowing students to work on files in Microsoft Word, Excel, and PowerPoint. It quickly blossomed into a full-fledged Classroom and partial Drive client - however, due to the severe limitations in Google's APIs, this is not feasible.
 
-Core functionality is completely fine, and the plan is to finish that up before re-scoping this project. Announcements and assignments along with their work and materials can be viewed. Due dates, classes, and other basic information is accessible. Original OneDrive sync will still be implemented. If possible, Turbodrive Widgets may be added.
+Google's API does not include [material groups](https://issuetracker.google.com/issues/115421140), [certain parts of class management, comments, and teacher comments (DMs)](https://developers.google.com/classroom/reference/rest). I'd appreciate if more attention was brought to these issues on the Google forums and feedback tools.
 
-However, Google's API does not include [material groups](https://issuetracker.google.com/issues/115421140), [certain parts of class management, comments, and teacher comments (DMs)](https://developers.google.com/classroom/reference/rest). I personally consider these features close enough to the core that a proper client is not feasible at this moment. I'd appreciate if more attention was brought to these issues on the Google forums and feedback tools.
+Core functionality is still planned for this variant of the app. Our school district has switched to using [Canvas](https://github.com/instructure/canvas-lms) - which means my top priority is getting this supported first since I'm very dissatisfied with the Canvas UI (and would be too large of an undertaking on the official repo). This can be found in the `caravan` branch of this repo. Eventually, the two will either get merged or one service will get chosen as the core service of Turbodrive.
 
-Below is the full original project statement which is now not entirely true.
+Below is the full original project statement.
 
 ## 🛠 Designed By Users, for Users
 
