@@ -25,6 +25,11 @@ export class StorageService {
   }
 
   set(key: string, value: any): void {
+    if (!value) {
+      this.store.delete(key);
+      return;
+    }
+
     this.store.set(key, value);
   }
 
