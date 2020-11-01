@@ -1,19 +1,17 @@
 # Turbodrive
 [![Build Status](https://travis-ci.com/SDBagel/Turbodrive.svg?branch=master)](https://travis-ci.com/SDBagel/Turbodrive) [![codecov](https://codecov.io/gh/SDBagel/Turbodrive/branch/master/graph/badge.svg)](https://codecov.io/gh/SDBagel/Turbodrive)
 
-Turbocharged.
+Turbocharged education client.
 
 This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
 
-## Change of Plans Notice
+## 🎉 Google Classroom's REST API now includes Materials
+https://issuetracker.google.com/issues/115421140
 
-This project was originally intended to be a simple file sync between Classroom assignments and OneDrive/Microsoft 365, allowing students to work on files in Microsoft Word, Excel, and PowerPoint. It quickly blossomed into a full-fledged Classroom and partial Drive client - however, due to the severe limitations in Google's APIs, this is not feasible.
+Google Classroom's API now includes Materials! Only took 2 years for them to do it.
 
-Google's API does not include [material groups](https://issuetracker.google.com/issues/115421140), [certain parts of class management, comments, and teacher comments (DMs)](https://developers.google.com/classroom/reference/rest). I'd appreciate if more attention was brought to these issues on the Google forums and feedback tools.
-
-Core functionality is still planned for this variant of the app. Our school district has switched to using [Canvas](https://github.com/instructure/canvas-lms) - which means my top priority is getting this supported first since I'm very dissatisfied with the Canvas UI (and would be too large of an undertaking on the official repo). This can be found in the `caravan` branch of this repo. Eventually, the two will either get merged or one service will get chosen as the core service of Turbodrive.
-
-Below is the full original project statement.
+## Persisting Limitations
+Google's API still does not include support for comments or direct messages on assignments. This would limit some functionality in the app compared to using the website.
 
 ## 🛠 Designed By Users, for Users
 
