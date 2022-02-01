@@ -114,7 +114,7 @@ export class ClassComponent implements OnInit {
       const wd = new Date();
       wd.setUTCFullYear(work.dueDate.year, work.dueDate.month - 1, work.dueDate.day);
       wd.setUTCHours(work.dueTime.hours);
-      wd.setUTCMinutes(work.dueTime.minutes ?? 0);
+      wd.setUTCMinutes(work.dueTime.minutes || 0);
       wd.setUTCSeconds(0);
 
       return (wd > new Date() && !work.read);
@@ -129,7 +129,7 @@ export class ClassComponent implements OnInit {
       const wd = new Date();
       wd.setUTCFullYear(work.dueDate.year, work.dueDate.month - 1, work.dueDate.day);
       wd.setUTCHours(work.dueTime.hours);
-      wd.setUTCMinutes(work.dueTime.minutes ?? 0);
+      wd.setUTCMinutes(work.dueTime.minutes || 0);
       wd.setUTCSeconds(0);
 
       return (wd < new Date() && !work.read);

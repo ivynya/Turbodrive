@@ -13,7 +13,7 @@ export class DueDateTimePipe implements PipeTransform {
     const datetime: Date = new Date();
     datetime.setUTCFullYear(dueDate.year, dueDate.month - 1, dueDate.day);
     datetime.setUTCHours(dueTime.hours); 
-    datetime.setUTCMinutes(dueTime.minutes ?? 0);
+    datetime.setUTCMinutes(dueTime.minutes || 0);
     datetime.setUTCSeconds(0);
     datetime.setUTCMilliseconds(0);
     

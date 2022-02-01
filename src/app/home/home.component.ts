@@ -25,10 +25,12 @@ export class HomeComponent implements OnInit {
     this.data.subscribeCourseDataAll((data) => {
       Object.keys(data).forEach((key: string) => {
         // Set announcements to only be unread ones
-        data[key].announcements = data[key].announcements?.filter((a) => {
+        if (data[key].announcements)
+        data[key].announcements = data[key].announcements.filter((a) => {
           return !a.read; });
         // Set assignments to only be unread ones
-        data[key].assignments = data[key].assignments?.filter((a) => {
+        if (data[key].assignments)
+        data[key].assignments = data[key].assignments.filter((a) => {
           return !a.read; });
       });
 

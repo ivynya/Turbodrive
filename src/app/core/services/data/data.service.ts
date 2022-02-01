@@ -289,8 +289,8 @@ export class DataService {
         // Find an assignment that matches the metadata
         const c = cached.find((c) => {return (c.id === a.id && c.updateTime === a.updateTime)});
         if (c && (c.read || c.submitted)) {
-          a.read = c.read ?? false;
-          a.submitted = c.submitted ?? false;
+          a.read = c.read || false;
+          a.submitted = c.submitted || false;
         }
         else {
           a.read = false;
