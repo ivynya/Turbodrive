@@ -1,6 +1,14 @@
 # Turbodrive
 [![Build Status](https://travis-ci.com/SDBagel/Turbodrive.svg?branch=master)](https://travis-ci.com/SDBagel/Turbodrive) [![codecov](https://codecov.io/gh/SDBagel/Turbodrive/branch/master/graph/badge.svg)](https://codecov.io/gh/SDBagel/Turbodrive)
 
+## ⚠️ THIS PROJECT IS UNSUPPORTED
+
+Turbodrive is unsupported and will not recieve future updates. If you are a student and use Canvas LMS, check out [Caravel](https://github.com/ivynya/Caravel) instead. If you are interested in developing a Google Classroom client, consider opening an issue in Caravel to create a unified education client for students.
+
+Below is the old README.
+
+<hr>
+
 Turbocharged education client.
 
 This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
