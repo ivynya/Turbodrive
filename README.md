@@ -1,40 +1,22 @@
 # Turbodrive
-[![Build Status](https://travis-ci.com/SDBagel/Turbodrive.svg?branch=master)](https://travis-ci.com/SDBagel/Turbodrive) [![codecov](https://codecov.io/gh/SDBagel/Turbodrive/branch/master/graph/badge.svg)](https://codecov.io/gh/SDBagel/Turbodrive)
 
-## ⚠️ THIS PROJECT IS UNSUPPORTED
+> ⚠️ This project is unsupported! It will not recieve future updates. If you are a student and use Canvas LMS, check out [Caravel](https://github.com/ivynya/Caravel) instead. If you are interested in developing a Google Classroom client, consider opening an issue in Caravel to create a unified education client for students.
 
-Turbodrive is unsupported and will not recieve future updates. If you are a student and use Canvas LMS, check out [Caravel](https://github.com/ivynya/Caravel) instead. If you are interested in developing a Google Classroom client, consider opening an issue in Caravel to create a unified education client for students.
+This README was updated on February 28th, 2023 for clarity in archival purposes. 
 
-Below is the old README.
+## README.md
 
-<hr>
-
-Turbocharged education client.
-
-This project is built on [this boilerplate](https://github.com/maximegris/angular-electron).
-
-## 🎉 Google Classroom's REST API now includes Materials
-https://issuetracker.google.com/issues/115421140
-
-Google Classroom's API now includes Materials! Only took 2 years for them to do it.
-
-## Persisting Limitations
-Google's API still does not include support for comments or direct messages on assignments. This would limit some functionality in the app compared to using the website.
+Turbocharged education client built on [this boilerplate](https://github.com/maximegris/angular-electron).
 
 ## 🛠 Designed By Users, for Users
 
-Turbodrive is built with real user (student) feedback in mind. Google Classroom is workable, but it could be way better, and that's where this project comes in.
+Turbodrive is built with real user (student) feedback in mind. Google Classroom is workable, but it could be way better, and that's where this project comes in. Turbodrive was designed with the following goals in mind:
 
-### Design Goals
 - Information: It should communicate info quickly across and without confusion.
 - Inclusivity: It should be easy to transition from a GSuite service like Classroom.
 - Speed: It should reduce loading times through a variety of techniques and redesigns.
 
-## ⚡ Power Up With Microsoft 365
-
-If you have access to the Google APIs and the local filesystem, why not power up with Microsoft 365? Edit documents and work on Google Classroom assignments completely offline using Microsoft 365's comprehensive suite of tools. Manage your Microsoft To Do and Calendar directly in-app.
-
-# Setup
+## Setup
 There is currently no packaged release of Turbodrive. Follow the steps below to get started with the source code. Also see [Known Issues](#Issues) below.
 
 1) Clone the git repo [`https://github.com/SDBagel/Turbodrive.git`]
@@ -53,8 +35,9 @@ The electron window will open and should redirect you to the Google Auth page. S
 
 ## Known Issues
 
-### Not my problem:
-- Google does not include an endpoint for CourseMaterials. This is solved by adding a very helpful link that just leads to the actual Google Classroom page. Until an endpoint is added, not much can be done. [The feature request can be found here.](https://issuetracker.google.com/issues/115421140)
+### External Issues:
+- ~~https://issuetracker.google.com/issues/115421140~~ FIXED: Classroom API now contains CourseMaterials
+- Google API does not contain comments endpoint
 
-### Pretty much my problem:
+### Project Issues:
  - As of commit `f772726` (#40) no stored (local) data is encrypted.
